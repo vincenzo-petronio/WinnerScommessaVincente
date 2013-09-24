@@ -1,10 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WinnerSV.ViewModels
 {
@@ -12,7 +7,7 @@ namespace WinnerSV.ViewModels
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
     /// </summary>
-    class ViewModelLocator
+    public class ViewModelLocator
     {
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -35,7 +30,7 @@ namespace WinnerSV.ViewModels
             SimpleIoc.Default.Register<HomeViewModel>();
         }
 
-        public HomeViewModel Main
+        public HomeViewModel Home
         {
             get
             {

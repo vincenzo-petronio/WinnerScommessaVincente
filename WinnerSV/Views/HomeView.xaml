@@ -13,6 +13,10 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
 
+    <phone:PhoneApplicationPage.DataContext>
+        <Binding Path="Home" Source="{StaticResource Locator}"/>
+    </phone:PhoneApplicationPage.DataContext>
+    
     <!--LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot">
         <phone:Panorama Title="my application">
