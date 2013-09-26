@@ -1,6 +1,46 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone">
+
+    <!-- PALETTE COLORI -->
+	<Color x:Key="BrownLight">#DE6E00</Color>
+	<Color x:Key="BrownDark">#CE4701</Color>
+	<Color x:Key="YellowLight">#FFF480</Color>
+	<Color x:Key="YellowDark">#FFAB01</Color>
+	<SolidColorBrush x:Key="paletteInailBrownLight" Color="{StaticResource BrownLight}" />
+	<SolidColorBrush x:Key="paletteInailBrownDark" Color="{StaticResource BrownDark}" />
+	<SolidColorBrush x:Key="paletteInailYellowLight" Color="{StaticResource YellowLight}" />
+	<SolidColorBrush x:Key="paletteInailYellowDark" Color="{StaticResource YellowDark}" />
     
+
+	<ControlTemplate x:Key="PanoramaControlTemplateWinner" TargetType="phone:Panorama">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<Primitives:PanningBackgroundLayer x:Name="BackgroundLayer" Grid.RowSpan="2" HorizontalAlignment="Left">
+				<Primitives:PanningBackgroundLayer.Background>
+					<ImageBrush Stretch="Fill" ImageSource="/Assets/PanoramaBackground.jpg"/>
+				</Primitives:PanningBackgroundLayer.Background>
+				<Border x:Name="background" Background="{TemplateBinding Background}" />
+			</Primitives:PanningBackgroundLayer>
+
+			<Primitives:PanningTitleLayer x:Name="TitleLayer" Grid.Row="0" HorizontalAlignment="Left"  Margin="10,-34,0,0"
+				Content="{TemplateBinding Title}" ContentTemplate="{TemplateBinding TitleTemplate}"
+				FontSize="170" FontFamily="{StaticResource PhoneFontFamilyLight}" CharacterSpacing="-35" Foreground="#FF0A0909" >
+				<Primitives:PanningTitleLayer.Background>
+					<SolidColorBrush Color="#FFF480"/>
+				</Primitives:PanningTitleLayer.Background>
+			</Primitives:PanningTitleLayer>
+
+			<Primitives:PanningLayer x:Name="ItemsLayer" Grid.Row="1" HorizontalAlignment="Left">
+				<ItemsPresenter x:Name="items"/>
+			</Primitives:PanningLayer>
+
+		</Grid>
+	</ControlTemplate>
     
+
 </ResourceDictionary>

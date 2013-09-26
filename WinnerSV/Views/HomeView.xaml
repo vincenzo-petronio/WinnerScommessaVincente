@@ -19,15 +19,39 @@
     
     <!--LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot">
-        <phone:Panorama Title="my application">
+        <phone:Panorama Template="{StaticResource PanoramaControlTemplateWinner}">
 
-            <!--Panorama item one-->
-            <phone:PanoramaItem Header="item1">
+            <phone:Panorama.Background>
+                <ImageBrush ImageSource="/Assets/PanoramaBackground.jpg" Stretch="Fill"/>
+            </phone:Panorama.Background>
+            
+            <phone:Panorama.Title>
+                <Border Background="Azure">
+                    <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" />
+                </Border>
+            </phone:Panorama.Title>
+            
+
+            <!-- Pivot 1 -->
+            <phone:PanoramaItem Header=" ">
+                <phone:PanoramaItem.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding LocalizedResources.PanoramaPivot1ItemTitle, Source={StaticResource LocalizedStrings}}" 
+                                       FontSize="{StaticResource PhoneFontSizeLarge}" 
+                                       Margin="100,0,0,0" />
+                        </Grid>
+                    </DataTemplate>
+                </phone:PanoramaItem.ContentTemplate>
+            </phone:PanoramaItem>
+
+            <!-- Pivot 2 -->
+            <phone:PanoramaItem Header="{Binding LocalizedResources.PanoramaPivot2Header, Source={StaticResource LocalizedStrings}}">
                 <Grid/>
             </phone:PanoramaItem>
 
-            <!--Panorama item two-->
-            <phone:PanoramaItem Header="item2">
+            <!-- Pivot 3 -->
+            <phone:PanoramaItem Header="{Binding LocalizedResources.PanoramaPivot3Header, Source={StaticResource LocalizedStrings}}">
                 <Grid/>
             </phone:PanoramaItem>
         </phone:Panorama>
