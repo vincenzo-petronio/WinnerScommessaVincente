@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
+  <Languages xmlns="">
+    <Language code="it-IT" />
+  </Languages>
   <App xmlns="" ProductID="{4e0172e5-0e88-41d3-afce-8b6fe63fe83a}" Title="WinnerSV" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="WinnerSV author" Description="Sample description" Publisher="WinnerSV" PublisherID="{0b4fb417-174d-4af8-861c-771d6d20b373}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
