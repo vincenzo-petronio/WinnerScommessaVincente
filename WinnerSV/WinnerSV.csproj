@@ -100,6 +100,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs" />
     <Compile Include="Views\PivotAbout.xaml.cs">
       <DependentUpon>PivotAbout.xaml</DependentUpon>
     </Compile>
@@ -171,7 +172,10 @@
   <ItemGroup>
     <Folder Include="DataModel\" />
     <Folder Include="DataSample\" />
-    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.it-IT.resx" />
+    <EmbeddedResource Include="Resources\AppResources.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
