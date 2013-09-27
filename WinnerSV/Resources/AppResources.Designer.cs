@@ -97,6 +97,51 @@ namespace WinnerSV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ver 1.0.0.0.
+        /// </summary>
+        public static string PivotAboutChangelogDescription {
+            get {
+                return ResourceManager.GetString("PivotAboutChangelogDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changelog.
+        /// </summary>
+        public static string PivotAboutChangelogTitle {
+            get {
+                return ResourceManager.GetString("PivotAboutChangelogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to author ... privacy.
+        /// </summary>
+        public static string PivotAboutCreditsDescription {
+            get {
+                return ResourceManager.GetString("PivotAboutCreditsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credits.
+        /// </summary>
+        public static string PivotAboutCreditsTitle {
+            get {
+                return ResourceManager.GetString("PivotAboutCreditsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App description.
+        /// </summary>
+        public static string PivotAboutDescription {
+            get {
+                return ResourceManager.GetString("PivotAboutDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {
