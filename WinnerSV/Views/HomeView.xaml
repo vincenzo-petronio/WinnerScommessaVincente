@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:WinnerSV="clr-namespace:WinnerSV.Views"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     x:Class="WinnerSV.Views.HomeView"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -37,6 +39,11 @@
 							<TextBlock Text="{Binding LocalizedResources.PanoramaPivot1ItemTitle, Source={StaticResource LocalizedStrings}}" 
 								FontSize="{StaticResource PhoneFontSizeLarge}" 
 								Margin="100,0,0,0" />
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Tap">
+                                    <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
 						</Grid>
 					</DataTemplate>
 				</phone:PanoramaItem.ContentTemplate>

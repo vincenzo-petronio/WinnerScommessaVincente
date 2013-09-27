@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,20 @@ namespace WinnerSV.ViewModels
             else
             {
                 // Code runs "for real"
+                NavToPageCommand = new RelayCommand(() =>
+                {
+                    System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "Tapped NavToPageCommand!");
+                });
             }
+        }
+
+        /// <summary>
+        /// RelayCommand per la Navigation.
+        /// </summary>
+        public RelayCommand NavToPageCommand
+        {
+            get;
+            private set;
         }
     }
 }
