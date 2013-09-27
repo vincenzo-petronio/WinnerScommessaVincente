@@ -36,7 +36,7 @@
 			</Primitives:PanningTitleLayer>
 
 			<Primitives:PanningLayer x:Name="ItemsLayer" Grid.Row="1" HorizontalAlignment="Left">
-				<ItemsPresenter x:Name="items"/>
+                <ItemsPresenter x:Name="items" Margin="0,0,0,200"/>
 			</Primitives:PanningLayer>
 
 		</Grid>
