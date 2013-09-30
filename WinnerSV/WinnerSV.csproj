@@ -94,6 +94,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="DataModel\Schedina.cs" />
+    <Compile Include="DataSample\PanoramaData.cs" />
     <Compile Include="Views\PivotAbout.xaml.cs">
       <DependentUpon>PivotAbout.xaml</DependentUpon>
     </Compile>
@@ -171,10 +173,6 @@
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.1\lib\wp8\System.Windows.Interactivity.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataModel\" />
-    <Folder Include="DataSample\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.it-IT.resx" />

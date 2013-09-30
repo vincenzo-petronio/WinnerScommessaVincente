@@ -19,24 +19,25 @@
 
             <StackPanel Grid.Row="0">
                 <TextBlock>
-                    <Run Text="descrizione app..." />
+                    <Run Text="{Binding LocalizedResources.PivotAboutDescription, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
                 </TextBlock>
             </StackPanel>
 
             <StackPanel Grid.Row="1">
-                <TextBlock Text="Credits" FontSize="{StaticResource PhoneFontSizeMedium}" TextDecorations="Underline"  />
-                <TextBlock >
-                    <Run Text="ringraziamenti " /><LineBreak/>
-                    <Run Text=" ..." />
+                <TextBlock Text="{Binding LocalizedResources.PivotAboutCreditsTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                           FontSize="{StaticResource PhoneFontSizeMedium}" 
+                           FontWeight="Bold"  />
+                <TextBlock Text="{Binding LocalizedResources.PivotAboutCreditsDescription, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+                    <!--<Run Text="ringraziamenti " /><LineBreak/>
+                    <Run Text=" ..." />-->
                 </TextBlock>
             </StackPanel>
 
             <StackPanel Grid.Row="2">
-                <TextBlock Text="Changelog" FontSize="{StaticResource PhoneFontSizeMedium}" TextDecorations="Underline" />
-                <TextBlock >
-                    <Run Text="versione 1.0.0.0 " /><LineBreak/>
-                    <Run Text=" ..." />
-                </TextBlock>
+                <TextBlock Text="{Binding LocalizedResources.PivotAboutChangelogTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                           FontSize="{StaticResource PhoneFontSizeMedium}" 
+                           FontWeight="Bold" />
+                <TextBlock Text="{Binding LocalizedResources.PivotAboutChangelogDescription, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
             </StackPanel>
         </Grid>
     </ScrollViewer>
