@@ -28,6 +28,7 @@ namespace WinnerSV.ViewModels
             ////}
 
             SimpleIoc.Default.Register<HomeViewModel>();
+            SimpleIoc.Default.Register<SportsViewModel>();
         }
 
         public HomeViewModel Home
@@ -35,6 +36,14 @@ namespace WinnerSV.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<HomeViewModel>();
+            }
+        }
+
+        public SportsViewModel Sports
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SportsViewModel>();
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinnerSV.DataModel;
 using WinnerSV.DataSample;
+using WinnerSV.Helpers;
 
 namespace WinnerSV.ViewModels
 {
@@ -34,6 +36,7 @@ namespace WinnerSV.ViewModels
                 NavToPageCommand = new RelayCommand(() =>
                 {
                     System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "Tapped NavToPageCommand!");
+                    Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "SportsView" });
                 });
             }
         }
