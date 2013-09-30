@@ -65,5 +65,24 @@
 		</Setter>
 	</Style>
     
+    <!-- TEMPLATE PANORAMA PIVOT 1 -->
+    <DataTemplate x:Key="templatePanoramaPivot1">
+        <StackPanel>
+            <TextBlock Text="{Binding LocalizedResources.PanoramaPivot1ItemTitle, Source={StaticResource LocalizedStrings}}" 
+                       FontSize="{StaticResource PhoneFontSizeLarge}" 
+                       Margin="0,0,0,0" />
+        </StackPanel>
+    </DataTemplate>
+    
+    <!-- TEMPLATE PANORAMA PIVOT 2 -->
+    <DataTemplate x:Key="templatePanoramaPivot2">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Title}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- TEMPLATE PANORAMA PIVOT 3 -->
+    <!--<DataTemplate x:Key="templatePanoramaPivot3">
+    </DataTemplate>-->
 
 </ResourceDictionary>

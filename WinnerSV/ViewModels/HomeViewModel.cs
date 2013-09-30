@@ -2,14 +2,19 @@
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinnerSV.DataModel;
+using WinnerSV.DataSample;
 
 namespace WinnerSV.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
+        private ObservableCollection<Schedina> schedine;
+
         /// <summary>
         /// Costruttore.
         /// </summary>
@@ -18,6 +23,10 @@ namespace WinnerSV.ViewModels
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
+
+                // TODO Fare injection con IDataService
+                PanoramaData pd = new PanoramaData();
+                schedine = pd.Schedine;
             }
             else
             {
@@ -36,6 +45,14 @@ namespace WinnerSV.ViewModels
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Proprieta' in binding con la lista presente nel Pivot 2.
+        /// </summary>
+        public ObservableCollection<Schedina> Schedine
+        {
+            get { return schedine; }
         }
     }
 }
