@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace WinnerSV.DataModel
 {
@@ -16,7 +12,10 @@ namespace WinnerSV.DataModel
         public Basket Basket { get; set; }
     }
     
-    public class ElencoIncontri
+    /// <summary>
+    /// Contiene tutti i dati di un incontro sportivo
+    /// </summary>
+    public class Incontro
     {
         public string TeamCasa { get; set; }
         public string TeamFCasa { get; set; }
@@ -35,24 +34,38 @@ namespace WinnerSV.DataModel
         public string DCX2 { get; set; }
         public string DC12 { get; set; }
         public string IdMatch { get; set; }
+
+        ////public override string ToString()
+        ////{
+        ////    return base.ToString() + ": " + TeamCasa.ToString() + "\t" + TeamFCasa.ToString() + "\t {" + Data.ToString() + "} \n";
+        ////}
     }
 
+    /// <summary>
+    /// Definisce il nome del campionato e le partite disputate
+    /// </summary>
     public class Calcio
     {
         public string NomeCampionato { get; set; }
-        public List<ElencoIncontri> ElencoIncontriCalcio { get; set; }
+        public List<Incontro> ElencoIncontriCalcio { get; set; }
     }
 
+    /// <summary>
+    /// Definisce il nome del campionato e le partite disputate
+    /// </summary>
     public class Tennis
     {
         public string NomeCampionato { get; set; }
-        public List<ElencoIncontri> ElencoIncontriTennis { get; set; }
+        public List<Incontro> ElencoIncontriTennis { get; set; }
     }
 
+    /// <summary>
+    /// Definisce il nome del campionato e le partite disputate
+    /// </summary>
     public class Basket
     {
         public string NomeCampionato { get; set; }
-        public List<ElencoIncontri> ElencoIncontriBasket { get; set; }
+        public List<Incontro> ElencoIncontriBasket { get; set; }
     }
 
 }

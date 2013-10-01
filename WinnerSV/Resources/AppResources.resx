@@ -150,4 +150,13 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="SportsPivot1Header" xml:space="preserve">
+    <value>Football</value>
+  </data>
+  <data name="SportsPivot2Header" xml:space="preserve">
+    <value>Tennis</value>
+  </data>
+  <data name="SportsPivot3Header" xml:space="preserve">
+    <value>Basket</value>
+  </data>
 </root>

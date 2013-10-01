@@ -85,4 +85,11 @@
     <!--<DataTemplate x:Key="templatePanoramaPivot3">
     </DataTemplate>-->
 
+    <!-- TEMPLATE SPORTS LLS -->
+    <DataTemplate x:Key="templateSportsLls">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=NomeCampionato}" />
+        </StackPanel>
+    </DataTemplate>
+    <!-- TEMPLATE SPORTS LLS JUMPLIST -->
 </ResourceDictionary>
