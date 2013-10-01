@@ -97,6 +97,7 @@
     <Compile Include="DataModel\Schedina.cs" />
     <Compile Include="DataModel\Sports.cs" />
     <Compile Include="DataSample\PanoramaData.cs" />
+    <Compile Include="DataSample\SportsData.cs" />
     <Compile Include="Helpers\NavToPage.cs" />
     <Compile Include="ViewModels\SportsViewModel.cs" />
     <Compile Include="Views\PivotAbout.xaml.cs">

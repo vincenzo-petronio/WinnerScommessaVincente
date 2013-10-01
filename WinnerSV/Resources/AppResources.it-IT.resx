@@ -147,4 +147,13 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>it-IT</value>
   </data>
+  <data name="SportsPivot1Header" xml:space="preserve">
+    <value>Calcio</value>
+  </data>
+  <data name="SportsPivot2Header" xml:space="preserve">
+    <value>Tennis</value>
+  </data>
+  <data name="SportsPivot3Header" xml:space="preserve">
+    <value>Basket</value>
+  </data>
 </root>
