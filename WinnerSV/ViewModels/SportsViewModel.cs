@@ -35,6 +35,10 @@ namespace WinnerSV.ViewModels
             {
                 // real code
                 NavToPageCommand = new RelayCommand<Incontro>(IncontroSelectedCommandImplemtation);
+
+                listCalcio = new List<Calcio>();
+                listTennis = new List<Tennis>();
+                listBasket = new List<Basket>();
             }
         }
 

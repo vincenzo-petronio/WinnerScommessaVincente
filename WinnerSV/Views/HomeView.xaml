@@ -45,15 +45,14 @@
 
 			<!-- Pivot 2 -->
 			<phone:PanoramaItem Header="{Binding LocalizedResources.PanoramaPivot2Header, Source={StaticResource LocalizedStrings}}" >
-                <phone:PanoramaItem>
-                    <ListBox ItemTemplate="{StaticResource templatePanoramaPivot2}" 
-                             ItemsSource="{Binding Schedine}" />
+                <ListBox ItemTemplate="{StaticResource templatePanoramaPivot2}" 
+                         ItemsSource="{Binding Schedine}" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Tap">
                             <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </phone:PanoramaItem>
+                </ListBox>
             </phone:PanoramaItem>
 
 			<!-- Pivot 3 -->

@@ -32,7 +32,7 @@ namespace WinnerSV.ViewModels
 
                 // TODO Fare injection con IDataService
                 PanoramaData pd = new PanoramaData();
-                schedine = pd.Schedine;
+                Schedine = pd.Schedine;
             }
             else
             {
