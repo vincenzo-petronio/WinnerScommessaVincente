@@ -12,8 +12,8 @@ namespace WinnerSV.DataSample
     public class SportsData : ViewModelBase
     {
         private List<Calcio> listCalcio;
-        private ObservableCollection<Basket> listBasket;
-        private ObservableCollection<Tennis> listTennis;
+        private List<Basket> listBasket;
+        private List<Tennis> listTennis;
 
         #region lista campionati
         private List<string> nomeCampionati = new List<string>()
@@ -130,12 +130,12 @@ namespace WinnerSV.DataSample
             get { return listCalcio; }
         }
 
-        public ObservableCollection<Basket> ListBasket
+        public List<Basket> ListBasket
         {
             get { return listBasket; }
         }
 
-        public ObservableCollection<Tennis> ListTennis
+        public List<Tennis> ListTennis
         {
             get { return listTennis; }
         }
@@ -222,9 +222,9 @@ namespace WinnerSV.DataSample
         /// </summary>
         /// <param name="numCampionati"></param>
         /// <returns></returns>
-        private ObservableCollection<Basket> PopulateListBasket(int numCampionati)
+        private List<Basket> PopulateListBasket(int numCampionati)
         {
-            ObservableCollection<Basket> baskets = new ObservableCollection<Basket>();
+            List<Basket> baskets = new List<Basket>();
             Random r = new Random();
             for (int i = 0; i < numCampionati; ++i)
             {
@@ -284,9 +284,9 @@ namespace WinnerSV.DataSample
         /// </summary>
         /// <param name="numCampionati"></param>
         /// <returns></returns>
-        private ObservableCollection<Tennis> PopulateListTennis(int numCampionati)
+        private List<Tennis> PopulateListTennis(int numCampionati)
         {
-            ObservableCollection<Tennis> tenniss = new ObservableCollection<Tennis>();
+            List<Tennis> tenniss = new List<Tennis>();
             Random r = new Random();
             for (int i = 0; i < numCampionati; ++i)
             {

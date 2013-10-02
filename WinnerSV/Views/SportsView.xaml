@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -21,23 +23,39 @@
             
             <!-- Pivot Calcio -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot1Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector ItemsSource="{Binding GroupedCalcio}" 
+                <phone:LongListSelector x:Name="llsCalcio"
+                                        ItemsSource="{Binding GroupedCalcio}" 
                                         ItemTemplate="{StaticResource templateSportsLls}"
                                         GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
                                         IsGroupingEnabled ="true" 
-                                        LayoutMode="List"/>
+                                        LayoutMode="List"
+                                        >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Tap">
+                            <Command:EventToCommand Command="{Binding Sports.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding Path=SelectedItem, ElementName=llsCalcio}" PassEventArgsToCommand="False"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </phone:LongListSelector>
             </phone:PivotItem>
 
             <!-- Pivot Tennis -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot2Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector ItemsSource="{Binding ListTennis}" 
-                                        ItemTemplate="{StaticResource templateSportsLls}"  />
+                <phone:LongListSelector ItemsSource="{Binding GroupedTennis}" 
+                                        ItemTemplate="{StaticResource templateSportsLls}"
+                                        GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
+                                        IsGroupingEnabled ="true" 
+                                        LayoutMode="List"
+                                        />
             </phone:PivotItem>
 
             <!-- Pivot Basket -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot3Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector ItemsSource="{Binding ListBasket}" 
-                                        ItemTemplate="{StaticResource templateSportsLls}"  />
+                <phone:LongListSelector ItemsSource="{Binding GroupedBasket}" 
+                                        ItemTemplate="{StaticResource templateSportsLls}"  
+                                        GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
+                                        IsGroupingEnabled ="true" 
+                                        LayoutMode="List"
+                                        />
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

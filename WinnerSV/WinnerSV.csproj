@@ -94,8 +94,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="DataModel\DataAccessDb.cs" />
+    <Compile Include="DataModel\IDataAccessDb.cs" />
     <Compile Include="DataModel\Schedina.cs" />
     <Compile Include="DataModel\Sports.cs" />
+    <Compile Include="DataSample\DbData.cs" />
     <Compile Include="DataSample\PanoramaData.cs" />
     <Compile Include="DataSample\SportsData.cs" />
     <Compile Include="Helpers\KeyedList.cs" />

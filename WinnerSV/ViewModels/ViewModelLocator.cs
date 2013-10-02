@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using WinnerSV.DataModel;
 
 namespace WinnerSV.ViewModels
 {
@@ -14,6 +15,7 @@ namespace WinnerSV.ViewModels
         /// </summary>
         public ViewModelLocator()
         {
+            // IoC CONTAINER
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -27,10 +29,17 @@ namespace WinnerSV.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            // DATA ACCESS - SERVICE AGENT
+            SimpleIoc.Default.Register<IDataAccessDb, DataAccessDb>(true);
+
+            // VIEW MODELS
             SimpleIoc.Default.Register<HomeViewModel>();
             SimpleIoc.Default.Register<SportsViewModel>();
         }
 
+        /// <summary>
+        /// View Panorama
+        /// </summary>
         public HomeViewModel Home
         {
             get
@@ -39,6 +48,9 @@ namespace WinnerSV.ViewModels
             }
         }
 
+        /// <summary>
+        /// View Sports
+        /// </summary>
         public SportsViewModel Sports
         {
             get
