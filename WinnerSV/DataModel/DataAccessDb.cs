@@ -22,18 +22,30 @@ namespace WinnerSV.DataModel
         /// </summary>
         public DataAccessDb()
         {
-            CreateDB();
+            TryToCreateDB();
         }
 
         /// <summary>
-        /// Creazione di un nuovo DB con una tabella per consentire il salvataggio dell'oggetto
-        /// da memorizzare.
+        /// Verifica se esiste, altrimenti crea un nuovo DB con una tabella per consentire il 
+        /// salvataggio dell'oggetto da memorizzare.
         /// </summary>
+        private async void TryToCreateDB()
+        {
+            try
+            {
+                await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.PATH_LOCAL_DB);
+            }
+            catch (FileNotFoundException)
+            {
+                CreateDB();
+            }
+        }
+
         private async void CreateDB()
         {
             SQLiteAsyncConnection connAsync = new SQLiteAsyncConnection(
-                pathLocalDb, 
-                true);
+                    pathLocalDb,
+                    true);
             await connAsync.CreateTableAsync<Schedina>();
             System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Table SCHEDINA creata con successo.");
         }
@@ -50,6 +62,19 @@ namespace WinnerSV.DataModel
             schedine = await query.ToListAsync();
             System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "GetSchedine: {0} records presenti nel DB", schedine.Count);
             return schedine;
+        }
+
+        /// <summary>
+        /// Consente di salvare un oggeto nel DB.
+        /// </summary>
+        /// <param name="s">Schedina</param>
+        /// <returns></returns>
+        public async Task SetSchedina(Schedina s)
+        {
+            SQLiteAsyncConnection connAsync = new SQLiteAsyncConnection(pathLocalDb, true);
+            var query = connAsync.Table<Schedina>();
+            await connAsync.InsertAsync(s);
+            System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Oggetto Schedina salvato nel DB!");
         }
     }
 }

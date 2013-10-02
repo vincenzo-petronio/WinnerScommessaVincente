@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WinnerSV.DataModel
@@ -12,5 +9,6 @@ namespace WinnerSV.DataModel
     public interface IDataAccessDb
     {
         Task<List<Schedina>> GetSchedine();
+        Task SetSchedina(Schedina s);
     }
 }
