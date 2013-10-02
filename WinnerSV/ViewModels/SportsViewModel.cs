@@ -140,8 +140,8 @@ namespace WinnerSV.ViewModels
         /// <param name="incontroSelected"></param>
         public void IncontroSelectedCommandImplemtation(Incontro incontroSelected)
         {
-            System.Diagnostics.Debug.WriteLine("[SPORTSVIEWMODEL] " + "Tapped NavToPageCommand!");
-            System.Diagnostics.Debug.WriteLine("[SPORTSVIEWMODEL] " + incontroSelected.Data + "\t" + incontroSelected.TeamCasa + "\t vs \t" + incontroSelected.TeamFCasa);
+            System.Diagnostics.Debug.WriteLineIf(incontroSelected != null, "[SPORTSVIEWMODEL] " + "Tapped NavToPageCommand!");
+            System.Diagnostics.Debug.WriteLineIf(incontroSelected != null, "[SPORTSVIEWMODEL] " + incontroSelected.Data + "\t" + incontroSelected.TeamCasa + "\t vs \t" + incontroSelected.TeamFCasa);
         }
     }
 }

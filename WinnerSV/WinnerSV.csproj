@@ -95,7 +95,9 @@
     </Compile>
     <Compile Include="Common\Constants.cs" />
     <Compile Include="DataModel\DataAccessDb.cs" />
+    <Compile Include="DataModel\ServiceAgentSports.cs" />
     <Compile Include="DataModel\IDataAccessDb.cs" />
+    <Compile Include="DataModel\IServiceAgent.cs" />
     <Compile Include="DataModel\Schedina.cs" />
     <Compile Include="DataModel\Sports.cs" />
     <Compile Include="DataSample\DbData.cs" />
