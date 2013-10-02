@@ -13,14 +13,18 @@ using WinnerSV.Helpers;
 
 namespace WinnerSV.ViewModels
 {
+    /// <summary>
+    /// ViewModel associato alla vista Panorama.
+    /// </summary>
     public class HomeViewModel : ViewModelBase
     {
         private ObservableCollection<Schedina> schedine;
+        private IDataAccessDb dataAccessDb;
 
         /// <summary>
         /// Costruttore.
         /// </summary>
-        public HomeViewModel()
+        public HomeViewModel(IDataAccessDb db)
         {
             if (IsInDesignMode)
             {
@@ -33,12 +37,31 @@ namespace WinnerSV.ViewModels
             else
             {
                 // Code runs "for real"
+
+                // DB
+                this.dataAccessDb = db;
+
+                // RELAY COMMAND
                 NavToPageCommand = new RelayCommand(() =>
                 {
                     System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "Tapped NavToPageCommand!");
                     Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "SportsView" });
                 });
+                
+                PopolaListaSchedine();
             }
+        }
+
+        /// <summary>
+        /// Consente di popolare il Pivot delle Schedine con i dati presenti nel DB.
+        /// </summary>
+        private async void PopolaListaSchedine()
+        {
+            // TEST
+            DbData d = new DbData();
+            await d.PopolaDb();
+
+            this.Schedine = new ObservableCollection<Schedina>(await dataAccessDb.GetSchedine());
         }
 
         /// <summary>
@@ -55,7 +78,19 @@ namespace WinnerSV.ViewModels
         /// </summary>
         public ObservableCollection<Schedina> Schedine
         {
-            get { return schedine; }
+            get 
+            { 
+                return schedine; 
+            }
+
+            set
+            {
+                if (schedine != value)
+                {
+                    schedine = value;
+                    RaisePropertyChanged(() => Schedine);
+                }
+            }
         }
     }
 }

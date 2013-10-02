@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WinnerSV.Common
+﻿namespace WinnerSV.Common
 {
-    class Constants
+    /// <summary>
+    /// Costanti hard-coded.
+    /// </summary>
+    public class Constants
     {
+        // ENDPOINT 
+
+        // DB
+        public const string PATH_LOCAL_DB = "db_schedine.sqlite";
     }
 }
