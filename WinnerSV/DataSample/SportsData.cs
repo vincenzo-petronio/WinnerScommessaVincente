@@ -11,7 +11,7 @@ namespace WinnerSV.DataSample
 {
     public class SportsData : ViewModelBase
     {
-        private ObservableCollection<Calcio> listCalcio;
+        private List<Calcio> listCalcio;
         private ObservableCollection<Basket> listBasket;
         private ObservableCollection<Tennis> listTennis;
 
@@ -125,7 +125,7 @@ namespace WinnerSV.DataSample
 
         }
 
-        public ObservableCollection<Calcio> ListCalcio
+        public List<Calcio> ListCalcio
         {
             get { return listCalcio; }
         }
@@ -140,9 +140,9 @@ namespace WinnerSV.DataSample
             get { return listTennis; }
         }
 
-        private ObservableCollection<Calcio> PopulateListCalcio(int numCampionati)
+        private List<Calcio> PopulateListCalcio(int numCampionati)
         {
-            ObservableCollection<Calcio> listCalcio = new ObservableCollection<Calcio>();
+            List<Calcio> listCalcio = new List<Calcio>();
             Random r = new Random();
             for (int i = 0; i < numCampionati; ++i)
             {

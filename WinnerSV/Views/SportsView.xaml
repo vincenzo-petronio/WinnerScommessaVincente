@@ -21,8 +21,11 @@
             
             <!-- Pivot Calcio -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot1Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector ItemsSource="{Binding ListCalcio}" 
-                                        ItemTemplate="{StaticResource templateSportsLls}"  />
+                <phone:LongListSelector ItemsSource="{Binding GroupedCalcio}" 
+                                        ItemTemplate="{StaticResource templateSportsLls}"
+                                        GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
+                                        IsGroupingEnabled ="true" 
+                                        LayoutMode="List"/>
             </phone:PivotItem>
 
             <!-- Pivot Tennis -->

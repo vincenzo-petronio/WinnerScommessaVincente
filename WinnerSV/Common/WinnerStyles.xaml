@@ -88,8 +88,21 @@
     <!-- TEMPLATE SPORTS LLS -->
     <DataTemplate x:Key="templateSportsLls">
         <StackPanel>
-            <TextBlock Text="{Binding Path=NomeCampionato}" />
+            <TextBlock Text="{Binding Path=TeamCasa}" />
+            <TextBlock Text="{Binding Path=TeamFCasa}" />
         </StackPanel>
     </DataTemplate>
+
+    <DataTemplate x:Key="templateSportsLlsGroupHeader">
+        <Border Background="{StaticResource PhoneAccentBrush}" 
+                BorderBrush="{StaticResource PhoneAccentBrush}" 
+                BorderThickness="2"	  				 
+                HorizontalAlignment="Left">
+            <TextBlock Text="{Binding Key}"                    
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"/>
+        </Border>
+    </DataTemplate>
     <!-- TEMPLATE SPORTS LLS JUMPLIST -->
+    
 </ResourceDictionary>
