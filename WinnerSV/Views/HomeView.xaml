@@ -22,7 +22,7 @@
 		<phone:Panorama Template="{StaticResource PanoramaControlTemplateWinner}" ItemContainerStyle="{StaticResource PanoramaItemStyleWinner}">
 
 			<phone:Panorama.Background>
-				<ImageBrush ImageSource="/Assets/PanoramaBackground.jpg" Stretch="Fill"/>
+				<ImageBrush ImageSource="/Assets/PanoramaBackground.png" Stretch="Fill"/>
 			</phone:Panorama.Background>
             
 			<phone:Panorama.Title>
