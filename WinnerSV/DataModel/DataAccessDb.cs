@@ -41,11 +41,23 @@ namespace WinnerSV.DataModel
             }
         }
 
+        /// <summary>
+        /// Restituisce la connessione al DB.
+        /// </summary>
+        /// <returns>SQLiteAsyncConnection</returns>
+        private SQLiteAsyncConnection GetSQLiteConnection()
+        {
+            return new SQLiteAsyncConnection(pathLocalDb, true);
+        }
+
+#region CRUD
+
+        /// <summary>
+        /// Crea la Tabella.
+        /// </summary>
         private async void CreateDB()
         {
-            SQLiteAsyncConnection connAsync = new SQLiteAsyncConnection(
-                    pathLocalDb,
-                    true);
+            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
             await connAsync.CreateTableAsync<Schedina>();
             System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Table SCHEDINA creata con successo.");
         }
@@ -57,7 +69,7 @@ namespace WinnerSV.DataModel
         public async Task<List<Schedina>> GetSchedine()
         {
             List<Schedina> schedine = new List<Schedina>();
-            SQLiteAsyncConnection connAsync = new SQLiteAsyncConnection(pathLocalDb, true);
+            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
             var query = connAsync.Table<Schedina>();
             schedine = await query.ToListAsync();
             System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "GetSchedine: {0} records presenti nel DB", schedine.Count);
@@ -65,16 +77,68 @@ namespace WinnerSV.DataModel
         }
 
         /// <summary>
-        /// Consente di salvare un oggeto nel DB.
+        /// Restituisce l'elemento specificato dal parametro, se presente nel DB.
+        /// </summary>
+        /// <param name="t">string </param>
+        /// <returns>schedina</returns>
+        public async Task<Schedina> GetSchedina(string t)
+        {
+            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
+            //var query = connAsync.Table<Schedina>();
+            string sqlQuery = "SELECT * FROM Schedina WHERE Title = '" + t + "'";
+            var sqlQueryResults = await connAsync.QueryAsync<Schedina>(sqlQuery);
+            System.Diagnostics.Debug.WriteLineIf(sqlQueryResults != null, "[DATAACCESSDB] \t" + "Schedina trovata nel DB: " + sqlQueryResults.Count);
+            if (sqlQueryResults.Count != 0)
+            {
+                return sqlQueryResults.First();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Consente di salvare un elemento nel DB.
         /// </summary>
         /// <param name="s">Schedina</param>
-        /// <returns></returns>
         public async Task SetSchedina(Schedina s)
         {
-            SQLiteAsyncConnection connAsync = new SQLiteAsyncConnection(pathLocalDb, true);
-            var query = connAsync.Table<Schedina>();
+            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
+            //var query = connAsync.Table<Schedina>();
             await connAsync.InsertAsync(s);
             System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Oggetto Schedina salvato nel DB!");
         }
+
+        /// <summary>
+        /// Consente di aggiornare un elemento nel DB.
+        /// </summary>
+        /// <param name="s">Schedina</param>
+        /// <returns></returns>
+        public async Task UpdateSchedina(Schedina s)
+        {
+            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
+            var sqlQueryResults = await connAsync.FindAsync<Schedina>(x => x.Title == s.Title);
+            if(sqlQueryResults != null)
+            {
+                await connAsync.UpdateAsync(s);
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Oggetto Schedina aggiornato nel DB!");
+            }
+        }
+
+        /// <summary>
+        /// Elimina dal DB l'elemento indicato dal parametro.
+        /// </summary>
+        /// <param name="s">Schedina </param>
+        public async Task DeleteSchedina(Schedina s)
+        {
+            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
+            //var query = connAsync.Table<Schedina>();
+            await connAsync.DeleteAsync(s);
+            System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Oggetto Schedina cancellato dal DB!");
+        }
+
+#endregion
+
     }
 }

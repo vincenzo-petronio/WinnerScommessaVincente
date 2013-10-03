@@ -107,7 +107,11 @@
     <Compile Include="Helpers\NavToPage.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="ViewModels\AnteprimaSchedinaViewModel.cs" />
     <Compile Include="ViewModels\SportsViewModel.cs" />
+    <Compile Include="Views\AnteprimaSchedina.xaml.cs">
+      <DependentUpon>AnteprimaSchedina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PivotAbout.xaml.cs">
       <DependentUpon>PivotAbout.xaml</DependentUpon>
     </Compile>
@@ -130,6 +134,10 @@
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AnteprimaSchedina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PivotAbout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

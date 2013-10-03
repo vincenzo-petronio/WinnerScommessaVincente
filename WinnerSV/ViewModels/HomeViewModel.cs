@@ -42,10 +42,19 @@ namespace WinnerSV.ViewModels
                 this.dataAccessDb = db;
 
                 // RELAY COMMAND
-                NavToPageCommand = new RelayCommand(() =>
+                NavToPageCommand = new RelayCommand<string>((args) =>
                 {
-                    System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "Tapped NavToPageCommand!");
-                    Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "SportsView" });
+                    System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "Tapped NavToPageCommand: " + args.ToString());
+                    string pageName = string.Empty;
+
+                    switch (args.ToString())
+                    {
+                        case "PanoramaPivot1": pageName = "SportsView"; break;
+                        case "PanoramaPivot2": pageName = "AnteprimaSchedina"; break;
+                        default: break;
+                    }
+
+                    Messenger.Default.Send<NavToPage>(new NavToPage { PageName = pageName });
                 });
                 
                 PopolaListaSchedine();
@@ -67,7 +76,7 @@ namespace WinnerSV.ViewModels
         /// <summary>
         /// RelayCommand per la Navigation.
         /// </summary>
-        public RelayCommand NavToPageCommand
+        public RelayCommand<string> NavToPageCommand
         {
             get;
             private set;

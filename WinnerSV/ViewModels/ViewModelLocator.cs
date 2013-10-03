@@ -36,10 +36,11 @@ namespace WinnerSV.ViewModels
             // VIEW MODELS
             SimpleIoc.Default.Register<HomeViewModel>();
             SimpleIoc.Default.Register<SportsViewModel>();
+            SimpleIoc.Default.Register<AnteprimaSchedinaViewModel>();
         }
 
         /// <summary>
-        /// View Panorama
+        /// ViewModel Panorama
         /// </summary>
         public HomeViewModel Home
         {
@@ -50,13 +51,24 @@ namespace WinnerSV.ViewModels
         }
 
         /// <summary>
-        /// View Sports
+        /// ViewModel Sports
         /// </summary>
         public SportsViewModel Sports
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<SportsViewModel>();
+            }
+        }
+
+        /// <summary>
+        /// ViewModel AnteprimaSchedina
+        /// </summary>
+        public AnteprimaSchedinaViewModel AnteSchedina
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AnteprimaSchedinaViewModel>();
             }
         }
 
