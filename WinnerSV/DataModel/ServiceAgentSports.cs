@@ -78,7 +78,7 @@ namespace WinnerSV.DataModel
                     {
                         using (var sr = new StreamReader(response.GetResponseStream()))
                         {
-                            downloaded = sr.ReadToEnd();
+                            downloaded = System.Net.WebUtility.HtmlDecode(sr.ReadToEnd());
                             System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - DownloadFileJson] \t" 
                                 + "Download JSON terminato in {0} s", sw.Elapsed.TotalSeconds);
                         }
