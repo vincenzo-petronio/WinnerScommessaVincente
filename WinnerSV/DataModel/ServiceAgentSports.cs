@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Net;
@@ -10,102 +10,94 @@ using WinnerSV.Helpers;
 
 namespace WinnerSV.DataModel
 {
+    /// <summary>
+    /// Definisce i metodi per accedere al WebServices.
+    /// </summary>
     public class ServiceAgentSports : IServiceAgent
     {
         private string currentLanguage = string.Empty;
         private string url = string.Empty;
-        private List<Calcio> listCalcio = new List<Calcio>();
-        private List<Tennis> listTennis = new List<Tennis>();
-        private List<Basket> listBasket = new List<Basket>();
 
+        /// <summary>
+        /// Costruttore.
+        /// </summary>
         public ServiceAgentSports()
         {
-            //mi serve per construire l'url da dove scarico il json
-            RilevaLingua();
-            //si parsa il file json popolando le 3 liste dei sport diversi
-            //ParseFileJson();
         }
 
         /// <summary>
-        /// la lingua deve essere es: "it", "en"
-        /// serve per construire l'url "http://winnerscommessavincente.altervista.org/Json/{0}_scommesse.json"
+        /// Ricava dai settings la lingua di sistema.
         /// </summary>
         private void RilevaLingua()
         {
-            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
-            string lingua = "it";
-            if (settings.Contains(Constants.SETTINGS_KEY_CORRENTE_LINGUA))
+            try
             {
-                lingua = ((string)settings[Constants.SETTINGS_KEY_CORRENTE_LINGUA]).Split('-')[0];
+                IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+                string lingua = "it";
+                if (settings.Contains(Constants.SETTINGS_KEY_CORRENTE_LINGUA))
+                {
+                    // La lingua memorizzata e' nel formato BCP-47.
+                    // en-US diventa en.
+                    lingua = ((string)settings[Constants.SETTINGS_KEY_CORRENTE_LINGUA]).Split('-')[0];
+                }
+                currentLanguage = lingua;
+                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \t" + "currentLanguage = " + currentLanguage);
             }
-            currentLanguage = lingua;
-            System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \t" + "currentLanguage = " + currentLanguage);
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \n" + e.ToString());
+            }
         }
 
         /// <summary>
-        /// fa partire il download del file json
+        /// Consente di scaricare un file Json da URL remoto.
         /// </summary>
-        //private void DownloadFileJson()
-        //{
-        //    this.url = Constants.URL_SUBDOMAIN_JSON + this.currentLanguage + Constants.URL_JSON;
-        //    System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \t" + "download content = " + this.url);
-
-        //    WebClient wc = new WebClient();
-        //    wc.DownloadStringCompleted += HttpCompleted;
-        //    wc.DownloadStringAsync(new Uri(url));
-        //}
-
-        /// <summary>
-        /// parsa il content
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        ////private void HttpCompleted(object sender, DownloadStringCompletedEventArgs e)
-        ////{
-        ////    if (e.Error == null)
-        ////    {
-        ////        var resultString = e.Result;
-        ////        Sports deserializedSports = JsonConvert.DeserializeObject<Sports>(resultString);
-        ////        if (deserializedSports != null)
-        ////        {
-        ////            this.listCalcio = deserializedSports.Calcio;
-        ////            this.listTennis = deserializedSports.Tennis;
-        ////            this.listBasket = deserializedSports.Basket;
-        ////        }
-        ////    }
-        ////}
-
+        /// <param name="uri">string Path finale del file Json</param>
+        /// <returns>string Contenuto del Json</returns>
         private async Task<string> DownloadFileJson(string uri)
         {
+            RilevaLingua();
             var downloaded = string.Empty;
             this.url = Constants.URL_SUBDOMAIN_JSON + this.currentLanguage + uri;
-
-            try
+            if (!string.IsNullOrEmpty(this.url))
             {
-                HttpWebRequest client = (HttpWebRequest)WebRequest.Create(this.url);
-                client.Method = "Get";
-                HttpWebResponse response = (HttpWebResponse)await client.GetResponseAsync();
+                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - URI] \t" + this.url);
+                try
+                {
+                    Stopwatch sw = Stopwatch.StartNew();
+                    HttpWebRequest client = (HttpWebRequest)WebRequest.Create(this.url);
+                    client.Method = "Get";
+                    HttpWebResponse response = (HttpWebResponse)await client.GetResponseAsync();
+                    sw.Stop();
 
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    throw new Exception("NotFound");
-                }
-                else
-                {
-                    using (var sr = new StreamReader(response.GetResponseStream()))
+                    if (response.StatusCode == HttpStatusCode.NotFound)
                     {
-                        downloaded = sr.ReadToEnd();
+                        throw new Exception("NotFound");
                     }
+                    else
+                    {
+                        using (var sr = new StreamReader(response.GetResponseStream()))
+                        {
+                            downloaded = sr.ReadToEnd();
+                            System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - DownloadFileJson] \t" 
+                                + "Download JSON terminato in {0} s", sw.Elapsed.TotalSeconds);
+                        }
+                    }
+
                 }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - DownloadFileJson] \n" + ex.ToString());
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - DownloadFileJson] \n" + ex.ToString());
+                }
             }
             return downloaded;
         }
 
-
+        /// <summary>
+        /// Restituisce una oggetto Sports con i dati ottenuto dal JSON.
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <param name="uri">string Path finale del file Json</param>
         public async void GetSports(Action<Sports, Exception> callback, string uri)
         {
             Exception err = null;
@@ -115,12 +107,14 @@ namespace WinnerSV.DataModel
                 var resultFileJson = await this.DownloadFileJson(uri);
                 if (!string.IsNullOrEmpty(resultFileJson))
                 {
+                    // PARSER
                     results = JsonConvert.DeserializeObject<Sports>(resultFileJson);
                 }
             }
             catch (Exception e)
             {
                 err = e;
+                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \n" + e.ToString());
             }
 
             callback(results, err);

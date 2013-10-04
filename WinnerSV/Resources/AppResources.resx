@@ -159,4 +159,7 @@
   <data name="SportsPivot3Header" xml:space="preserve">
     <value>Basket</value>
   </data>
+  <data name="SportsProgressIndicatorText" xml:space="preserve">
+    <value>Download ...</value>
+  </data>
 </root>

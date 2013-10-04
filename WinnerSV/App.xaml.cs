@@ -72,8 +72,15 @@ namespace WinnerSV
         /// </summary>
         private void SetLinguaCorrente()
         {
-            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
-            settings[Constants.SETTINGS_KEY_CORRENTE_LINGUA] = CultureInfo.CurrentUICulture.Name;
+            try
+            {
+                IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+                settings[Constants.SETTINGS_KEY_CORRENTE_LINGUA] = CultureInfo.CurrentUICulture.Name;
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("[APP] \n" + e.ToString());
+            }
         }
 
         // Code to execute when the application is launching (eg, from Start)

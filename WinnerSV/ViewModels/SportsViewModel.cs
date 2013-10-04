@@ -4,23 +4,27 @@ using System.Collections.Generic;
 using WinnerSV.DataModel;
 using WinnerSV.DataSample;
 using GalaSoft.MvvmLight.Command;
-using System.Windows.Input;
 using WinnerSV.Helpers;
 using GalaSoft.MvvmLight.Messaging;
 using WinnerSV.Common;
+using System.Collections.ObjectModel;
 
 namespace WinnerSV.ViewModels
 {
-
+    /// <summary>
+    /// ViewModel associato alla vista Sports, contenente la lista di tutti i possibili
+    /// Sport sui quali e' possibile effettuare delle scommesse.
+    /// </summary>
     public class SportsViewModel : ViewModelBase
     {
         private IServiceAgent serviceAgent;
         private Sports sports;
-        private List<Calcio> listCalcio;
-        private List<Basket> listBasket;
-        private List<Tennis> listTennis;
-
+        private ObservableCollection<Calcio> listCalcio;
+        private ObservableCollection<Basket> listBasket;
+        private ObservableCollection<Tennis> listTennis;
         private Incontro itemSelected;
+        private Incontro itemSelectedStored;
+        private bool isProgressIndicatorVisible = true;
 
         /// <summary>
         /// Costruttore.
@@ -31,38 +35,61 @@ namespace WinnerSV.ViewModels
             {
                 // TODO Fare injection con IDataService
                 SportsData sd = new SportsData();
-                listCalcio = sd.ListCalcio;
-                listBasket = sd.ListBasket;
-                listTennis = sd.ListTennis;
+                listCalcio = new ObservableCollection<Calcio>(sd.ListCalcio);
+                listBasket = new ObservableCollection<Basket>(sd.ListBasket);
+                listTennis = new ObservableCollection<Tennis>(sd.ListTennis);
             }
             else
             {
-                // real code
+                // RELAY COMMAND
                 NavToPageCommand = new RelayCommand(IncontroSelectedCommand);
 
+                // SERVICE AGENT
                 this.serviceAgent = srvAgn;
                 this.serviceAgent.GetSports((sports, err) =>
+                    {
+                        if (err != null)
                         {
-                            if (err != null)
-                            {
-                                System.Diagnostics.Debug.WriteLine("[SportsViewModel] \r" + err.Message);
-                            }
-                            else
-                            {
-                                this.listCalcio = sports.Calcio;
-
-                                ////this.listTennis = sports.Tennis;
-                                ////this.listCalcio = sports.Calcio;
-                            }
+                            System.Diagnostics.Debug.WriteLine("[SportsViewModel] \r" + err.Message);
                         }
-                    , Constants.URL_JSON);
-                
-                ////SportsData sd = new SportsData();
-                ////listCalcio = sd.ListCalcio;
-                ////listBasket = sd.ListBasket;
-                ////listTennis = sd.ListTennis;
+                        else
+                        {
+                            // CALCIO
+                            this.ListCalcio = new ObservableCollection<Calcio>(sports.Calcio);
+                            RaisePropertyChanged(() => GroupedCalcio);
 
+                            // TENNIS
+                            this.listTennis = new ObservableCollection<Tennis>(sports.Tennis);
+                            RaisePropertyChanged(() => GroupedTennis);
 
+                            // BASKET
+                            this.listBasket = new ObservableCollection<Basket>(sports.Basket);
+                            RaisePropertyChanged(() => GroupedBasket);
+                        }
+                        // Nascondo la progress
+                        IsProgressIndicatorVisible = false;
+                    }
+                , Constants.URL_JSON);
+            }
+        }
+
+        /// <summary>
+        /// Proprieta' in binding con la Visibility del ProgressIndicator.
+        /// </summary>
+        public bool IsProgressIndicatorVisible
+        {
+            get
+            {
+                return isProgressIndicatorVisible;
+            }
+
+            set
+            {
+                if(isProgressIndicatorVisible != value)
+                {
+                    isProgressIndicatorVisible = value;
+                    RaisePropertyChanged(() => IsProgressIndicatorVisible);
+                }
             }
         }
 
@@ -87,31 +114,87 @@ namespace WinnerSV.ViewModels
         }
 
         /// <summary>
+        /// Conserva l'oggetto selezionato per essere utilizzato da altri ViewModel.
+        /// </summary>
+        public Incontro ItemSelectedStored
+        {
+            get
+            {
+                return itemSelectedStored;
+            }
+
+            set
+            {
+                if (itemSelectedStored != value)
+                {
+                    itemSelectedStored = value;
+                    RaisePropertyChanged(() => ItemSelectedStored);
+                }
+            }
+        }
+
+        /// <summary>
         /// Proprieta' in binding con la lista presente nel Pivot con i campionati di Calcio.
         /// </summary>
-        public List<Calcio> ListCalcio
+        public ObservableCollection<Calcio> ListCalcio
         {
-            get { return listCalcio; }
+            get 
+            { 
+                return listCalcio; 
+            }
+
+            set
+            {
+                if (listCalcio != value)
+                {
+                    listCalcio = value;
+                    RaisePropertyChanged(() => ListCalcio);
+                }
+            }
         }
         
         /// <summary>
         /// Proprieta' in binding con la lista presente nel Pivot con i campionati di Basket.
         /// </summary>
-        public List<Basket> ListBasket
+        public ObservableCollection<Basket> ListBasket
         {
-            get { return listBasket; }
+            get 
+            { 
+                return listBasket; 
+            }
+
+            set
+            {
+                if (listBasket != value)
+                {
+                    listBasket = value;
+                    RaisePropertyChanged(() => ListBasket);
+                }
+            }
         }
 
         /// <summary>
         /// Proprieta' in binding con la lista presente nel Pivot con i campionati di Tennis.
         /// </summary>
-        public List<Tennis> ListTennis
+        public ObservableCollection<Tennis> ListTennis
         {
-            get { return listTennis; }
+            get 
+            { 
+                return listTennis; 
+            }
+
+            set
+            {
+                if (listTennis != value)
+                {
+                    listTennis = value;
+                    RaisePropertyChanged(() => ListTennis);
+                }
+            }
         }
 
         /// <summary>
-        /// Crea una lista di incontri ragruppati associati ai campionati per la Long List Selector
+        /// Crea una lista di incontri ragruppati associati ai campionati per la LongListSelector
         /// </summary>
         public List<KeyedList<string, Incontro>> GroupedCalcio
         {
@@ -119,8 +202,8 @@ namespace WinnerSV.ViewModels
             {
                 if (listCalcio != null)
                 {
-                    //linq che per ogni campionato prende la lista di incontri associati al compionato, 
-                    //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
+                    // linq che per ogni campionato prende la lista di incontri associati al compionato, 
+                    // e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
                     var listGruppi =
                         from calcio in listCalcio
                         orderby calcio.NomeCampionato
@@ -147,8 +230,8 @@ namespace WinnerSV.ViewModels
             {
                 if (listTennis != null)
                 {
-                    //linq che per ogni campionato prende la lista di incontri associati al compionato, 
-                    //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
+                    // linq che per ogni campionato prende la lista di incontri associati al compionato, 
+                    // e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
                     var listGruppi =
                         from tennis in listTennis
                         orderby tennis.NomeCampionato
@@ -175,8 +258,8 @@ namespace WinnerSV.ViewModels
             {
                 if (listBasket != null)
                 {
-                    //linq che per ogni campionato prende la lista di incontri associati al compionato, 
-                    //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
+                    // linq che per ogni campionato prende la lista di incontri associati al compionato, 
+                    // e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
                     var listGruppi =
                         from basket in listBasket
                         orderby basket.NomeCampionato
@@ -210,7 +293,7 @@ namespace WinnerSV.ViewModels
         {
             if (itemSelected != null)
             {
-                System.Diagnostics.Debug.WriteLine("[SPORTSVIEWMODEL] " + "Tapped NavToPageCommand! " + itemSelected.TeamCasa + " vs " + itemSelected.TeamFCasa);
+                ItemSelectedStored = ItemSelected;
                 Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "IncontroView" });
                 ItemSelected = null;
             }

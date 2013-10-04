@@ -31,10 +31,12 @@
         <Grid x:Name="ContentPanel" 
               Grid.Row="1" 
               Margin="12,0,12,0" 
-              DataContext="{Binding DatiIncontro}" >
-
-            <TextBlock Text="{Binding Data}" 
-                       FontSize="{StaticResource PhoneFontSizeHuge}" />
+              DataContext="{Binding Sports.ItemSelectedStored, Source={StaticResource Locator}}" >
+            <StackPanel>
+                <TextBlock Text="{Binding Path=TeamCasa, StringFormat='Team Casa: {0}'}" />
+                <TextBlock Text="{Binding Path=TeamFCasa, StringFormat='Team FCasa: {0}'}" />
+                <TextBlock Text="{Binding Path=Data}" />
+            </StackPanel>
         </Grid>
     </Grid>
 
