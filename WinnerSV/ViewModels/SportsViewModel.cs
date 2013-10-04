@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 using WinnerSV.Helpers;
 using GalaSoft.MvvmLight.Messaging;
+using WinnerSV.Common;
 
 namespace WinnerSV.ViewModels
 {
@@ -14,6 +15,7 @@ namespace WinnerSV.ViewModels
     public class SportsViewModel : ViewModelBase
     {
         private IServiceAgent serviceAgent;
+        private Sports sports;
         private List<Calcio> listCalcio;
         private List<Basket> listBasket;
         private List<Tennis> listTennis;
@@ -37,11 +39,30 @@ namespace WinnerSV.ViewModels
             {
                 // real code
                 NavToPageCommand = new RelayCommand(IncontroSelectedCommand);
+
+                this.serviceAgent = srvAgn;
+                this.serviceAgent.GetSports((sports, err) =>
+                        {
+                            if (err != null)
+                            {
+                                System.Diagnostics.Debug.WriteLine("[SportsViewModel] \r" + err.Message);
+                            }
+                            else
+                            {
+                                this.listCalcio = sports.Calcio;
+
+                                ////this.listTennis = sports.Tennis;
+                                ////this.listCalcio = sports.Calcio;
+                            }
+                        }
+                    , Constants.URL_JSON);
                 
-                SportsData sd = new SportsData();
-                listCalcio = sd.ListCalcio;
-                listBasket = sd.ListBasket;
-                listTennis = sd.ListTennis;
+                ////SportsData sd = new SportsData();
+                ////listCalcio = sd.ListCalcio;
+                ////listBasket = sd.ListBasket;
+                ////listTennis = sd.ListTennis;
+
+
             }
         }
 
@@ -96,17 +117,24 @@ namespace WinnerSV.ViewModels
         {
             get
             {
-                //linq che per ogni campionato prende la lista di incontri associati al compionato, 
-                //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
-                var listGruppi =
-                    from calcio in listCalcio
-                    orderby calcio.NomeCampionato
+                if (listCalcio != null)
+                {
+                    //linq che per ogni campionato prende la lista di incontri associati al compionato, 
+                    //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
+                    var listGruppi =
+                        from calcio in listCalcio
+                        orderby calcio.NomeCampionato
 
-                    from incontro in calcio.ElencoIncontriCalcio
-                    group incontro by calcio.NomeCampionato into listaCalcioGroup
-                    select new KeyedList<string, Incontro>(listaCalcioGroup);
+                        from incontro in calcio.ElencoIncontriCalcio
+                        group incontro by calcio.NomeCampionato into listaCalcioGroup
+                        select new KeyedList<string, Incontro>(listaCalcioGroup);
 
-                return new List<KeyedList<string, Incontro>>(listGruppi);
+                    return new List<KeyedList<string, Incontro>>(listGruppi);
+                }
+                else
+                {
+                    return new List<KeyedList<string, Incontro>>();
+                }
             }
         }
 
@@ -117,17 +145,24 @@ namespace WinnerSV.ViewModels
         {
             get
             {
-                //linq che per ogni campionato prende la lista di incontri associati al compionato, 
-                //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
-                var listGruppi =
-                    from tennis in listTennis
-                    orderby tennis.NomeCampionato
+                if (listTennis != null)
+                {
+                    //linq che per ogni campionato prende la lista di incontri associati al compionato, 
+                    //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
+                    var listGruppi =
+                        from tennis in listTennis
+                        orderby tennis.NomeCampionato
 
-                    from incontro in tennis.ElencoIncontriTennis
-                    group incontro by tennis.NomeCampionato into listaTennisGroup
-                    select new KeyedList<string, Incontro>(listaTennisGroup);
+                        from incontro in tennis.ElencoIncontriTennis
+                        group incontro by tennis.NomeCampionato into listaTennisGroup
+                        select new KeyedList<string, Incontro>(listaTennisGroup);
 
-                return new List<KeyedList<string, Incontro>>(listGruppi);
+                    return new List<KeyedList<string, Incontro>>(listGruppi);
+                }
+                else
+                {
+                    return new List<KeyedList<string, Incontro>>();
+                }
             }
         }
 
@@ -138,17 +173,24 @@ namespace WinnerSV.ViewModels
         {
             get
             {
-                //linq che per ogni campionato prende la lista di incontri associati al compionato, 
-                //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
-                var listGruppi =
-                    from basket in listBasket
-                    orderby basket.NomeCampionato
+                if (listBasket != null)
+                {
+                    //linq che per ogni campionato prende la lista di incontri associati al compionato, 
+                    //e per ogni incontro crea gli oggetti KeyedList che mi serve per creare i gruppi 
+                    var listGruppi =
+                        from basket in listBasket
+                        orderby basket.NomeCampionato
 
-                    from incontro in basket.ElencoIncontriBasket
-                    group incontro by basket.NomeCampionato into listaBasketGroup
-                    select new KeyedList<string, Incontro>(listaBasketGroup);
+                        from incontro in basket.ElencoIncontriBasket
+                        group incontro by basket.NomeCampionato into listaBasketGroup
+                        select new KeyedList<string, Incontro>(listaBasketGroup);
 
-                return new List<KeyedList<string, Incontro>>(listGruppi);
+                    return new List<KeyedList<string, Incontro>>(listGruppi);
+                }
+                else
+                {
+                    return new List<KeyedList<string, Incontro>>();
+                }
             }
         }
 

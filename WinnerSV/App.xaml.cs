@@ -10,6 +10,10 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WinnerSV.Resources;
 using WinnerSV.ViewModels;
+using System.IO.IsolatedStorage;
+using WinnerSV.Common;
+using System.Globalization;
+using System.Threading.Tasks;
 
 namespace WinnerSV
 {
@@ -38,6 +42,9 @@ namespace WinnerSV
             // Language display initialization
             InitializeLanguage();
 
+            //mi salva in settings la lingua del dispositivo
+            SetLinguaCorrente();
+
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
             {
@@ -58,6 +65,15 @@ namespace WinnerSV
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+        }
+
+        /// <summary>
+        /// Aggiunge nei settings la lingua corrente
+        /// </summary>
+        private void SetLinguaCorrente()
+        {
+            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+            settings[Constants.SETTINGS_KEY_CORRENTE_LINGUA] = CultureInfo.CurrentUICulture.Name;
         }
 
         // Code to execute when the application is launching (eg, from Start)

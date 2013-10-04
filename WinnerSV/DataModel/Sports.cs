@@ -7,9 +7,9 @@ namespace WinnerSV.DataModel
     /// </summary>
     public class Sports
     {
-        public Calcio Calcio { get; set; }
-        public Tennis Tennis { get; set; }
-        public Basket Basket { get; set; }
+        public List<Calcio> Calcio { get; set; }
+        public List<Tennis> Tennis { get; set; }
+        public List<Basket> Basket { get; set; }
     }
     
     /// <summary>

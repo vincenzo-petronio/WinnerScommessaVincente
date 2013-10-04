@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,6 @@ namespace WinnerSV.DataModel
     /// </summary>
     public interface IServiceAgent
     {
-        List<Calcio> GetListCalcio();
-        List<Basket> GetListBasket();
-        List<Tennis> GetListTennis();
+        void GetSports(Action<Sports, Exception> callback, string uri);
     }
 }

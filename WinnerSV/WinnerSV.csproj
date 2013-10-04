@@ -94,6 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Helpers\HttpExtensions.cs" />
     <Compile Include="Helpers\LongListSelector.cs" />
     <Compile Include="DataModel\DataAccessDb.cs" />
     <Compile Include="DataModel\ServiceAgentSports.cs" />
