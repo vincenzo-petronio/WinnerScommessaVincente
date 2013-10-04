@@ -15,9 +15,6 @@ namespace WinnerSV.DataModel
     /// </summary>
     public class ServiceAgentSports : IServiceAgent
     {
-        private string currentLanguage = string.Empty;
-        private string url = string.Empty;
-
         /// <summary>
         /// Costruttore.
         /// </summary>
@@ -28,44 +25,48 @@ namespace WinnerSV.DataModel
         /// <summary>
         /// Ricava dai settings la lingua di sistema.
         /// </summary>
-        private void RilevaLingua()
+        private string RilevaLingua()
         {
+            string lingua = "it";
+
             try
             {
                 IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
-                string lingua = "it";
                 if (settings.Contains(Constants.SETTINGS_KEY_CORRENTE_LINGUA))
                 {
                     // La lingua memorizzata e' nel formato BCP-47.
-                    // en-US diventa en.
+                    // Trasformo en-US nel formato en.
                     lingua = ((string)settings[Constants.SETTINGS_KEY_CORRENTE_LINGUA]).Split('-')[0];
                 }
-                currentLanguage = lingua;
-                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \t" + "currentLanguage = " + currentLanguage);
+                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \t" + "currentLanguage = " + lingua);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \n" + e.ToString());
             }
+            finally
+            { 
+            }
+
+            return lingua;
         }
 
         /// <summary>
-        /// Consente di scaricare un file Json da URL remoto.
+        /// Consente di scaricare un file da URL remoto.
         /// </summary>
-        /// <param name="uri">string Path finale del file Json</param>
-        /// <returns>string Contenuto del Json</returns>
-        private async Task<string> DownloadFileJson(string uri)
+        /// <param name="uri">string Path del file remoto</param>
+        /// <returns>string Contenuto del file remoto ricevuto dalla risposta Http</returns>
+        private async Task<string> DownloadRemoteFile(string uri)
         {
-            RilevaLingua();
             var downloaded = string.Empty;
-            this.url = Constants.URL_SUBDOMAIN_JSON + this.currentLanguage + uri;
-            if (!string.IsNullOrEmpty(this.url))
+            
+            if (!string.IsNullOrEmpty(uri))
             {
-                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - URI] \t" + this.url);
+                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - URI] \t" + uri);
                 try
                 {
                     Stopwatch sw = Stopwatch.StartNew();
-                    HttpWebRequest client = (HttpWebRequest)WebRequest.Create(this.url);
+                    HttpWebRequest client = (HttpWebRequest)WebRequest.Create(uri);
                     client.Method = "Get";
                     HttpWebResponse response = (HttpWebResponse)await client.GetResponseAsync();
                     sw.Stop();
@@ -94,27 +95,33 @@ namespace WinnerSV.DataModel
         }
 
         /// <summary>
-        /// Restituisce una oggetto Sports con i dati ottenuto dal JSON.
+        /// Restituisce una oggetto Sports con i dati ottenuti dal JSON.
         /// </summary>
         /// <param name="callback"></param>
         /// <param name="uri">string Path finale del file Json</param>
-        public async void GetSports(Action<Sports, Exception> callback, string uri)
+        public async void GetSports(Action<Sports, Exception> callback, string uriFileName)
         {
             Exception err = null;
             Sports results = null;
+
+            string uri = Constants.URL_SUBDOMAIN_JSON + RilevaLingua() + uriFileName;
             try
             {
-                var resultFileJson = await this.DownloadFileJson(uri);
+                var resultFileJson = await this.DownloadRemoteFile(uri);
                 if (!string.IsNullOrEmpty(resultFileJson))
                 {
                     // PARSER
+                    Stopwatch sw = Stopwatch.StartNew();
                     results = JsonConvert.DeserializeObject<Sports>(resultFileJson);
+                    sw.Stop();
+                    System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - GetSports] \t" 
+                        + "Parser completato in {0} s.", sw.Elapsed.TotalSeconds);
                 }
             }
             catch (Exception e)
             {
                 err = e;
-                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports] \n" + e.ToString());
+                System.Diagnostics.Debug.WriteLine("[ServiceAgentSports - GetSports] \n" + e.ToString());
             }
 
             callback(results, err);
