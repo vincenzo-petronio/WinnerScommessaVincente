@@ -116,11 +116,18 @@ namespace WinnerSV.DataSample
 
         public SportsData()
         {
+            //uso sti dati fittizi anche per la demo
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 listCalcio = PopulateListCalcio(10);
                 listBasket = PopulateListBasket(3);
                 listTennis = PopulateListTennis(5);
+            }
+            else
+            {
+                listCalcio = PopulateListCalcio(2);
+                listBasket = PopulateListBasket(2);
+                listTennis = PopulateListTennis(2);
             }
 
         }

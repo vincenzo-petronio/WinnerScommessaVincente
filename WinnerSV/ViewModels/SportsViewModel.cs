@@ -1,27 +1,29 @@
 ﻿using GalaSoft.MvvmLight;
-using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using WinnerSV.DataModel;
 using WinnerSV.DataSample;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
+using WinnerSV.Helpers;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace WinnerSV.ViewModels
 {
 
     public class SportsViewModel : ViewModelBase
     {
-
+        private IServiceAgent serviceAgent;
         private List<Calcio> listCalcio;
         private List<Basket> listBasket;
         private List<Tennis> listTennis;
 
+        private Incontro itemSelected;
+
         /// <summary>
         /// Costruttore.
         /// </summary>
-        public SportsViewModel()
+        public SportsViewModel(IServiceAgent srvAgn)
         {
             if (IsInDesignMode)
             {
@@ -34,11 +36,32 @@ namespace WinnerSV.ViewModels
             else
             {
                 // real code
-                NavToPageCommand = new RelayCommand<Incontro>(IncontroSelectedCommandImplemtation);
+                NavToPageCommand = new RelayCommand(IncontroSelectedCommand);
+                
+                SportsData sd = new SportsData();
+                listCalcio = sd.ListCalcio;
+                listBasket = sd.ListBasket;
+                listTennis = sd.ListTennis;
+            }
+        }
 
-                listCalcio = new List<Calcio>();
-                listTennis = new List<Tennis>();
-                listBasket = new List<Basket>();
+        /// <summary>
+        /// Binding con la proprietà SelectedItem del LongListSelector
+        /// </summary>
+        public Incontro ItemSelected
+        {
+            get
+            {
+                return itemSelected;
+            }
+
+            set
+            {
+                if (itemSelected != value)
+                {
+                    itemSelected = value;
+                    RaisePropertyChanged(() => ItemSelected);
+                }
             }
         }
 
@@ -78,10 +101,10 @@ namespace WinnerSV.ViewModels
                 var listGruppi =
                     from calcio in listCalcio
                     orderby calcio.NomeCampionato
-                    
-                        from incontro in calcio.ElencoIncontriCalcio
-                        group incontro by calcio.NomeCampionato into  listaCalcioGroup
-                        select new KeyedList<string, Incontro>( listaCalcioGroup);
+
+                    from incontro in calcio.ElencoIncontriCalcio
+                    group incontro by calcio.NomeCampionato into listaCalcioGroup
+                    select new KeyedList<string, Incontro>(listaCalcioGroup);
 
                 return new List<KeyedList<string, Incontro>>(listGruppi);
             }
@@ -132,20 +155,24 @@ namespace WinnerSV.ViewModels
         /// <summary>
         /// RelayCommand per la Navigation a dettaglio incontro
         /// </summary>
-        public ICommand NavToPageCommand
+        public RelayCommand NavToPageCommand
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// cattura l'oggetto selezionato dalla long list selector
+        /// Permette la navigazione alla vista successiva
         /// </summary>
-        /// <param name="incontroSelected"></param>
-        public void IncontroSelectedCommandImplemtation(Incontro incontroSelected)
+        private void IncontroSelectedCommand()
         {
-            System.Diagnostics.Debug.WriteLineIf(incontroSelected != null, "[SPORTSVIEWMODEL] " + "Tapped NavToPageCommand!");
-            System.Diagnostics.Debug.WriteLineIf(incontroSelected != null, "[SPORTSVIEWMODEL] " + incontroSelected.Data + "\t" + incontroSelected.TeamCasa + "\t vs \t" + incontroSelected.TeamFCasa);
+            if (itemSelected != null)
+            {
+                System.Diagnostics.Debug.WriteLine("[SPORTSVIEWMODEL] " + "Tapped NavToPageCommand! " + itemSelected.TeamCasa + " vs " + itemSelected.TeamFCasa);
+                Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "IncontroView" });
+                ItemSelected = null;
+            }
         }
+
     }
 }

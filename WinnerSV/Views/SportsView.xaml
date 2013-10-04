@@ -8,6 +8,7 @@
     xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="clr-namespace:WinnerSV.Helpers"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -23,39 +24,57 @@
             
             <!-- Pivot Calcio -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot1Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector x:Name="llsCalcio"
-                                        ItemsSource="{Binding GroupedCalcio}" 
+                <helpers:LongListSelector x:Name="llsCalcio"
+                                        ItemsSource="{Binding GroupedCalcio}"
                                         ItemTemplate="{StaticResource templateSportsLls}"
+                                        JumpListStyle="{StaticResource templateSprtsJumpLls}"
                                         GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
                                         IsGroupingEnabled ="true" 
-                                        LayoutMode="List"
+                                        LayoutMode="List" 
+                                        SelectedItem="{Binding ItemSelected,Mode=TwoWay}"
                                         >
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Tap">
-                            <Command:EventToCommand Command="{Binding Sports.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding Path=SelectedItem, ElementName=llsCalcio}" PassEventArgsToCommand="False"/>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <Command:EventToCommand Command="{Binding NavToPageCommand, Mode=OneWay}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </phone:LongListSelector>
+                </helpers:LongListSelector>
             </phone:PivotItem>
 
             <!-- Pivot Tennis -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot2Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector ItemsSource="{Binding GroupedTennis}" 
+                <helpers:LongListSelector ItemsSource="{Binding GroupedTennis}" 
                                         ItemTemplate="{StaticResource templateSportsLls}"
+                                        JumpListStyle="{StaticResource templateSprtsJumpLls}"
                                         GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
                                         IsGroupingEnabled ="true" 
                                         LayoutMode="List"
-                                        />
+                                        SelectedItem="{Binding ItemSelected,Mode=TwoWay}"
+                                        >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <Command:EventToCommand Command="{Binding NavToPageCommand, Mode=OneWay}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </helpers:LongListSelector>
             </phone:PivotItem>
 
             <!-- Pivot Basket -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot3Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector ItemsSource="{Binding GroupedBasket}" 
-                                        ItemTemplate="{StaticResource templateSportsLls}"  
+                <helpers:LongListSelector ItemsSource="{Binding GroupedBasket}" 
+                                        ItemTemplate="{StaticResource templateSportsLls}"
+                                        JumpListStyle="{StaticResource templateSprtsJumpLls}"
                                         GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
                                         IsGroupingEnabled ="true" 
                                         LayoutMode="List"
-                                        />
+                                        SelectedItem="{Binding ItemSelected,Mode=TwoWay}"
+                                        >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <Command:EventToCommand Command="{Binding NavToPageCommand, Mode=OneWay}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </helpers:LongListSelector>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

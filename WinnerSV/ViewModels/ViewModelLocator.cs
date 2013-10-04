@@ -31,6 +31,7 @@ namespace WinnerSV.ViewModels
 
                 // DATA ACCESS - SERVICE AGENT
                 SimpleIoc.Default.Register<IDataAccessDb, DataAccessDb>(true);
+                SimpleIoc.Default.Register<IServiceAgent, ServiceAgentSports>(true);
             }
 
             // VIEW MODELS

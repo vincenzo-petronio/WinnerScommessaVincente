@@ -87,9 +87,8 @@
 
     <!-- TEMPLATE SPORTS LLS -->
     <DataTemplate x:Key="templateSportsLls">
-        <StackPanel>
-            <TextBlock Text="{Binding Path=TeamCasa}" />
-            <TextBlock Text="{Binding Path=TeamFCasa}" />
+        <StackPanel Margin="20,0,0,20">
+            <TextBlock Text="{Binding Path=TeamCasa}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
         </StackPanel>
     </DataTemplate>
 
@@ -103,6 +102,21 @@
                         VerticalAlignment="Center"/>
         </Border>
     </DataTemplate>
-    <!-- TEMPLATE SPORTS LLS JUMPLIST -->
     
+    <!-- TEMPLATE SPORTS LLS JUMPLIST -->
+    <Style x:Key="templateSprtsJumpLls" TargetType="phone:LongListSelector">
+        <Setter Property="LayoutMode" Value="List" />
+        <Setter Property="Margin" Value="18,12,0,0"/>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Key}"
+                               FontSize="48" 
+                               Padding="11,0,0,0"
+                               VerticalAlignment="Bottom" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
