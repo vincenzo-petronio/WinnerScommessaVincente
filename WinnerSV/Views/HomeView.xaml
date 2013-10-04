@@ -38,7 +38,8 @@
                                  >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Tap">
-                        <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" />
+                        <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                CommandParameterValue="PanoramaPivot1" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 			</phone:PanoramaItem>
@@ -49,7 +50,8 @@
                          ItemsSource="{Binding Schedine}" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Tap">
-                            <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" />
+                            <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                    CommandParameterValue="PanoramaPivot2" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListBox>

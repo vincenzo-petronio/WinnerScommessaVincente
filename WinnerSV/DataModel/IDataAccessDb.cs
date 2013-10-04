@@ -9,6 +9,8 @@ namespace WinnerSV.DataModel
     public interface IDataAccessDb
     {
         Task<List<Schedina>> GetSchedine();
+        Task<Schedina> GetSchedina(string t);
         Task SetSchedina(Schedina s);
+        Task DeleteSchedina(Schedina s);
     }
 }
