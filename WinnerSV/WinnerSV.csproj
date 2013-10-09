@@ -107,8 +107,6 @@
     <Compile Include="DataSample\SportsData.cs" />
     <Compile Include="Helpers\KeyedList.cs" />
     <Compile Include="Helpers\NavToPage.cs" />
-    <Compile Include="SQLite.cs" />
-    <Compile Include="SQLiteAsync.cs" />
     <Compile Include="ViewModels\AnteprimaSchedinaViewModel.cs" />
     <Compile Include="ViewModels\IncontroViewModel.cs" />
     <Compile Include="ViewModels\SportsViewModel.cs" />
@@ -235,9 +233,9 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LIBRARIES\sqlite-net-wp8-master\Sqlite.vcxproj">
-      <Project>{59B35F6C-E062-4F0E-88D8-13F3F82A24F3}</Project>
-      <Name>Sqlite</Name>
+    <ProjectReference Include="..\..\LIBRARIES\SQLiteWinRTPhone\SQLiteWinRTPhone.vcxproj">
+      <Project>{4AE0193F-5986-404E-87B6-1EC9301D16D8}</Project>
+      <Name>SQLiteWinRTPhone</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

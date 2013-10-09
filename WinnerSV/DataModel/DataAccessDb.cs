@@ -1,10 +1,8 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using SQLiteWinRT;
 using Windows.Storage;
 using WinnerSV.Common;
 
@@ -15,8 +13,6 @@ namespace WinnerSV.DataModel
     /// </summary>
     public class DataAccessDb : IDataAccessDb
     {
-        private string pathLocalDb = Path.Combine(ApplicationData.Current.LocalFolder.Path, Constants.PATH_LOCAL_DB);
-        
         /// <summary>
         /// Costruttore.
         /// </summary>
@@ -45,9 +41,9 @@ namespace WinnerSV.DataModel
         /// Restituisce la connessione al DB.
         /// </summary>
         /// <returns>SQLiteAsyncConnection</returns>
-        private SQLiteAsyncConnection GetSQLiteConnection()
+        private Database GetSQLiteConnection()
         {
-            return new SQLiteAsyncConnection(pathLocalDb, true);
+            return new Database(ApplicationData.Current.LocalFolder, Constants.PATH_LOCAL_DB);
         }
 
 #region CRUD
@@ -57,9 +53,35 @@ namespace WinnerSV.DataModel
         /// </summary>
         private async void CreateDB()
         {
-            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
-            await connAsync.CreateTableAsync<Schedina>();
-            System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Table SCHEDINA creata con successo.");
+            try
+            {
+                Database dbInstance = GetSQLiteConnection();
+                await dbInstance.OpenAsync();
+
+                // TABLE SCHEDINA
+                string querySqlCreateFirstTable =
+                    " CREATE TABLE IF NOT EXISTS SCHEDINA " +
+                    " (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    " Title varchar(50) NOT NULL UNIQUE) ";
+                await dbInstance.ExecuteStatementAsync(querySqlCreateFirstTable);
+
+                // TABLE SCOMMESSA
+                string querySqlCreateSecondTable =
+                    " CREATE TABLE IF NOT EXISTS SCOMMESSA " +
+                    " (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    " IdScommessa INTEGER NOT NULL, " +
+                    " Date VARCHAR(200), " +
+                    " TeamCasa VARCHAR(200), " +
+                    " TeamFCasa VARCHAR(200), " +
+                    " FOREIGN KEY(IdScommessa) REFERENCES SCHEDINA(Id) ON DELETE CASCADE) ";
+                await dbInstance.ExecuteStatementAsync(querySqlCreateSecondTable);
+
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Table create con successo!");
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \n" + e.ToString());
+            }
         }
 
         /// <summary>
@@ -69,9 +91,11 @@ namespace WinnerSV.DataModel
         public async Task<List<Schedina>> GetSchedine()
         {
             List<Schedina> schedine = new List<Schedina>();
-            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
-            var query = connAsync.Table<Schedina>();
-            schedine = await query.ToListAsync();
+            Database dbInstance = GetSQLiteConnection();
+            await dbInstance.OpenAsync();
+            
+            // TODO
+
             System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "GetSchedine: {0} records presenti nel DB", schedine.Count);
             return schedine;
         }
@@ -83,19 +107,12 @@ namespace WinnerSV.DataModel
         /// <returns>schedina</returns>
         public async Task<Schedina> GetSchedina(string t)
         {
-            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
-            //var query = connAsync.Table<Schedina>();
-            string sqlQuery = "SELECT * FROM Schedina WHERE Title = '" + t + "'";
-            var sqlQueryResults = await connAsync.QueryAsync<Schedina>(sqlQuery);
-            System.Diagnostics.Debug.WriteLineIf(sqlQueryResults != null, "[DATAACCESSDB] \t" + "Schedina trovata nel DB: " + sqlQueryResults.Count);
-            if (sqlQueryResults.Count != 0)
-            {
-                return sqlQueryResults.First();
-            }
-            else
-            {
-                return null;
-            }
+            Database dbInstance = GetSQLiteConnection();
+            await dbInstance.OpenAsync();
+
+            // TODO
+
+            return null;
         }
 
         /// <summary>
@@ -104,9 +121,11 @@ namespace WinnerSV.DataModel
         /// <param name="s">Schedina</param>
         public async Task SetSchedina(Schedina s)
         {
-            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
-            //var query = connAsync.Table<Schedina>();
-            await connAsync.InsertAsync(s);
+            Database dbInstance = GetSQLiteConnection();
+            await dbInstance.OpenAsync();
+
+            // TODO
+
             System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Oggetto Schedina salvato nel DB!");
         }
 
@@ -117,13 +136,12 @@ namespace WinnerSV.DataModel
         /// <returns></returns>
         public async Task UpdateSchedina(Schedina s)
         {
-            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
-            var sqlQueryResults = await connAsync.FindAsync<Schedina>(x => x.Title == s.Title);
-            if(sqlQueryResults != null)
-            {
-                await connAsync.UpdateAsync(s);
-                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Oggetto Schedina aggiornato nel DB!");
-            }
+            Database dbInstance = GetSQLiteConnection();
+            await dbInstance.OpenAsync();
+
+            // TODO
+
+            System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Oggetto Schedina aggiornato nel DB!");
         }
 
         /// <summary>
@@ -132,9 +150,11 @@ namespace WinnerSV.DataModel
         /// <param name="s">Schedina </param>
         public async Task DeleteSchedina(Schedina s)
         {
-            SQLiteAsyncConnection connAsync = GetSQLiteConnection();
-            //var query = connAsync.Table<Schedina>();
-            await connAsync.DeleteAsync(s);
+            Database dbInstance = GetSQLiteConnection();
+            await dbInstance.OpenAsync();
+
+            // TODO
+
             System.Diagnostics.Debug.WriteLine("[DATAACCESSDB] \t" + "Oggetto Schedina cancellato dal DB!");
         }
 
