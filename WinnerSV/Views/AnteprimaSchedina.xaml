@@ -11,8 +11,20 @@
     DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}">
     
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-        <StackPanel DataContext="{Binding SelectedSchedina}">
-            <TextBlock Text="{Binding Title}" />
+        <StackPanel Orientation="Vertical" 
+                    DataContext="{Binding SelectedSchedina}">
+            <TextBlock Text="{Binding Title, Mode=TwoWay}" />
+            <ListBox ItemsSource="{Binding Incontri, Mode=TwoWay}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock >
+                            <Run Text="{Binding TeamCasa}" />
+                            <Run Text=" VS " />
+                            <Run Text="{Binding TeamFCasa}" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
     </Grid>
 </UserControl>

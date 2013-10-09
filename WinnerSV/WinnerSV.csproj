@@ -121,6 +121,9 @@
     <Compile Include="Views\PivotAbout.xaml.cs">
       <DependentUpon>PivotAbout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SchedinaView.xaml.cs">
+      <DependentUpon>SchedinaView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SportsView.xaml.cs">
       <DependentUpon>SportsView.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PivotAbout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SchedinaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

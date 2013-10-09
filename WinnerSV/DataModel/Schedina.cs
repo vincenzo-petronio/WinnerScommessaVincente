@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace WinnerSV.DataModel
     /// </summary>
     public class Schedina
     {
+        [PrimaryKey]
         public string Title { get; set; }
+        //public List<Incontro> Incontri { get; set; }
     }
 }
