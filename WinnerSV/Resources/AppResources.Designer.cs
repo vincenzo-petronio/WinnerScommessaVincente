@@ -61,6 +61,15 @@ namespace WinnerSV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new Scommessa.
+        /// </summary>
+        public static string AddScommessaTitle {
+            get {
+                return ResourceManager.GetString("AddScommessaTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Winner - Scommessa vincente.
         /// </summary>
         public static string ApplicationTitle {

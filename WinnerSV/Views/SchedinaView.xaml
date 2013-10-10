@@ -6,12 +6,15 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" 
+    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -22,16 +25,31 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                <TextBox Text="{Binding TitleSchedina, Mode=TwoWay}" 
+                         Margin="9,-7,0,0" 
+                         FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
                 <Image />
             </StackPanel>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85*" />
+                <RowDefinition Height="15*" />
+            </Grid.RowDefinitions>
+            
+            <Button Grid.Row="1" 
+                    Content="{Binding LocalizedResources.AddScommessaTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Tap">
+                        <Command:EventToCommand Command="{Binding NavToPageCommand, Mode=OneWay}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </Grid>
     </Grid>
 

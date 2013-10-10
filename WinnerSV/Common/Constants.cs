@@ -14,9 +14,13 @@ namespace WinnerSV.Common
 
         // DB
         public const string PATH_LOCAL_DB = "db_schedine.sqlite";
+        public const string TABLE_NAME_SCHEDINA = "SCHEDINA";
+        public const string TABLE_NAME_SCOMMESSA = "SCOMMESSA";
 
         // SETTINGS
         public const string SETTINGS_KEY_CORRENTE_LINGUA = "lingua_corrente";
 
+        // DATI
+        public const string TITLE_SCHEDINA_DEFAULT = "title...";
     }
 }

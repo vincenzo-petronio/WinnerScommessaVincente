@@ -10,7 +10,7 @@ namespace WinnerSV.DataModel
     {
         Task<List<Schedina>> GetSchedine();
         Task<Schedina> GetSchedina(string t);
-        Task SetSchedina(Schedina s);
+        Task<bool> SetSchedina(string s);
         Task DeleteSchedina(Schedina s);
     }
 }

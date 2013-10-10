@@ -49,7 +49,7 @@ namespace WinnerSV.ViewModels
 
                     switch (args.ToString())
                     {
-                        case "PanoramaPivot1": pageName = "SportsView"; break;
+                        case "PanoramaPivot1": pageName = "SchedinaView"; break;
                         case "PanoramaPivot2": pageName = "AnteprimaSchedina"; break;
                         default: break;
                     }
