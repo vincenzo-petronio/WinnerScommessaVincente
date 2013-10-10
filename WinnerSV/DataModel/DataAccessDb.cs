@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using SQLiteWinRT;
 using Windows.Storage;
 using WinnerSV.Common;
+using System.Text;
 
 namespace WinnerSV.DataModel
 {
@@ -53,6 +54,8 @@ namespace WinnerSV.DataModel
         /// </summary>
         private async void CreateDB()
         {
+            string messageForLog = string.Empty;
+
             try
             {
                 Database dbInstance = GetSQLiteConnection();
@@ -60,27 +63,31 @@ namespace WinnerSV.DataModel
 
                 // TABLE SCHEDINA
                 string querySqlCreateFirstTable =
-                    " CREATE TABLE IF NOT EXISTS " + Constants.TABLE_NAME_SCHEDINA  +
-                    " (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "             +
+                    " CREATE TABLE IF NOT EXISTS " + Constants.TABLE_NAME_SCHEDINA +
+                    " (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     " Title varchar(50) NOT NULL UNIQUE) ";
                 await dbInstance.ExecuteStatementAsync(querySqlCreateFirstTable);
 
                 // TABLE SCOMMESSA
                 string querySqlCreateSecondTable =
-                    " CREATE TABLE IF NOT EXISTS " + Constants.TABLE_NAME_SCOMMESSA     +
-                    " (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "                 +
-                    " IdScommessa INTEGER NOT NULL, "                                   +
-                    " Date VARCHAR(200), "                                              +
-                    " TeamCasa VARCHAR(200), "                                          +
-                    " TeamFCasa VARCHAR(200), "                                         +
+                    " CREATE TABLE IF NOT EXISTS " + Constants.TABLE_NAME_SCOMMESSA +
+                    " (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    " IdScommessa INTEGER NOT NULL, " +
+                    " Date VARCHAR(200), " +
+                    " TeamCasa VARCHAR(200), " +
+                    " TeamFCasa VARCHAR(200), " +
                     " FOREIGN KEY(IdScommessa) REFERENCES SCHEDINA(Id) ON DELETE CASCADE) ";
                 await dbInstance.ExecuteStatementAsync(querySqlCreateSecondTable);
 
-                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - Create] \t" + "Table create con successo!");
+                messageForLog = "Tentativo CREATE Table concluso con successo!";
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - Create] \n" + e.ToString());
+                messageForLog = e.Message;
+            }
+            finally
+            {
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - CreateDB] \t" + messageForLog);
             }
         }
 
@@ -91,12 +98,35 @@ namespace WinnerSV.DataModel
         public async Task<List<Schedina>> GetSchedine()
         {
             List<Schedina> schedine = new List<Schedina>();
-            Database dbInstance = GetSQLiteConnection();
-            await dbInstance.OpenAsync(SqliteOpenMode.OpenRead);
-            
-            // TODO
+            string messageForLog = string.Empty;
+            StringBuilder sb = new StringBuilder();
 
-            System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - GetSchedine] \t" + "GetSchedine: {0} records presenti nel DB", schedine.Count);
+            try
+            {
+                Database dbInstance = GetSQLiteConnection();
+                await dbInstance.OpenAsync(SqliteOpenMode.OpenRead);
+
+                string query = " SELECT * FROM " + Constants.TABLE_NAME_SCHEDINA;
+                Statement statement = await dbInstance.PrepareStatementAsync(query);
+                sb.AppendLine("\n");
+                while (await statement.StepAsync())
+                {
+                    sb.AppendLine(" | " + statement.GetIntAt(0).ToString() + " | " + statement.GetTextAt(1) + " | ");
+                    schedine.Add(new Schedina { Id = statement.GetIntAt(0), Title = statement.GetTextAt(1)});
+                }
+                sb.AppendLine("\n");
+                sb.AppendLine("Schedine presenti: " + schedine.Count.ToString());
+                messageForLog = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                messageForLog = ex.Message;
+            }
+            finally
+            {
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - GetSchedine] \t" + messageForLog);
+            }
+
             return schedine;
         }
 
