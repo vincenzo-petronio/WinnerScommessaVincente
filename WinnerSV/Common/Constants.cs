@@ -21,6 +21,6 @@ namespace WinnerSV.Common
         public const string SETTINGS_KEY_CORRENTE_LINGUA = "lingua_corrente";
 
         // DATI
-        public const string TITLE_SCHEDINA_DEFAULT = "title...";
+        public const string TITLE_SCHEDINA_DEFAULT = "Schedina";
     }
 }

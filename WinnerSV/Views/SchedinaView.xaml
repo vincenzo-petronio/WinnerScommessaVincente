@@ -14,7 +14,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" 
-    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}">
+    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}"
+    xmlns:uc="clr-namespace:WinnerSV.Views">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -28,7 +29,7 @@
             <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <StackPanel Orientation="Horizontal">
-                <TextBox Text="{Binding TitleSchedina, Mode=TwoWay}" 
+                <TextBox Text="{Binding SelectedSchedina.Title, Mode=TwoWay}" 
                          Margin="9,-7,0,0" 
                          FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
                 <Image />
@@ -41,6 +42,8 @@
                 <RowDefinition Height="85*" />
                 <RowDefinition Height="15*" />
             </Grid.RowDefinitions>
+            
+            <uc:AnteprimaSchedina Grid.Row="0" />
             
             <Button Grid.Row="1" 
                     Content="{Binding LocalizedResources.AddScommessaTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">

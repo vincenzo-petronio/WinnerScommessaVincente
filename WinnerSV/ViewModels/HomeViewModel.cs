@@ -19,6 +19,7 @@ namespace WinnerSV.ViewModels
     public class HomeViewModel : ViewModelBase
     {
         private ObservableCollection<Schedina> schedine;
+        private Schedina nuovaSchedina;
         private IDataAccessDb dataAccessDb;
 
         /// <summary>
@@ -31,8 +32,8 @@ namespace WinnerSV.ViewModels
                 // Code runs in Blend --> create design time data.
 
                 // TODO Fare injection con IDataService
-                PanoramaData pd = new PanoramaData();
-                Schedine = pd.Schedine;
+                ////PanoramaData pd = new PanoramaData();
+                ////Schedine = pd.Schedine;
             }
             else
             {
@@ -42,44 +43,34 @@ namespace WinnerSV.ViewModels
                 this.dataAccessDb = db;
 
                 // RELAY COMMAND
-                NavToPageCommand = new RelayCommand<string>((args) =>
+                NavToPageCommand = new RelayCommand<Schedina>((s) =>
                 {
-                    System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "Tapped NavToPageCommand: " + args.ToString());
-                    string pageName = string.Empty;
-
-                    switch (args.ToString())
+                    if (s != null)
                     {
-                        case "PanoramaPivot1": pageName = "SchedinaView"; break;
-                        case "PanoramaPivot2": pageName = "AnteprimaSchedina"; break;
-                        default: break;
-                    }
+                        System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "Tapped NavToPageCommand: " + s.Title.ToString());
+                        string pageName = "SchedinaView";
+                        string pageParameter = s.Title.ToString();
 
-                    Messenger.Default.Send<NavToPage>(new NavToPage { PageName = pageName });
+                        Messenger.Default.Send<NavToPage>(new NavToPage { PageName = pageName, PageParameter = pageParameter });
+                    }
                 });
                 
-                PopolaListaSchedine();
+                ////PopolaPanoramaProperties();
             }
         }
 
         /// <summary>
         /// Consente di popolare il Pivot delle Schedine con i dati presenti nel DB.
         /// </summary>
-        private async void PopolaListaSchedine()
+        public async void PopolaPanoramaProperties()
         {
             // TEST
-            DbData d = new DbData();
-            await d.PopolaDb();
+            ////DbData d = new DbData();
+            ////await d.PopolaDb();
 
             this.Schedine = new ObservableCollection<Schedina>(await dataAccessDb.GetSchedine());
-        }
 
-        /// <summary>
-        /// RelayCommand per la Navigation.
-        /// </summary>
-        public RelayCommand<string> NavToPageCommand
-        {
-            get;
-            private set;
+            this.NuovaSchedina = new Schedina() { Title = Resources.AppResources.PanoramaPivot1ItemTitle };
         }
 
         /// <summary>
@@ -100,6 +91,35 @@ namespace WinnerSV.ViewModels
                     RaisePropertyChanged(() => Schedine);
                 }
             }
+        }
+
+        /// <summary>
+        /// Proprieta' in binding con la casella di testo nel Pivot 1.
+        /// </summary>
+        public Schedina NuovaSchedina
+        {
+            get
+            {
+                return nuovaSchedina;
+            }
+
+            set
+            {
+                if (nuovaSchedina != value)
+                {
+                    nuovaSchedina = value;
+                    RaisePropertyChanged(() => NuovaSchedina);
+                }
+            }
+        }
+
+        /// <summary>
+        /// RelayCommand per la Navigation.
+        /// </summary>
+        public RelayCommand<Schedina> NavToPageCommand
+        {
+            get;
+            private set;
         }
     }
 }

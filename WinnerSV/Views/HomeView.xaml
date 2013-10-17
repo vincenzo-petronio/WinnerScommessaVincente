@@ -16,52 +16,59 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False" 
     DataContext="{Binding Home, Source={StaticResource Locator}}">
-    
+
     <!--LayoutRoot contains the root grid where all other page content is placed-->
-	<Grid x:Name="LayoutRoot">
-		<phone:Panorama Template="{StaticResource PanoramaControlTemplateWinner}" ItemContainerStyle="{StaticResource PanoramaItemStyleWinner}">
+    <Grid x:Name="LayoutRoot">
+        <phone:Panorama Template="{StaticResource PanoramaControlTemplateWinner}" 
+                        ItemContainerStyle="{StaticResource PanoramaItemStyleWinner}">
 
-			<phone:Panorama.Background>
-				<ImageBrush ImageSource="/Assets/PanoramaBackground.png" Stretch="Fill"/>
-			</phone:Panorama.Background>
-            
-			<phone:Panorama.Title>
-				<Border Background="Azure">
-					<TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" />
-				</Border>
-			</phone:Panorama.Title>
-            
+            <phone:Panorama.Background>
+                <ImageBrush ImageSource="/Assets/PanoramaBackground.png" Stretch="Fill"/>
+            </phone:Panorama.Background>
 
-			<!-- Pivot 1 -->
-			<phone:PanoramaItem Header=" " 
-                                ContentTemplate="{StaticResource templatePanoramaPivot1}" 
-                                 >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Tap">
-                        <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                                                CommandParameterValue="PanoramaPivot1" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-			</phone:PanoramaItem>
+            <phone:Panorama.Title>
+                <Border Background="Azure">
+                    <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" />
+                </Border>
+            </phone:Panorama.Title>
 
-			<!-- Pivot 2 -->
-			<phone:PanoramaItem Header="{Binding LocalizedResources.PanoramaPivot2Header, Source={StaticResource LocalizedStrings}}" >
-                <ListBox ItemTemplate="{StaticResource templatePanoramaPivot2}" 
+
+            <!-- Pivot 1 -->
+            <phone:PanoramaItem x:Name="panoramaItem" Header=" ">
+                <StackPanel>
+                    <TextBlock x:Name="textBlock" 
+                               DataContext="{Binding NuovaSchedina}"
+                               FontSize="{StaticResource PhoneFontSizeLarge}" 
+                               Margin="0,0,0,0" 
+                               Text="{Binding Title}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Tap">
+                            <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                    CommandParameter="{Binding DataContext, ElementName=textBlock}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    </TextBlock>
+                </StackPanel>
+            </phone:PanoramaItem>
+
+            <!-- Pivot 2 -->
+            <phone:PanoramaItem Header="{Binding LocalizedResources.PanoramaPivot2Header, Source={StaticResource LocalizedStrings}}" >
+                <ListBox x:Name="listBox" ItemTemplate="{StaticResource templatePanoramaPivot2}" 
                          ItemsSource="{Binding Schedine}" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Tap">
                             <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                                                    CommandParameterValue="PanoramaPivot2" />
+                                                    CommandParameter="{Binding SelectedItem, ElementName=listBox}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListBox>
             </phone:PanoramaItem>
 
-			<!-- Pivot 3 -->
-			<phone:PanoramaItem Header="{Binding LocalizedResources.PanoramaPivot3Header, Source={StaticResource LocalizedStrings}}" >
-				<WinnerSV:PivotAbout/>
-			</phone:PanoramaItem>
-		</phone:Panorama>
-	</Grid>
+            <!-- Pivot 3 -->
+            <phone:PanoramaItem Header="{Binding LocalizedResources.PanoramaPivot3Header, Source={StaticResource LocalizedStrings}}" >
+                <WinnerSV:PivotAbout/>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+    </Grid>
 
 </phone:PhoneApplicationPage>

@@ -94,6 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="DataModel\Scommessa.cs" />
     <Compile Include="Helpers\HttpExtensions.cs" />
     <Compile Include="Helpers\LongListSelector.cs" />
     <Compile Include="DataModel\DataAccessDb.cs" />
@@ -108,7 +109,6 @@
     <Compile Include="Helpers\KeyedList.cs" />
     <Compile Include="Helpers\NavToPage.cs" />
     <Compile Include="ViewModels\AnteprimaSchedinaViewModel.cs" />
-    <Compile Include="ViewModels\IncontroViewModel.cs" />
     <Compile Include="ViewModels\SportsViewModel.cs" />
     <Compile Include="Views\AnteprimaSchedina.xaml.cs">
       <DependentUpon>AnteprimaSchedina.xaml</DependentUpon>

@@ -37,7 +37,7 @@
                                           GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
                                           IsGroupingEnabled ="true" 
                                           LayoutMode="List" 
-                                          SelectedItem="{Binding Path=ItemSelected, Mode=TwoWay}"
+                                          SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}"
                                           >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -55,7 +55,7 @@
                                           GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
                                           IsGroupingEnabled ="true" 
                                           LayoutMode="List"
-                                          SelectedItem="{Binding Path=ItemSelected, Mode=TwoWay}"
+                                          SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}"
                                           >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -73,7 +73,7 @@
                                           GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
                                           IsGroupingEnabled ="true" 
                                           LayoutMode="List"
-                                          SelectedItem="{Binding Path=ItemSelected, Mode=TwoWay}"
+                                          SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}"
                                           >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">

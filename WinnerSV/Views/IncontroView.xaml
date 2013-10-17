@@ -6,13 +6,15 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" 
-    DataContext="{Binding Incontro, Mode=OneWay, Source={StaticResource Locator}}"  >
+    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}"  >
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -30,12 +32,79 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" 
               Grid.Row="1" 
-              Margin="12,0,12,0" 
-              DataContext="{Binding Sports.ItemSelectedStored, Source={StaticResource Locator}}" >
+              Margin="12,0,12,0" DataContext="{Binding AnteSchedina.SelectedIncontro, Source={StaticResource Locator}}" 
+               >
+            <!--DataContext="{Binding Sports.ItemSelectedStored, Source={StaticResource Locator}}"-->
             <StackPanel>
-                <TextBlock Text="{Binding Path=TeamCasa, StringFormat='Team Casa: {0}'}" />
-                <TextBlock Text="{Binding Path=TeamFCasa, StringFormat='Team FCasa: {0}'}" />
+                <TextBlock Text="{Binding Path=IdMatch}" />
                 <TextBlock Text="{Binding Path=Data}" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock >
+                        <Run Text="{Binding Path=TeamCasa}"/>
+                        <Run Text=" VS " />
+                        <Run Text="{Binding Path=TeamFCasa}"/>
+                    </TextBlock>
+                </StackPanel>
+                
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Q1, StringFormat='quota1 {0}'}" />
+                            <Button Content="+" HorizontalAlignment="Right" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                                CommandParameterValue="Q1"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=QX, StringFormat='X {0}'}" />
+                            <Button Content="+" HorizontalAlignment="Right" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                                CommandParameterValue="QX"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Q2, StringFormat='2 {0}'}" />
+                            <Button Content="+" HorizontalAlignment="Right" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                                CommandParameterValue="Q2"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=HC, StringFormat='Handicap {0}'}" />
+                            <Button Content="+" HorizontalAlignment="Right" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                                CommandParameterValue="HC"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=OVER, StringFormat='OVER {0}'}" />
+                            <Button Content="+" HorizontalAlignment="Right" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Tap">
+                                        <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                                CommandParameterValue="OVER"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </StackPanel>
         </Grid>
     </Grid>

@@ -38,7 +38,6 @@ namespace WinnerSV.ViewModels
             SimpleIoc.Default.Register<HomeViewModel>();
             SimpleIoc.Default.Register<SportsViewModel>();
             SimpleIoc.Default.Register<AnteprimaSchedinaViewModel>();
-            SimpleIoc.Default.Register<IncontroViewModel>();
         }
 
         /// <summary>
@@ -71,17 +70,6 @@ namespace WinnerSV.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<AnteprimaSchedinaViewModel>();
-            }
-        }
-
-        /// <summary>
-        /// ViewModel Incontro
-        /// </summary>
-        public IncontroViewModel Incontro
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<IncontroViewModel>();
             }
         }
 

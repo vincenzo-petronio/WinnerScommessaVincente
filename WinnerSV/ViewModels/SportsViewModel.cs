@@ -52,7 +52,7 @@ namespace WinnerSV.ViewModels
                         {
                             System.Diagnostics.Debug.WriteLine("[SportsViewModel] \r" + err.Message);
                         }
-                        else
+                        else if(sports != null)
                         {
                             // CALCIO
                             this.ListCalcio = new ObservableCollection<Calcio>(sports.Calcio);
@@ -96,42 +96,42 @@ namespace WinnerSV.ViewModels
         /// <summary>
         /// Binding con la proprietà SelectedItem del LongListSelector
         /// </summary>
-        public Incontro ItemSelected
-        {
-            get
-            {
-                return itemSelected;
-            }
+        ////public Incontro ItemSelected
+        ////{
+        ////    get
+        ////    {
+        ////        return itemSelected;
+        ////    }
 
-            set
-            {
-                if (itemSelected != value)
-                {
-                    itemSelected = value;
-                    RaisePropertyChanged(() => ItemSelected);
-                }
-            }
-        }
+        ////    set
+        ////    {
+        ////        if (itemSelected != value)
+        ////        {
+        ////            itemSelected = value;
+        ////            RaisePropertyChanged(() => ItemSelected);
+        ////        }
+        ////    }
+        ////}
 
         /// <summary>
         /// Conserva l'oggetto selezionato per essere utilizzato da altri ViewModel.
         /// </summary>
-        public Incontro ItemSelectedStored
-        {
-            get
-            {
-                return itemSelectedStored;
-            }
+        ////public Incontro ItemSelectedStored
+        ////{
+        ////    get
+        ////    {
+        ////        return itemSelectedStored;
+        ////    }
 
-            set
-            {
-                if (itemSelectedStored != value)
-                {
-                    itemSelectedStored = value;
-                    RaisePropertyChanged(() => ItemSelectedStored);
-                }
-            }
-        }
+        ////    set
+        ////    {
+        ////        if (itemSelectedStored != value)
+        ////        {
+        ////            itemSelectedStored = value;
+        ////            RaisePropertyChanged(() => ItemSelectedStored);
+        ////        }
+        ////    }
+        ////}
 
         /// <summary>
         /// Proprieta' in binding con la lista presente nel Pivot con i campionati di Calcio.
@@ -291,12 +291,12 @@ namespace WinnerSV.ViewModels
         /// </summary>
         private void IncontroSelectedCommand()
         {
-            if (itemSelected != null)
-            {
-                ItemSelectedStored = ItemSelected;
+            ////if (itemSelected != null)
+            ////{
+            ////    ItemSelectedStored = ItemSelected;
                 Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "IncontroView" });
-                ItemSelected = null;
-            }
+            ////    ItemSelected = null;
+            ////}
         }
 
     }

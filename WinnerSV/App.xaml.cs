@@ -40,7 +40,7 @@ namespace WinnerSV
             InitializePhoneApplication();
 
             // Language display initialization
-            InitializeLanguage();
+            InitializeLanguage(); 
 
             //mi salva in settings la lingua del dispositivo
             SetLinguaCorrente();

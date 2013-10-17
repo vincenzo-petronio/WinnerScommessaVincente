@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using GalaSoft.MvvmLight.Messaging;
 using WinnerSV.Helpers;
+using WinnerSV.ViewModels;
 
 namespace WinnerSV.Views
 {
@@ -18,8 +12,19 @@ namespace WinnerSV.Views
         {
             InitializeComponent();
 
-            // MESSENGER
+            // MESSENGER per la Navigation.
             Messenger.Default.Register<NavToPage>(this, (action) => ReceiveMessage(action));
+        }
+
+        /// <summary>
+        /// Proprieta' per accedere al View-Model dal Code-Behind
+        /// </summary>
+        private HomeViewModel VM
+        {
+            get
+            {
+                return (HomeViewModel)this.DataContext;
+            }
         }
 
         private object ReceiveMessage(NavToPage action)
@@ -28,13 +33,22 @@ namespace WinnerSV.Views
             {
                 var page = string.Format("/Views/{0}.xaml", action.PageName);
 
-                ////if (action.PageName == "Main")
-                ////{
-                ////    page = "/MainPage.xaml";
-                ////}
+                if (action.PageParameter != WinnerSV.Resources.AppResources.PanoramaPivot1ItemTitle)
+                {
+                    // QueryString
+                    page += "?Title=" + action.PageParameter;
+                }
+
                 NavigationService.Navigate(new System.Uri(page, System.UriKind.Relative));
             }
             return null;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            this.VM.PopolaPanoramaProperties();
         }
     }
 }

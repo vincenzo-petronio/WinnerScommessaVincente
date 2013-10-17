@@ -34,11 +34,8 @@ namespace WinnerSV.DataModel
         public string DCX2 { get; set; }
         public string DC12 { get; set; }
         public string IdMatch { get; set; }
-
-        ////public override string ToString()
-        ////{
-        ////    return base.ToString() + ": " + TeamCasa.ToString() + "\t" + TeamFCasa.ToString() + "\t {" + Data.ToString() + "} \n";
-        ////}
+        public string Home12 { get; set; }
+        public string Away12 { get; set; }
     }
 
     /// <summary>

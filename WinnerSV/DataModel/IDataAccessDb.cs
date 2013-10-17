@@ -4,13 +4,16 @@ using System.Threading.Tasks;
 namespace WinnerSV.DataModel
 {
     /// <summary>
-    /// Specifica i metodi di accesso in lettura e scrittura al DB.
+    /// Specifica le operazioni CRUD sul DB.
     /// </summary>
     public interface IDataAccessDb
     {
         Task<List<Schedina>> GetSchedine();
         Task<Schedina> GetSchedina(string t);
         Task<bool> SetSchedina(string s);
-        Task DeleteSchedina(Schedina s);
+        Task DeleteSchedina(string t);
+        Task<List<Scommessa>> GetScommesse(string t);
+        Task<bool> UpdateScommessa(Incontro i, Schedina s);
+        Task<List<Incontro>> GetIncontri(string t);
     }
 }
