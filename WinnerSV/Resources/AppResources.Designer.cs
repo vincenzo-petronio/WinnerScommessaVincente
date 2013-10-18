@@ -79,6 +79,15 @@ namespace WinnerSV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string ContextMenuItemDelete {
+            get {
+                return ResourceManager.GetString("ContextMenuItemDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Play new game.
         /// </summary>
         public static string PanoramaPivot1ItemTitle {

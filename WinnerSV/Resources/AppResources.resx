@@ -123,6 +123,9 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Winner - Scommessa vincente</value>
   </data>
+  <data name="ContextMenuItemDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="PanoramaPivot1ItemTitle" xml:space="preserve">
     <value>Play new game</value>
   </data>

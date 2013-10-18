@@ -54,13 +54,31 @@ namespace WinnerSV.ViewModels
                         Messenger.Default.Send<NavToPage>(new NavToPage { PageName = pageName, PageParameter = pageParameter });
                     }
                 });
-                
+
+                DeleteCommand = new RelayCommand<Schedina>(async (s) => 
+                {
+                    if (s != null && s.GetType() == typeof(Schedina))
+                    {
+                        System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "Tapped DeleteCommand: " + s.Title.ToString());
+                        bool isDeleted = await dataAccessDb.DeleteSchedina(s.Id);
+                        if (isDeleted)
+                        {
+                            PopolaPanoramaProperties();
+                        }
+                        else
+                        {
+                            // TODO 
+                            // Notificare l'errore nella UI.
+                        }
+                    }
+                });
+
                 ////PopolaPanoramaProperties();
             }
         }
 
         /// <summary>
-        /// Consente di popolare il Pivot delle Schedine con i dati presenti nel DB.
+        /// Consente di popolare le proprieta' in binding con il Panorama.
         /// </summary>
         public async void PopolaPanoramaProperties()
         {
@@ -68,9 +86,9 @@ namespace WinnerSV.ViewModels
             ////DbData d = new DbData();
             ////await d.PopolaDb();
 
-            this.Schedine = new ObservableCollection<Schedina>(await dataAccessDb.GetSchedine());
-
+            // Pivot 1 e 2
             this.NuovaSchedina = new Schedina() { Title = Resources.AppResources.PanoramaPivot1ItemTitle };
+            this.Schedine = new ObservableCollection<Schedina>(await dataAccessDb.GetSchedine());
         }
 
         /// <summary>
@@ -117,6 +135,15 @@ namespace WinnerSV.ViewModels
         /// RelayCommand per la Navigation.
         /// </summary>
         public RelayCommand<Schedina> NavToPageCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// RelayCommand per la cancellazione di un elemento della lista.
+        /// </summary>
+        public RelayCommand<Schedina> DeleteCommand
         {
             get;
             private set;

@@ -59,7 +59,7 @@ namespace WinnerSV.DataModel
                     " CREATE TABLE IF NOT EXISTS " + Constants.TABLE_NAME_SCOMMESSA +
                     " ( " +
                     ////" Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    " IdScommessa INTEGER NOT NULL, " +
+                    " IdScommessa INTEGER, " +
                     " TeamCasa VARCHAR(200) NOT NULL, " +
                     " TeamFCasa VARCHAR(200) NOT NULL, " +
                     " Data VARCHAR(200) NOT NULL, " +
@@ -84,6 +84,9 @@ namespace WinnerSV.DataModel
                     " ) ";
                 await dbInstance.ExecuteStatementAsync(querySqlCreateSecondTable);
 
+                string querySqlEnablePragma = @"PRAGMA foreign_keys = ON";
+                await dbInstance.ExecuteStatementAsync(querySqlEnablePragma);
+
                 messageForLog = "Query eseguita con successo";
             }
             catch (Exception e)
@@ -104,7 +107,6 @@ namespace WinnerSV.DataModel
         {
             List<Schedina> schedine = new List<Schedina>();
             string messageForLog = string.Empty;
-            StringBuilder sb = new StringBuilder();
 
             try
             {
@@ -114,23 +116,30 @@ namespace WinnerSV.DataModel
                 string query = " SELECT * FROM " + Constants.TABLE_NAME_SCHEDINA;
                 using (Statement statement = await dbInstance.PrepareStatementAsync(query))
                 {
-                    sb.AppendLine("\n");
                     while (await statement.StepAsync())
                     {
-                        sb.AppendLine(" | " + statement.GetIntAt(0).ToString() + " | " + statement.GetTextAt(1) + " | ");
                         schedine.Add(new Schedina { Id = statement.GetIntAt(0), Title = statement.GetTextAt(1) });
                     }
-                    sb.AppendLine("\n");
-                    sb.AppendLine("Schedine presenti: " + schedine.Count.ToString());
-                    messageForLog = sb.ToString();
+                    messageForLog = "Query eseguita con successo";
                 }
 
 #if DEBUG
+                string query1 = " SELECT * FROM " + Constants.TABLE_NAME_SCHEDINA;
+                using (Statement statement = await dbInstance.PrepareStatementAsync(query1))
+                {
+                    StringBuilder sb = new StringBuilder();
+                    while (await statement.StepAsync())
+                    {
+                        sb.AppendLine(" | " + statement.GetIntAt(0).ToString() + " | " + statement.GetTextAt(1) + " | ");
+                    }
+                    sb.AppendLine("Schedine presenti: " + schedine.Count.ToString());
+                    System.Diagnostics.Debug.WriteLine(sb.ToString());
+                }
+
                 string query2 = " SELECT * FROM " + Constants.TABLE_NAME_SCOMMESSA;
                 using (Statement statement = await dbInstance.PrepareStatementAsync(query2))
                 {
                     StringBuilder sb2 = new StringBuilder();
-                    sb2.AppendLine("\n");
                     while (await statement.StepAsync())
                     {
                         sb2.Append(" | " + statement.GetIntAt(0).ToString());
@@ -140,8 +149,7 @@ namespace WinnerSV.DataModel
                         }
                         sb2.Append("\n");
                     }
-                    sb2.AppendLine("\n");
-                    System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - Tabella Scommessa] \n" + sb2.ToString());
+                    System.Diagnostics.Debug.WriteLine(sb2.ToString());
                 }
 #endif
             }
@@ -256,14 +264,33 @@ namespace WinnerSV.DataModel
         /// Elimina dal DB l'elemento Schedina indicato dal parametro.
         /// </summary>
         /// <param name="t">String titolo della Schedina</param>
-        public async Task DeleteSchedina(string t)
+        public async Task<bool> DeleteSchedina(int id)
         {
-            Database dbInstance = GetSQLiteConnection();
-            await dbInstance.OpenAsync(SqliteOpenMode.OpenReadWrite);
+            string messageForLog = string.Empty;
+            bool isCompleted = false;
 
-            // TODO
+            try
+            {
+                Database dbInstance = GetSQLiteConnection();
+                await dbInstance.OpenAsync(SqliteOpenMode.OpenReadWrite);
 
-            System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - DeleteSchedina] \t" + "Oggetto Schedina cancellato dal DB!");
+                string query = " DELETE FROM " + Constants.TABLE_NAME_SCHEDINA +
+                    " WHERE Id=" + id;
+                await dbInstance.ExecuteStatementAsync(query);
+                messageForLog = "Query eseguita con successo";
+                isCompleted = true;
+            }
+            catch (Exception ex)
+            {
+                isCompleted = false;
+                messageForLog = ex.Message;
+            }
+            finally
+            {
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - DeleteSchedina] \t" + messageForLog.ToString());
+            }
+
+            return isCompleted;
         }
 
         /// <summary>

@@ -1,70 +1,73 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" 
+    xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
     <!-- PALETTE COLORI -->
-	<Color x:Key="BrownLight">#DE6E00</Color>
-	<Color x:Key="BrownDark">#CE4701</Color>
-	<Color x:Key="YellowLight">#FFF480</Color>
-	<Color x:Key="YellowDark">#FFAB01</Color>
-	<SolidColorBrush x:Key="paletteInailBrownLight" Color="{StaticResource BrownLight}" />
-	<SolidColorBrush x:Key="paletteInailBrownDark" Color="{StaticResource BrownDark}" />
-	<SolidColorBrush x:Key="paletteInailYellowLight" Color="{StaticResource YellowLight}" />
-	<SolidColorBrush x:Key="paletteInailYellowDark" Color="{StaticResource YellowDark}" />
-    
+    <Color x:Key="BrownLight">#DE6E00</Color>
+    <Color x:Key="BrownDark">#CE4701</Color>
+    <Color x:Key="YellowLight">#FFF480</Color>
+    <Color x:Key="YellowDark">#FFAB01</Color>
+    <SolidColorBrush x:Key="paletteInailBrownLight" Color="{StaticResource BrownLight}" />
+    <SolidColorBrush x:Key="paletteInailBrownDark" Color="{StaticResource BrownDark}" />
+    <SolidColorBrush x:Key="paletteInailYellowLight" Color="{StaticResource YellowLight}" />
+    <SolidColorBrush x:Key="paletteInailYellowDark" Color="{StaticResource YellowDark}" />
+
 
     <!-- TEMPLATE PANORAMA -->
-	<ControlTemplate x:Key="PanoramaControlTemplateWinner" TargetType="phone:Panorama">
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
+    <ControlTemplate x:Key="PanoramaControlTemplateWinner" TargetType="phone:Panorama">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-			<Primitives:PanningBackgroundLayer x:Name="BackgroundLayer" Grid.RowSpan="2" HorizontalAlignment="Left">
-				<Primitives:PanningBackgroundLayer.Background>
-					<ImageBrush Stretch="Fill" ImageSource="/Assets/PanoramaBackground.jpg"/>
-				</Primitives:PanningBackgroundLayer.Background>
-				<Border x:Name="background" Background="{TemplateBinding Background}" />
-			</Primitives:PanningBackgroundLayer>
+            <Primitives:PanningBackgroundLayer x:Name="BackgroundLayer" Grid.RowSpan="2" HorizontalAlignment="Left">
+                <Primitives:PanningBackgroundLayer.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="/Assets/PanoramaBackground.jpg"/>
+                </Primitives:PanningBackgroundLayer.Background>
+                <Border x:Name="background" Background="{TemplateBinding Background}" />
+            </Primitives:PanningBackgroundLayer>
 
-			<Primitives:PanningTitleLayer x:Name="TitleLayer" Grid.Row="0" HorizontalAlignment="Left"  Margin="10,-34,0,0"
+            <Primitives:PanningTitleLayer x:Name="TitleLayer" Grid.Row="0" HorizontalAlignment="Left"  Margin="10,-34,0,0"
 				Content="{TemplateBinding Title}" ContentTemplate="{TemplateBinding TitleTemplate}"
 				FontSize="170" FontFamily="{StaticResource PhoneFontFamilyLight}" CharacterSpacing="-35" Foreground="#FF0A0909" >
-				<Primitives:PanningTitleLayer.Background>
-					<SolidColorBrush Color="#FFF480"/>
-				</Primitives:PanningTitleLayer.Background>
-			</Primitives:PanningTitleLayer>
+                <Primitives:PanningTitleLayer.Background>
+                    <SolidColorBrush Color="#FFF480"/>
+                </Primitives:PanningTitleLayer.Background>
+            </Primitives:PanningTitleLayer>
 
-			<Primitives:PanningLayer x:Name="ItemsLayer" Grid.Row="1" HorizontalAlignment="Left">
-				<ItemsPresenter x:Name="items" Margin="0,0,0,200"/>
-			</Primitives:PanningLayer>
+            <Primitives:PanningLayer x:Name="ItemsLayer" Grid.Row="1" HorizontalAlignment="Left">
+                <ItemsPresenter x:Name="items" Margin="0,0,0,200"/>
+            </Primitives:PanningLayer>
 
-		</Grid>
-	</ControlTemplate>
-	<Style x:Key="PanoramaItemStyleWinner" TargetType="phone:PanoramaItem">
-		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-		<Setter Property="VerticalContentAlignment" Value="Stretch"/>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="phone:PanoramaItem">
-					<Grid Background="{TemplateBinding Background}" Margin="12,0,0,0">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"/>
-							<RowDefinition Height="*"/>
-						</Grid.RowDefinitions>
-						<ContentControl x:Name="header" CharacterSpacing="-35" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" FontSize="66" FontFamily="{StaticResource PhoneFontFamilySemiLight}" HorizontalAlignment="Left" Margin="12,-2,0,38">
-							<ContentControl.RenderTransform>
-								<TranslateTransform x:Name="headerTransform"/>
-							</ContentControl.RenderTransform>
-						</ContentControl>
-						<ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Grid.Row="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-    
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="PanoramaItemStyleWinner" TargetType="phone:PanoramaItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="phone:PanoramaItem">
+                    <Grid Background="{TemplateBinding Background}" Margin="12,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ContentControl x:Name="header" CharacterSpacing="-35" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" FontSize="66" FontFamily="{StaticResource PhoneFontFamilySemiLight}" HorizontalAlignment="Left" Margin="12,-2,0,38">
+                            <ContentControl.RenderTransform>
+                                <TranslateTransform x:Name="headerTransform"/>
+                            </ContentControl.RenderTransform>
+                        </ContentControl>
+                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Grid.Row="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- TEMPLATE PANORAMA PIVOT 1 -->
     <!--<DataTemplate x:Key="templatePanoramaPivot1">
         <StackPanel>
@@ -73,13 +76,21 @@
                        Margin="0,0,0,0" />
         </StackPanel>
     </DataTemplate>-->
-    
+
     <!-- TEMPLATE PANORAMA PIVOT 2 -->
-    <DataTemplate x:Key="templatePanoramaPivot2">
+    <!--<DataTemplate x:Key="templatePanoramaPivot2">
         <StackPanel>
-            <TextBlock Text="{Binding Path=Title}" />
+            <TextBlock Text="{Binding Path=Title}" >
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu>
+                        <toolkit:MenuItem Header="{Binding LocalizedResources.ContextMenuItemDelete, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                                          Command="{Binding Home.DeleteCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                          CommandParameter="{Binding SelectedItem, ElementName=listBox}" />
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+            </TextBlock>
         </StackPanel>
-    </DataTemplate>
+    </DataTemplate>-->
 
     <!-- TEMPLATE PANORAMA PIVOT 3 -->
     <!--<DataTemplate x:Key="templatePanoramaPivot3">
@@ -102,7 +113,7 @@
                         VerticalAlignment="Center"/>
         </Border>
     </DataTemplate>
-    
+
     <!-- TEMPLATE SPORTS LLS JUMPLIST -->
     <Style x:Key="templateSprtsJumpLls" TargetType="phone:LongListSelector">
         <Setter Property="LayoutMode" Value="List" />
