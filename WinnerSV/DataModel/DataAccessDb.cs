@@ -6,6 +6,7 @@ using SQLiteWinRT;
 using Windows.Storage;
 using WinnerSV.Common;
 using System.Text;
+using System.Threading;
 
 namespace WinnerSV.DataModel
 {
@@ -23,7 +24,7 @@ namespace WinnerSV.DataModel
         }
 
         /// <summary>
-        /// Restituisce la connessione al DB.
+        /// Restituisce una nuova connessione al DB.
         /// </summary>
         /// <returns>Database</returns>
         private Database GetSQLiteConnection()
@@ -80,12 +81,12 @@ namespace WinnerSV.DataModel
                     " Home12 VARCHAR(200), " +
                     " Away12 VARCHAR(200), " +
                     " PRIMARY KEY(IdScommessa, TeamCasa, TeamFCasa, Data, IdMatch), " +
-                    " FOREIGN KEY(IdScommessa) REFERENCES SCHEDINA(Id) ON DELETE CASCADE " +
+                    " FOREIGN KEY(IdScommessa) REFERENCES " + Constants.TABLE_NAME_SCHEDINA + "(Id) ON DELETE CASCADE " +
                     " ) ";
                 await dbInstance.ExecuteStatementAsync(querySqlCreateSecondTable);
 
-                string querySqlEnablePragma = @"PRAGMA foreign_keys = ON";
-                await dbInstance.ExecuteStatementAsync(querySqlEnablePragma);
+                ////string querySqlEnablePragma = " PRAGMA foreign_keys = ON ";
+                ////await dbInstance.ExecuteStatementAsync(querySqlEnablePragma);
 
                 messageForLog = "Query eseguita con successo";
             }
@@ -273,6 +274,9 @@ namespace WinnerSV.DataModel
             {
                 Database dbInstance = GetSQLiteConnection();
                 await dbInstance.OpenAsync(SqliteOpenMode.OpenReadWrite);
+
+                string querySqlEnablePragma = " PRAGMA foreign_keys = ON ";
+                await dbInstance.ExecuteStatementAsync(querySqlEnablePragma);
 
                 string query = " DELETE FROM " + Constants.TABLE_NAME_SCHEDINA +
                     " WHERE Id=" + id;
