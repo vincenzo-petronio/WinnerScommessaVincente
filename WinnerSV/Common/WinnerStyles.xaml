@@ -3,17 +3,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" 
     xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:Converters="clr-namespace:WinnerSV.Converters">
 
+    <!-- CONVERTER -->
+    <Converters:StringDateToFormatConverter x:Key="DateConverter" />
+    
     <!-- PALETTE COLORI -->
     <Color x:Key="BrownLight">#DE6E00</Color>
     <Color x:Key="BrownDark">#CE4701</Color>
     <Color x:Key="YellowLight">#FFF480</Color>
     <Color x:Key="YellowDark">#FFAB01</Color>
-    <SolidColorBrush x:Key="paletteInailBrownLight" Color="{StaticResource BrownLight}" />
-    <SolidColorBrush x:Key="paletteInailBrownDark" Color="{StaticResource BrownDark}" />
-    <SolidColorBrush x:Key="paletteInailYellowLight" Color="{StaticResource YellowLight}" />
-    <SolidColorBrush x:Key="paletteInailYellowDark" Color="{StaticResource YellowDark}" />
+    <SolidColorBrush x:Key="paletteWinnerBrownLight" Color="{StaticResource BrownLight}" />
+    <SolidColorBrush x:Key="paletteWinnerBrownDark" Color="{StaticResource BrownDark}" />
+    <SolidColorBrush x:Key="paletteWinnerYellowLight" Color="{StaticResource YellowLight}" />
+    <SolidColorBrush x:Key="paletteWinnerYellowDark" Color="{StaticResource YellowDark}" />
 
 
     <!-- TEMPLATE PANORAMA -->

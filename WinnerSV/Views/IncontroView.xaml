@@ -37,7 +37,7 @@
             <!--DataContext="{Binding Sports.ItemSelectedStored, Source={StaticResource Locator}}"-->
             <StackPanel>
                 <TextBlock Text="{Binding Path=IdMatch}" />
-                <TextBlock Text="{Binding Path=Data}" />
+                <TextBlock Text="{Binding Path=Data, Converter={StaticResource DateConverter}}" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock >
                         <Run Text="{Binding Path=TeamCasa}"/>

@@ -18,11 +18,11 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Data}" />
-                            <TextBlock>
-                                <Run Text="{Binding TeamCasa}" />
+                        <TextBlock Text="{Binding Data, Converter={StaticResource DateConverter}, StringFormat=\{0:d\}}" />
+                            <TextBlock TextTrimming="WordEllipsis">
+                                <Run Text="{Binding TeamCasa}" FontSize="{StaticResource PhoneFontSizeLarge}" />
                                 <Run Text=" VS " />
-                                <Run Text="{Binding TeamFCasa}" />
+                                <Run Text="{Binding TeamFCasa}" FontSize="{StaticResource PhoneFontSizeLarge}" />
                             </TextBlock>
                             <toolkit:ContextMenuService.ContextMenu>
                                 <toolkit:ContextMenu>
