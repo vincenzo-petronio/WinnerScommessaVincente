@@ -43,6 +43,7 @@ namespace WinnerSV.ViewModels
                 // RELAY COMMAND
                 NavToPageCommand = new RelayCommand(InsertSchedinaCommandExecute);
                 UpdateScommessaCommand = new RelayCommand<string>(UpdateScommessaCommandExecute);
+                DeleteScommessaCommand = new RelayCommand<Scommessa>(DeleteScommessaCommandExecute);
             }
         }
 
@@ -122,6 +123,27 @@ namespace WinnerSV.ViewModels
                 else
                 {
                     // TODO
+                }
+            }
+        }
+
+        /// <summary>
+        /// Cancella dal DB una Scommessa di una determinata Schedina.
+        /// </summary>
+        private async void DeleteScommessaCommandExecute(Scommessa s)
+        {
+            if (s != null && s.GetType() == typeof(Scommessa))
+            {
+                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] " + "Tapped DeleteScommmessaCommand: " + s.IdScommessa.ToString() + "," + s.IdMatch.ToString());
+                bool isDeleted = await dataAccessDb.DeleteScommessa(s);
+                if (isDeleted)
+                {
+                    PopolaAnteprimaProperties();
+                }
+                else
+                {
+                    // TODO 
+                    // Notificare l'errore nella UI.
                 }
             }
         }
@@ -241,5 +263,13 @@ namespace WinnerSV.ViewModels
             private set;
         }
 
+        /// <summary>
+        /// RelayCommand per la cancellazione di un elemento Scommessa dalla lista.
+        /// </summary>
+        public RelayCommand<Scommessa> DeleteScommessaCommand
+        {
+            get;
+            private set;
+        }
     }
 }

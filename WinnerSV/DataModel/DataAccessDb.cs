@@ -455,6 +455,50 @@ namespace WinnerSV.DataModel
         }
 
         /// <summary>
+        /// Elimina dal DB l'elemento Scommessa indicato dal parametro.
+        /// </summary>
+        /// <param name="s">Scommessa</param>
+        /// <returns>bool True per query eseguita, False in caso di Exception</returns>
+        public async Task<bool> DeleteScommessa(Scommessa s)
+        {
+            string messageForLog = string.Empty;
+            bool isCompleted = false;
+
+            try
+            {
+                Database dbInstance = GetSQLiteConnection();
+                await dbInstance.OpenAsync(SqliteOpenMode.OpenReadWrite);
+
+                string querySqlEnablePragma = " PRAGMA foreign_keys = ON ";
+                await dbInstance.ExecuteStatementAsync(querySqlEnablePragma);
+
+                string query = " DELETE FROM " + Constants.TABLE_NAME_SCOMMESSA +
+                    " WHERE " + 
+                    " IdScommessa=" + s.IdScommessa +
+                    " AND " + 
+                    " IdMatch='" + s.IdMatch + "'" +
+                    " AND " + 
+                    " TeamCasa='" + s.TeamCasa + "'" +
+                    " AND " + 
+                    " TeamFCasa='" + s.TeamFCasa + "'";
+                await dbInstance.ExecuteStatementAsync(query);
+                messageForLog = "Query eseguita con successo";
+                isCompleted = true;
+            }
+            catch (Exception ex)
+            {
+                isCompleted = false;
+                messageForLog = ex.Message;
+            }
+            finally
+            {
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - DeleteScommessa] \t" + messageForLog.ToString());
+            }
+
+            return isCompleted;
+        }
+
+        /// <summary>
         /// Restituisce un elenco di scommesse con relative quote giocate, 
         /// per una determinata Schedina.
         /// </summary>

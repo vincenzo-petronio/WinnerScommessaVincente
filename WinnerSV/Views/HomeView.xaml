@@ -63,7 +63,7 @@
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu>
                                         <toolkit:MenuItem Header="{Binding LocalizedResources.ContextMenuItemDelete, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
-                                                                  Command="{Binding Home.DeleteCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                                  Command="{Binding Home.DeleteSchedinaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
                                                                   CommandParameter="{Binding}" />
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>

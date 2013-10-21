@@ -55,7 +55,7 @@ namespace WinnerSV.ViewModels
                     }
                 });
 
-                DeleteCommand = new RelayCommand<Schedina>(async (s) => 
+                DeleteSchedinaCommand = new RelayCommand<Schedina>(async (s) => 
                 {
                     if (s != null && s.GetType() == typeof(Schedina))
                     {
@@ -141,9 +141,9 @@ namespace WinnerSV.ViewModels
         }
 
         /// <summary>
-        /// RelayCommand per la cancellazione di un elemento della lista.
+        /// RelayCommand per la cancellazione di un elemento Schedina dalla lista.
         /// </summary>
-        public RelayCommand<Schedina> DeleteCommand
+        public RelayCommand<Schedina> DeleteSchedinaCommand
         {
             get;
             private set;
