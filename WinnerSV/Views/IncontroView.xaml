@@ -48,9 +48,11 @@
                 
                 <ScrollViewer>
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" 
+                                    Visibility="{Binding Q1, Converter={StaticResource StringToVisConverter}}" >
                             <TextBlock Text="{Binding Path=Q1, StringFormat='quota1 {0}'}" />
-                            <Button Content="+" HorizontalAlignment="Right" >
+                            <Button Content="+" 
+                                    HorizontalAlignment="Right">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Tap">
                                         <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 

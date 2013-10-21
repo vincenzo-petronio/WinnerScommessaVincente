@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Converters\StringDateToFormatConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="DataModel\Scommessa.cs" />
     <Compile Include="Helpers\HttpExtensions.cs" />
     <Compile Include="Helpers\LongListSelector.cs" />

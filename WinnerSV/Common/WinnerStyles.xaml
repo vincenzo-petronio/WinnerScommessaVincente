@@ -8,6 +8,7 @@
 
     <!-- CONVERTER -->
     <Converters:StringDateToFormatConverter x:Key="DateConverter" />
+    <Converters:StringToVisibilityConverter x:Key="StringToVisConverter" />
     
     <!-- PALETTE COLORI -->
     <Color x:Key="BrownLight">#DE6E00</Color>
