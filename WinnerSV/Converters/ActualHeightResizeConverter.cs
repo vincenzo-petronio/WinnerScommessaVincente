@@ -34,11 +34,11 @@ namespace WinnerSV.Converters
         {
             if ((string)parameter == "1")
             {
-                return (value != null) ? ((double)value * (6.5 * 0.1)) : value;
+                return (value != null) ? ((double)value * (5.5 * 0.1)) : value;
             }
             else if ((string)parameter == "2")
             {
-                return (value != null) ? ((double)value * (5.5 * 0.1)) : value;
+                return (value != null) ? ((double)value * (4.5 * 0.1)) : value;
             }
 
             return value;

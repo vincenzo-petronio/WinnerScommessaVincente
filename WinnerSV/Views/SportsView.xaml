@@ -17,38 +17,46 @@
     shell:SystemTray.IsVisible="True"
     DataContext="{Binding Sports, Source={StaticResource Locator}}"
     xmlns:uc="clr-namespace:WinnerSV.Views">
-    
+
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="StoryBoardYUp">
             <DoubleAnimation x:Name="DoubleAnimationUp"
-        		Duration="0:0:0.2"
+        		Duration="0:0:0.7"
         		To="0" 
         		Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" 
         		Storyboard.TargetName="SportsGridAnteprima" 
-        		d:IsOptimized="True"/>
+        		d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseIn" Amplitude="0.2" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="StoryBoardYDown">
             <DoubleAnimation x:Name="DoubleAnimationDown"
-        		Duration="0:0:0.2"
+        		Duration="0:0:0.7"
         		From="0"
         		Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" 
         		Storyboard.TargetName="SportsGridAnteprima" 
-        		d:IsOptimized="True"/>
+        		d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.2" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
     </phone:PhoneApplicationPage.Resources>
-    
+
     <!-- Progress Indicator-->
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator IsIndeterminate="True"
                                  Text="{Binding LocalizedResources.SportsProgressIndicatorText, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
                                  IsVisible="{Binding Path=IsProgressIndicatorVisible}" />
     </shell:SystemTray.ProgressIndicator>
-    
-        <!--LayoutRoot is the root grid where all page content is placed-->
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <phone:Pivot Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-            
+
             <!-- Pivot Calcio -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot1Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
                 <helpers:LongListSelector ItemsSource="{Binding GroupedCalcio}"
@@ -103,7 +111,7 @@
                 </helpers:LongListSelector>
             </phone:PivotItem>
         </phone:Pivot>
-        
+
         <Grid x:Name="SportsGridAnteprima" 
               VerticalAlignment="Bottom"
               Height="{Binding ActualHeight, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay, ConverterParameter=1}" 
@@ -113,12 +121,17 @@
               ManipulationCompleted="SportsGridAnteprima_ManipulationCompleted"
               Tap="SportsGridAnteprima_Tap"
               Background="Red"
-              >
+              UseOptimizedManipulationRouting="False" >
             <Grid.RenderTransform>
                 <CompositeTransform TranslateY="{Binding ActualHeight, ConverterParameter=2, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}" />
             </Grid.RenderTransform>
-            <!--<uc:AnteprimaSchedina  Margin="0,50,0,0"/>-->
+
+            <StackPanel DataContext="{Binding Source={StaticResource Locator}}">
+                <TextBlock Text="{Binding AnteSchedina.SelectedSchedina.Title}" />
+                <uc:AnteprimaSchedina  Margin="0,50,0,0" IsEnabled="False"/>
+            </StackPanel>
+
         </Grid>
     </Grid>
-    
+
 </phone:PhoneApplicationPage>

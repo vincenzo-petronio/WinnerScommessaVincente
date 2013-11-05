@@ -5,13 +5,15 @@ namespace WinnerSV.Views
 {
     public partial class SportsView : PhoneApplicationPage
     {
-
+        // Posizione iniziale della griglia con l'anteprima, ottenuta dal 
+        // binding nel CompositeTransform.
         private double initialPosition;
-        /// <summary>
-        /// è true se la grid è visibile, false altrimenti
-        /// </summary>
+        // è true se la grid è visibile, false altrimenti
         private bool isGridUp = false;
 
+        /// <summary>
+        /// Costruttore
+        /// </summary>
         public SportsView()
         {
             InitializeComponent();
@@ -48,14 +50,14 @@ namespace WinnerSV.Views
                 DoubleAnimationDown.To = initialPosition;
                 System.Diagnostics.Debug.WriteLine("Grid_ManipulationStarted - Initial Position: " + initialPosition);
             }
-            e.Handled = true;
+            ////e.Handled = true;
         }
 
         private void SportsGridAnteprima_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
         {
             var ct = (CompositeTransform)this.SportsGridAnteprima.RenderTransform;
             ct.TranslateY += e.DeltaManipulation.Translation.Y;
-            e.Handled = true;
+            ////e.Handled = true;
         }
 
         private void SportsGridAnteprima_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
@@ -76,8 +78,7 @@ namespace WinnerSV.Views
                 //setto la grid invisible
                 isGridUp = false;
             }
-
-            e.Handled = true;
+            ////e.Handled = true;
         }
     }
 }
