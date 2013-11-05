@@ -120,8 +120,8 @@
               ManipulationDelta="SportsGridAnteprima_ManipulationDelta"
               ManipulationCompleted="SportsGridAnteprima_ManipulationCompleted"
               Tap="SportsGridAnteprima_Tap"
-              Background="Red"
-              UseOptimizedManipulationRouting="False" >
+              UseOptimizedManipulationRouting="False" 
+              Background="#FF6A6A6A" >
             <Grid.RenderTransform>
                 <CompositeTransform TranslateY="{Binding ActualHeight, ConverterParameter=2, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}" />
             </Grid.RenderTransform>
