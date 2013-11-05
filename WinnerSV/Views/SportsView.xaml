@@ -15,7 +15,27 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    DataContext="{Binding Sports, Source={StaticResource Locator}}">
+    DataContext="{Binding Sports, Source={StaticResource Locator}}"
+    xmlns:uc="clr-namespace:WinnerSV.Views">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="StoryBoardYUp">
+            <DoubleAnimation x:Name="DoubleAnimationUp"
+        		Duration="0:0:0.2"
+        		To="0" 
+        		Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" 
+        		Storyboard.TargetName="SportsGridAnteprima" 
+        		d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="StoryBoardYDown">
+            <DoubleAnimation x:Name="DoubleAnimationDown"
+        		Duration="0:0:0.2"
+        		From="0"
+        		Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" 
+        		Storyboard.TargetName="SportsGridAnteprima" 
+        		d:IsOptimized="True"/>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
     
     <!-- Progress Indicator-->
     <shell:SystemTray.ProgressIndicator>
@@ -83,6 +103,22 @@
                 </helpers:LongListSelector>
             </phone:PivotItem>
         </phone:Pivot>
+        
+        <Grid x:Name="SportsGridAnteprima" 
+              VerticalAlignment="Bottom"
+              Height="{Binding ActualHeight, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay, ConverterParameter=1}" 
+              RenderTransformOrigin="0.5,0.5" 
+              ManipulationStarted="SportsGridAnteprima_ManipulationStarted"
+              ManipulationDelta="SportsGridAnteprima_ManipulationDelta"
+              ManipulationCompleted="SportsGridAnteprima_ManipulationCompleted"
+              Tap="SportsGridAnteprima_Tap"
+              Background="Red"
+              >
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateY="{Binding ActualHeight, ConverterParameter=2, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}" />
+            </Grid.RenderTransform>
+            <!--<uc:AnteprimaSchedina  Margin="0,50,0,0"/>-->
+        </Grid>
     </Grid>
     
 </phone:PhoneApplicationPage>
