@@ -1,4 +1,5 @@
-﻿using Microsoft.Phone.Controls;
+﻿using System;
+using Microsoft.Phone.Controls;
 using System.Windows.Media;
 
 namespace WinnerSV.Views
@@ -8,7 +9,7 @@ namespace WinnerSV.Views
         // Posizione iniziale della griglia con l'anteprima, ottenuta dal 
         // binding nel CompositeTransform.
         private double initialPosition;
-        // è true se la grid è visibile, false altrimenti
+        // true se l'anteprima è visibile, false altrimenti. Inizialmente è nascosta.
         private bool isGridUp = false;
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace WinnerSV.Views
                 initialPosition = ct.TranslateY;
                 DoubleAnimationUp.From = initialPosition;
                 DoubleAnimationDown.To = initialPosition;
-                System.Diagnostics.Debug.WriteLine("Grid_ManipulationStarted - Initial Position: " + initialPosition);
+                System.Diagnostics.Debug.WriteLine("[SPORTSVIEW] \t Grid_ManipulationStarted - Initial Position: " + initialPosition);
             }
             ////e.Handled = true;
         }
@@ -67,16 +68,45 @@ namespace WinnerSV.Views
             // Swipe Down-Up gesture < 0 
             if (e.TotalManipulation.Translation.Y < 0)
             {
-                ct.TranslateY = 0;
-                //setto la grid visible
+                double lr = this.LayoutRoot.ActualHeight;
+                double spa = this.SportsGridAnteprima.ActualHeight;
+                ////System.Diagnostics.Debug.WriteLine("[DOWN-UP]\nLayoutRoot = " + lr + "\n" + "SportsGridAnteprima = " + spa + "\n" +
+                ////    "Translation = " + e.TotalManipulation.Translation.Y + "\n" + 
+                ////    "PositionGridAnte = " + ((CompositeTransform)this.SportsGridAnteprima.RenderTransform).TranslateY);
+                if (((CompositeTransform)this.SportsGridAnteprima.RenderTransform).TranslateY < 0)
+                {
+                    // traslazione della Grid nel bordo superiore dello schermo
+                    ct.TranslateY = -(lr - spa);
+                }
+                else
+                {
+                    // traslazione della Grid in posizione 0  (Grid visibile e allineata con il bordo inferiore dello schermo)
+                    ct.TranslateY = 0;
+                }
+
+                // In entrambi i casi la Grid è visibile.
                 isGridUp = true;
             }
             // Swipe Up-Down gesture
             else if (e.TotalManipulation.Translation.Y > 0)
             {
-                ct.TranslateY = initialPosition;
-                //setto la grid invisible
-                isGridUp = false;
+                var lr = this.LayoutRoot.ActualHeight;
+                var spa = this.SportsGridAnteprima.ActualHeight;
+                ////System.Diagnostics.Debug.WriteLine("[UP-DOWN]\nLayoutRoot = " + lr + "\n" + "SportsGridAnteprima = " + spa + "\n" +
+                ////    "Translation = " + e.TotalManipulation.Translation.Y + "\n" +
+                ////    "PositionGridAnte = " + ((CompositeTransform)this.SportsGridAnteprima.RenderTransform).TranslateY);
+                if(((CompositeTransform)this.SportsGridAnteprima.RenderTransform).TranslateY < 0)
+                {
+                    // traslazione della Grid in posizione 0  (Grid visibile e allineata con il bordo inferiore dello schermo)
+                    ct.TranslateY = 0;
+                }
+                else
+                {
+                    // traslazione della Grid in posizione iniziale (Grid semi nascosta con solo titolo visibile)
+                    ct.TranslateY = initialPosition;
+                    // solo in questo caso non è visibile
+                    isGridUp = false;
+                }
             }
             ////e.Handled = true;
         }
