@@ -113,6 +113,9 @@
     <Compile Include="Helpers\NavToPage.cs" />
     <Compile Include="ViewModels\AnteprimaSchedinaViewModel.cs" />
     <Compile Include="ViewModels\SportsViewModel.cs" />
+    <Compile Include="Views\AdsControl.xaml.cs">
+      <DependentUpon>AdsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AnteprimaSchedina.xaml.cs">
       <DependentUpon>AnteprimaSchedina.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AdsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AnteprimaSchedina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +249,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="MSAdvertising, Version=6.1">
+      <Name>Microsoft Advertising SDK for Windows Phone 8 %28XAML%29</Name>
+    </SDKReference>
     <SDKReference Include="SQLite.WP80, Version=3.8.0.2">
       <Name>SQLite for Windows Phone</Name>
     </SDKReference>

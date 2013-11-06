@@ -36,8 +36,13 @@
 
             <!-- Pivot 1 -->
             <phone:PanoramaItem x:Name="panoramaItem" Header=" ">
-                <StackPanel>
-                    <TextBlock x:Name="textBlock" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="textBlock"
+                               Grid.Row="0"
                                DataContext="{Binding NuovaSchedina}"
                                FontSize="{StaticResource PhoneFontSizeLarge}" 
                                Margin="0,0,0,0" 
@@ -49,7 +54,9 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     </TextBlock>
-                </StackPanel>
+                    <WinnerSV:AdsControl VerticalAlignment="Bottom"
+                                         Grid.Row="1"/>
+                </Grid>
             </phone:PanoramaItem>
 
             <!-- Pivot 2 -->

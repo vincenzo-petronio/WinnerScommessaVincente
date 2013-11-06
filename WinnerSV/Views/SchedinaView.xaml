@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
     xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+    xmlns:WinnerSV="clr-namespace:WinnerSV.Views"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -40,19 +41,21 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="85*" />
-                <RowDefinition Height="15*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             
             <uc:AnteprimaSchedina Grid.Row="0" />
-            
-            <Button Grid.Row="1" 
-                    Content="{Binding LocalizedResources.AddScommessaTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Tap">
-                        <Command:EventToCommand Command="{Binding NavToPageCommand, Mode=OneWay}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+
+            <StackPanel Grid.Row="1">
+                <Button Content="{Binding LocalizedResources.AddScommessaTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Tap">
+                            <Command:EventToCommand Command="{Binding NavToPageCommand, Mode=OneWay}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <WinnerSV:AdsControl VerticalAlignment="Bottom" />
+            </StackPanel>
         </Grid>
     </Grid>
 
