@@ -54,6 +54,10 @@ namespace WinnerSV.ViewModels
             else
             {
                 // Code runs "for real"
+                
+                // INIT
+                this.nuovaSchedina = new Schedina() { Title = Resources.AppResources.PanoramaPivot1ItemTitle };
+                this.schedine = new ObservableCollection<Schedina>();
 
                 // DB
                 this.dataAccessDb = db;
@@ -89,7 +93,7 @@ namespace WinnerSV.ViewModels
                     }
                 });
 
-                ////PopolaPanoramaProperties();
+                RefreshBindingData = new RelayCommand(PopolaPanoramaProperties);
             }
         }
 
@@ -102,9 +106,13 @@ namespace WinnerSV.ViewModels
             ////DbData d = new DbData();
             ////await d.PopolaDb();
 
-            // Pivot 1 e 2
-            this.NuovaSchedina = new Schedina() { Title = Resources.AppResources.PanoramaPivot1ItemTitle };
-            this.Schedine = new ObservableCollection<Schedina>(await dataAccessDb.GetSchedine());
+            // Pivot 2
+            this.schedine.Clear();
+            var list = await dataAccessDb.GetSchedine();
+            foreach(Schedina l in list)
+            {
+                this.schedine.Add(l);
+            }
         }
 
         /// <summary>
@@ -160,6 +168,15 @@ namespace WinnerSV.ViewModels
         /// RelayCommand per la cancellazione di un elemento Schedina dalla lista.
         /// </summary>
         public RelayCommand<Schedina> DeleteSchedinaCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// RelayCommand per eseguire il refresh delle proprieta' in binding.
+        /// </summary>
+        public RelayCommand RefreshBindingData
         {
             get;
             private set;

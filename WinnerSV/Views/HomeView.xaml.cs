@@ -38,17 +38,6 @@ namespace WinnerSV.Views
             Messenger.Default.Register<NavToPage>(this, (action) => ReceiveMessage(action));
         }
 
-        /// <summary>
-        /// Proprieta' per accedere al View-Model dal Code-Behind
-        /// </summary>
-        private HomeViewModel VM
-        {
-            get
-            {
-                return (HomeViewModel)this.DataContext;
-            }
-        }
-
         private object ReceiveMessage(NavToPage action)
         {
             if (action != null)
@@ -64,13 +53,6 @@ namespace WinnerSV.Views
                 NavigationService.Navigate(new System.Uri(page, System.UriKind.Relative));
             }
             return null;
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            this.VM.PopolaPanoramaProperties();
         }
     }
 }
