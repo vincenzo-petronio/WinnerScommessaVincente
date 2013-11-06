@@ -21,6 +21,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.Windows;
 using System.Windows.Data;
 
 namespace WinnerSV.Converters
@@ -30,22 +31,35 @@ namespace WinnerSV.Converters
     /// </summary>
     public class ActualHeightResizeConverter : IValueConverter
     {
+        // Percentuale che la griglia dell'anteprima deve occupare
+        // rispetto al LayoutRoot.
+        private double fullVisibleFactor = (5.5 * 0.1);
+        // Percentuale che la griglia dell'anteprima deve traslare oltre
+        // il bordo inferiore dello schermo.
+        private double partiallyVisibleFactor = (4.5 * 0.1);
+
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if ((string)parameter == "1")
             {
-                return (value != null) ? ((double)value * (5.5 * 0.1)) : value;
+                return (value != null) ? ((double)value * fullVisibleFactor) : value;
             }
             else if ((string)parameter == "2")
             {
-                return (value != null) ? ((double)value * (4.5 * 0.1)) : value;
+                return (value != null) ? ((double)value * partiallyVisibleFactor) : value;
             }
-
+            else if ((string)parameter == "3")
+            {
+                // Percentuale visibile a valle della traslazione.
+                double diffVisibleFactor = fullVisibleFactor - partiallyVisibleFactor;
+                return new Thickness(0, 0, 0, (double)value * diffVisibleFactor);
+            }
             return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            // ONE-WAY Conversion!
             return null;
         }
     }

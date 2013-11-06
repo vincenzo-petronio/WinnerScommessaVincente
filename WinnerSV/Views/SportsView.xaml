@@ -65,8 +65,12 @@
                                           GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
                                           IsGroupingEnabled ="true" 
                                           LayoutMode="List" 
-                                          SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}"
+                                          SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}" 
+                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}"
                                           >
+                    <!--<helpers:LongListSelector.Padding>
+                        <Thickness Left="0" Top="0" Right="0" Bottom="76.8"  />
+                    </helpers:LongListSelector.Padding>-->
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <Command:EventToCommand Command="{Binding Path=NavToPageCommand, Mode=OneWay}" />
@@ -84,6 +88,7 @@
                                           IsGroupingEnabled ="true" 
                                           LayoutMode="List"
                                           SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}"
+                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}"
                                           >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -102,6 +107,7 @@
                                           IsGroupingEnabled ="true" 
                                           LayoutMode="List"
                                           SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}"
+                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}"
                                           >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
