@@ -44,8 +44,8 @@
             <phone:PanoramaItem x:Name="panoramaItem" Header=" ">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock x:Name="textBlock"
                                Grid.Row="0"
