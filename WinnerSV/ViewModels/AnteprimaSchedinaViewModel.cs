@@ -116,15 +116,15 @@ namespace WinnerSV.ViewModels
                 // Quota giocata.
                 switch (obj)
                 {
-                    case "OVER": i.OVER = SelectedIncontro.OVER; break;
-                    case "UNDER": i.UNDER = SelectedIncontro.UNDER; break;
+                    case "OVER": { i.OVER = SelectedIncontro.OVER; i.TotalScore = SelectedIncontro.TotalScore; } break;
+                    case "UNDER": { i.UNDER = SelectedIncontro.UNDER; i.TotalScore = SelectedIncontro.TotalScore; } break;
                     case "Q1": i.Q1 = SelectedIncontro.Q1; break;
                     case "QX": i.QX = SelectedIncontro.QX; break;
                     case "Q2": i.Q2 = SelectedIncontro.Q2; break;
-                    case "HC": i.HC = SelectedIncontro.HC; break;
-                    case "HC1": i.HC1 = SelectedIncontro.HC1; break;
-                    case "HC2": i.HC2 = SelectedIncontro.HC2; break;
-                    case "HCX": i.HCX = SelectedIncontro.HCX; break;
+                    ////case "HC": i.HC = SelectedIncontro.HC; break;
+                    case "HC1": { i.HC1 = SelectedIncontro.HC1; i.HC = SelectedIncontro.HC; } break;
+                    case "HC2": { i.HC2 = SelectedIncontro.HC2; i.HC = SelectedIncontro.HC; } break;
+                    case "HCX": { i.HCX = SelectedIncontro.HCX; i.HC = SelectedIncontro.HC; } break;
                     case "DC1X": i.DC1X = SelectedIncontro.DC1X; break;
                     case "DC12": i.DC12 = SelectedIncontro.DC12; break;
                     case "DCX2": i.DCX2 = SelectedIncontro.DCX2; break;
