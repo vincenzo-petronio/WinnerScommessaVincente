@@ -156,6 +156,33 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="Scommessa1X2Title" xml:space="preserve">
+    <value>Esito Finale 1 X 2</value>
+  </data>
+  <data name="ScommessaDoppiaChanceTitle" xml:space="preserve">
+    <value>Doppia Chance</value>
+  </data>
+  <data name="ScommessaHandicapTitle" xml:space="preserve">
+    <value>Handicap</value>
+  </data>
+  <data name="ScommessaHomeAwayTitle" xml:space="preserve">
+    <value>1 / 2</value>
+  </data>
+  <data name="ScommessaOver" xml:space="preserve">
+    <value>Over</value>
+  </data>
+  <data name="ScommessaOverUnderTitle" xml:space="preserve">
+    <value>Over / Under</value>
+  </data>
+  <data name="ScommessaPareggio" xml:space="preserve">
+    <value>Pareggio</value>
+  </data>
+  <data name="ScommessaUnder" xml:space="preserve">
+    <value>Under</value>
+  </data>
+  <data name="ScommessaVittoria" xml:space="preserve">
+    <value>Vittoria</value>
+  </data>
   <data name="SportsPivot1Header" xml:space="preserve">
     <value>Football</value>
   </data>

@@ -10,6 +10,7 @@
     <Converters:StringDateToFormatConverter x:Key="DateConverter" />
     <Converters:StringToVisibilityConverter x:Key="StringToVisConverter" />
     <Converters:ActualHeightResizeConverter x:Key="ResizeConverter" />
+    <Converters:ScommessaPropertyToVisibilityConverter x:Key="ScommessaConverter" />
     
     <!-- PALETTE COLORI -->
     <Color x:Key="BrownLight">#DE6E00</Color>

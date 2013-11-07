@@ -134,7 +134,7 @@
 
             <StackPanel DataContext="{Binding Source={StaticResource Locator}}">
                 <TextBlock Text="{Binding AnteSchedina.SelectedSchedina.Title}" />
-                <uc:AnteprimaSchedina  Margin="0,50,0,0" IsEnabled="False"/>
+                <uc:AnteprimaSchedina  Margin="0,50,0,0" IsEnabled="False" HorizontalAlignment="Center"/>
             </StackPanel>
 
         </Grid>

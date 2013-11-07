@@ -178,6 +178,87 @@ namespace WinnerSV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Esito Finale 1 X 2.
+        /// </summary>
+        public static string Scommessa1X2Title {
+            get {
+                return ResourceManager.GetString("Scommessa1X2Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doppia Chance.
+        /// </summary>
+        public static string ScommessaDoppiaChanceTitle {
+            get {
+                return ResourceManager.GetString("ScommessaDoppiaChanceTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Handicap.
+        /// </summary>
+        public static string ScommessaHandicapTitle {
+            get {
+                return ResourceManager.GetString("ScommessaHandicapTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 / 2.
+        /// </summary>
+        public static string ScommessaHomeAwayTitle {
+            get {
+                return ResourceManager.GetString("ScommessaHomeAwayTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over.
+        /// </summary>
+        public static string ScommessaOver {
+            get {
+                return ResourceManager.GetString("ScommessaOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over / Under.
+        /// </summary>
+        public static string ScommessaOverUnderTitle {
+            get {
+                return ResourceManager.GetString("ScommessaOverUnderTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pareggio.
+        /// </summary>
+        public static string ScommessaPareggio {
+            get {
+                return ResourceManager.GetString("ScommessaPareggio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Under.
+        /// </summary>
+        public static string ScommessaUnder {
+            get {
+                return ResourceManager.GetString("ScommessaUnder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vittoria.
+        /// </summary>
+        public static string ScommessaVittoria {
+            get {
+                return ResourceManager.GetString("ScommessaVittoria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Football.
         /// </summary>
         public static string SportsPivot1Header {
