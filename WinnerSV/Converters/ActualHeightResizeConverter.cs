@@ -50,9 +50,16 @@ namespace WinnerSV.Converters
             }
             else if ((string)parameter == "3")
             {
-                // Percentuale visibile a valle della traslazione.
+                // Bottom = Percentuale visibile a valle della traslazione
                 double diffVisibleFactor = fullVisibleFactor - partiallyVisibleFactor;
                 return new Thickness(0, 0, 0, (double)value * diffVisibleFactor);
+            }
+            else if ((string)parameter == "4")
+            {
+                // Top = (percentuale di griglia visibile a valle della traslazione) + 5px
+                // Left,Right,Bottom = 5px
+                double diffVisibleFactor = fullVisibleFactor - partiallyVisibleFactor;
+                return new Thickness(5, (double)value * diffVisibleFactor + 5, 5, 5);
             }
             return value;
         }

@@ -68,9 +68,6 @@
                                           SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}" 
                                           Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}"
                                           >
-                    <!--<helpers:LongListSelector.Padding>
-                        <Thickness Left="0" Top="0" Right="0" Bottom="76.8"  />
-                    </helpers:LongListSelector.Padding>-->
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <Command:EventToCommand Command="{Binding Path=NavToPageCommand, Mode=OneWay}" />
@@ -132,11 +129,20 @@
                 <CompositeTransform TranslateY="{Binding ActualHeight, ConverterParameter=2, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}" />
             </Grid.RenderTransform>
 
-            <StackPanel DataContext="{Binding Source={StaticResource Locator}}">
-                <TextBlock Text="{Binding AnteSchedina.SelectedSchedina.Title}" />
-                <uc:AnteprimaSchedina  Margin="0,50,0,0" IsEnabled="False" HorizontalAlignment="Center"/>
-            </StackPanel>
-
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0"
+                       Padding="10"
+                       DataContext="{Binding AnteSchedina, Source={StaticResource Locator}}"
+                       Text="{Binding SelectedSchedina.Title}" 
+                       FontSize="{StaticResource PhoneFontSizeLarge}" 
+                       TextTrimming="WordEllipsis"/>
+            <uc:AnteprimaSchedina Grid.Row="0" Grid.RowSpan="2"
+                                  Margin="{Binding ActualHeight, ConverterParameter=4, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}" />
+            
         </Grid>
     </Grid>
 
