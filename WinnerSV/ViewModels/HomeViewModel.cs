@@ -46,10 +46,6 @@ namespace WinnerSV.ViewModels
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
-
-                // TODO Fare injection con IDataService
-                ////PanoramaData pd = new PanoramaData();
-                ////Schedine = pd.Schedine;
             }
             else
             {
@@ -83,7 +79,7 @@ namespace WinnerSV.ViewModels
                         bool isDeleted = await dataAccessDb.DeleteSchedina(s.Id);
                         if (isDeleted)
                         {
-                            PopolaPanoramaProperties();
+                            Schedine.Remove(s);
                         }
                         else
                         {
@@ -102,16 +98,14 @@ namespace WinnerSV.ViewModels
         /// </summary>
         public async void PopolaPanoramaProperties()
         {
-            // TEST
-            ////DbData d = new DbData();
-            ////await d.PopolaDb();
-
             // Pivot 2
-            this.schedine.Clear();
-            var list = await dataAccessDb.GetSchedine();
-            foreach(Schedina l in list)
+            var listSchedineFromDb = await dataAccessDb.GetSchedine();
+            foreach (Schedina s in listSchedineFromDb)
             {
-                this.schedine.Add(l);
+                if (!Schedine.Contains(s))
+                {
+                    Schedine.Add(s);
+                }
             }
         }
 
