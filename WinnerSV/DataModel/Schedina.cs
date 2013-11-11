@@ -19,15 +19,27 @@
 //    along with Winner - Scommessa vincente.  If not, see <http://www.gnu.org/licenses/>.
 // </license>
 //-----------------------------------------------------------------------
-      
+
+using System;
+
 namespace WinnerSV.DataModel
 {
     /// <summary>
     /// Oggetto per rappresentare un elemento della tabella Schedina nel DB.
     /// </summary>
-    public class Schedina
+    public class Schedina : IEquatable<Schedina>
     {
         public int Id { get; set; }
         public string Title { get; set; }
+
+        /// <summary>
+        /// Definisce la relazione di uguaglianza tra oggetti Schedina.
+        /// </summary>
+        /// <param name="s">Schedina</param>
+        /// <returns>True/False</returns>
+        public bool Equals(Schedina s)
+        {
+            return s.Id == Id && s.Title == Title; 
+        }
     }
 }

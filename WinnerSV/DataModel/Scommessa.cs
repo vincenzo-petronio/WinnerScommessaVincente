@@ -19,7 +19,9 @@
 //    along with Winner - Scommessa vincente.  If not, see <http://www.gnu.org/licenses/>.
 // </license>
 //-----------------------------------------------------------------------
-      
+
+using System;
+
 namespace WinnerSV.DataModel
 {
     /// <summary>
@@ -27,7 +29,7 @@ namespace WinnerSV.DataModel
     /// Ogni Scommessa contiene gli stessi elementi dell'oggetto Incontro piu' 
     /// un identificativo.
     /// </summary>
-    public class Scommessa
+    public class Scommessa : IEquatable<Scommessa>
     {
         public int IdScommessa { get; set; } // FOREIGN KEY
         public string TeamCasa { get; set; }
@@ -49,5 +51,35 @@ namespace WinnerSV.DataModel
         public string DCX2 { get; set; }
         public string Home12 { get; set; }
         public string Away12 { get; set; }
+
+        /// <summary>
+        /// Definisce la relazione di uguaglianza tra oggetti Scommessa.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Scommessa s)
+        {
+            return
+                ////s.Away12 == Away12 &&
+                s.Data == Data &&
+                ////s.DC12 == DC12 &&
+                ////s.DC1X == DC1X &&
+                ////s.DCX2 == DCX2 &&
+                ////s.HC == HC &&
+                ////s.HC1 == HC1 &&
+                ////s.HC2 == HC2 &&
+                ////s.HCX == HCX &&
+                ////s.Home12 == Home12 &&
+                s.IdMatch == IdMatch &&
+                s.IdScommessa == IdScommessa &&
+                ////s.OVER == OVER &&
+                ////s.Q1 == Q1 &&
+                ////s.Q2 == Q2 &&
+                ////s.QX == QX &&
+                s.TeamCasa == TeamCasa &&
+                s.TeamFCasa == TeamFCasa;
+                ////s.TotalScore == TotalScore &&
+                ////s.UNDER == UNDER;
+        }
     }
 }
