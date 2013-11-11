@@ -11,7 +11,7 @@
     <Converters:StringToVisibilityConverter x:Key="StringToVisConverter" />
     <Converters:ActualHeightResizeConverter x:Key="ResizeConverter" />
     <Converters:ScommessaPropertyToVisibilityConverter x:Key="ScommessaConverter" />
-    
+
     <!-- PALETTE COLORI -->
     <Color x:Key="BrownLight">#DE6E00</Color>
     <Color x:Key="BrownDark">#CE4701</Color>
@@ -75,6 +75,7 @@
         </Setter>
     </Style>
 
+
     <!-- TEMPLATE PANORAMA PIVOT 1 -->
     <!--<DataTemplate x:Key="templatePanoramaPivot1">
         <StackPanel>
@@ -105,33 +106,79 @@
 
     <!-- TEMPLATE SPORTS LLS -->
     <DataTemplate x:Key="templateSportsLls">
-        <StackPanel Margin="20,0,0,20">
-            <TextBlock Text="{Binding Path=TeamCasa}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
-        </StackPanel>
+        <Border BorderBrush="{StaticResource PhoneAccentBrush}" 
+                BorderThickness="2"
+                Margin="20,5,0,5"
+                Padding="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="20*" />
+                        <ColumnDefinition Width="40*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" 
+                           Text="{Binding Path=TeamCasa}" 
+                           FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                            />
+                    <TextBlock Grid.Column="1"
+                           Text="VS" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" 
+                           Text="{Binding Path=TeamFCasa}"
+                           FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           />
+                </Grid>
+                <TextBlock Grid.Row="0"
+                       Text="{Binding Data, Converter={StaticResource DateConverter}}"
+                       HorizontalAlignment="Center"/>
+            </Grid>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="templateSportsLlsGroupHeader">
-        <Border Background="{StaticResource PhoneAccentBrush}" 
-                BorderBrush="{StaticResource PhoneAccentBrush}" 
-                BorderThickness="2"	  				 
-                HorizontalAlignment="Left">
-            <TextBlock Text="{Binding Key}"                    
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"/>
+        <Border Background="{StaticResource PhoneAccentBrush}" 				 
+                HorizontalAlignment="Stretch"
+                Padding="14"
+                >
+            <TextBlock Text="{Binding Key}"                     
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       FontSize="{StaticResource LongListSelectorGroupHeaderFontSize}"/>
         </Border>
     </DataTemplate>
 
     <!-- TEMPLATE SPORTS LLS JUMPLIST -->
     <Style x:Key="templateSprtsJumpLls" TargetType="phone:LongListSelector">
         <Setter Property="LayoutMode" Value="List" />
-        <Setter Property="Margin" Value="18,12,0,0"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Key}"
-                               FontSize="48" 
-                               Padding="11,0,0,0"
-                               VerticalAlignment="Bottom" />
+                    <Border Background="{StaticResource PhoneAccentBrush}" 				 
+                            HorizontalAlignment="Stretch"
+                            Padding="14"
+                            Margin="2"
+                            >
+                        <TextBlock Text="{Binding Key}"
+                                   Padding="10"
+                                   VerticalAlignment="Bottom" 
+                                   FontSize="{StaticResource JumpListStringFontSize}" 
+                                   TextTrimming="WordEllipsis" />
+                    </Border>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
