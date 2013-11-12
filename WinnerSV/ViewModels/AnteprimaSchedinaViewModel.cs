@@ -264,7 +264,16 @@ namespace WinnerSV.ViewModels
         /// <returns></returns>
         public async void PopolaAnteprimaProperties()
         {
-            ListScommesse = new ObservableCollection<Scommessa>(await dataAccessDb.GetScommesse(SelectedSchedina.Title));
+            ////ListScommesse = new ObservableCollection<Scommessa>(await dataAccessDb.GetScommesse(SelectedSchedina.Title));
+            var listScommesseFromDb = await dataAccessDb.GetScommesse(SelectedSchedina.Title);
+            foreach (var s in listScommesseFromDb)
+            {
+                if (ListScommesse.Contains(s))
+                {
+                    ListScommesse.Remove(s);
+                }
+                ListScommesse.Add(s);
+            }
         }
 
         /// <summary>

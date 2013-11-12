@@ -349,7 +349,7 @@ namespace WinnerSV.DataModel
                 using (Statement statement = await dbInstance.PrepareStatementAsync(query))
                 {
                     statement.EnableColumnsProperty();
-                    System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - GetIncontri] \t" + query.ToString());
+                    System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - GetScommesse] \t" + query.ToString());
                     while (await statement.StepAsync())
                     {
                         var columns = statement.Columns;

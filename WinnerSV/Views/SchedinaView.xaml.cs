@@ -50,21 +50,36 @@ namespace WinnerSV.Views
         {
             base.OnNavigatedTo(e);
 
-            // Aggiorno AnteprimaSchedinaViewModel con il titolo della Schedina, a seconda se e'
-            // una nuova schedina o un caricamento di una schedina gia' giocata.
-            string parameter = string.Empty;
-            if (NavigationContext.QueryString.TryGetValue("Title", out parameter))
+            // Arrivo su una nuova pagina?
+            if (e.NavigationMode == NavigationMode.New)
             {
-                this.VM.SelectedSchedina.Title = parameter;
-            }
-            else
-            {
-                DateTime dt = DateTime.Now;
-                var dtFormatted = String.Format("{0:g}", dt);
-                this.VM.SelectedSchedina.Title = (Constants.TITLE_SCHEDINA_DEFAULT + " " + dtFormatted).Replace(" ", "_");
-            }
+                // Svuoto la lista per effettuare un refresh.
+                this.VM.ListScommesse.Clear();
 
+                // Aggiorno AnteprimaSchedinaViewModel con il titolo della Schedina, a seconda se e'
+                // una nuova schedina o un caricamento di una schedina gia' giocata.
+                string parameter = string.Empty;
+                if (NavigationContext.QueryString.TryGetValue("Title", out parameter))
+                {
+                    this.VM.SelectedSchedina.Title = parameter;
+                    this.textBoxTitle.IsReadOnly = true;
+                }
+                else
+                {
+                    DateTime dt = DateTime.Now;
+                    var dtFormatted = String.Format("{0:g}", dt);
+                    this.VM.SelectedSchedina.Title = (Constants.TITLE_SCHEDINA_DEFAULT + " " + dtFormatted).Replace(" ", "_");
+                    this.textBoxTitle.IsReadOnly = false;
+                }
+            }
             this.VM.PopolaAnteprimaProperties();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            this.textBoxTitle.IsReadOnly = true;
         }
     }
 }

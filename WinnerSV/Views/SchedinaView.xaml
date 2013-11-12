@@ -30,7 +30,8 @@
             <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextNormalStyle}"/>
             <StackPanel Orientation="Horizontal">
-                <TextBox Text="{Binding SelectedSchedina.Title, Mode=TwoWay}" 
+                <TextBox x:Name="textBoxTitle"
+                         Text="{Binding SelectedSchedina.Title, Mode=TwoWay}" 
                          Margin="9,-7,0,0" 
                          FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
                 <Image />
