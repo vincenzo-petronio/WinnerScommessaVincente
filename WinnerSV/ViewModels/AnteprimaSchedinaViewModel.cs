@@ -160,7 +160,7 @@ namespace WinnerSV.ViewModels
                 bool isDeleted = await dataAccessDb.DeleteScommessa(s);
                 if (isDeleted)
                 {
-                    PopolaAnteprimaProperties();
+                    ListScommesse.Remove(s);
                 }
                 else
                 {
