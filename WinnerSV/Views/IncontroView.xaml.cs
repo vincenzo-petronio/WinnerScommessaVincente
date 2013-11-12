@@ -18,16 +18,5 @@ namespace WinnerSV.Views
         {
             InitializeComponent();
         }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            ////base.OnNavigatedTo(e);
-
-            ////var pageDataContext = (AnteprimaSchedinaViewModel)this.DataContext;
-
-            ////var gridDataContext = (Incontro)this.ContentPanel.DataContext;
-
-            ////pageDataContext.SelectedIncontro = gridDataContext;
-        }
     }
 }

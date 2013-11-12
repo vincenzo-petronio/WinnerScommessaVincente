@@ -58,6 +58,7 @@ namespace WinnerSV.Views
 
                 // Aggiorno AnteprimaSchedinaViewModel con il titolo della Schedina, a seconda se e'
                 // una nuova schedina o un caricamento di una schedina gia' giocata.
+                // Recupero il parametro dalla Query String.
                 string parameter = string.Empty;
                 if (NavigationContext.QueryString.TryGetValue("Title", out parameter))
                 {

@@ -66,7 +66,17 @@ namespace WinnerSV.ViewModels
                 NavToPageCommand = new RelayCommand(InsertSchedinaCommandExecute);
                 UpdateScommessaCommand = new RelayCommand<string>(UpdateScommessaCommandExecute);
                 DeleteScommessaCommand = new RelayCommand<Scommessa>(DeleteScommessaCommandExecute);
+                RemoveSelectedItemCommand = new RelayCommand(RemoveSelectedItemCommandExecute);
             }
+        }
+
+        private void RemoveSelectedItemCommandExecute()
+        {
+            // WORK-AROUND
+            // Con il BackKey da IncontroView a SportsView, disabilito l'item selezionato.
+            // Necessario perche' con il LongListSelector l'evento nel Command è SelectionChanged,
+            // non Tap (il Tap intercetta anche l'Header).
+            this.SelectedIncontro = null;
         }
 
         /// <summary>
@@ -140,7 +150,7 @@ namespace WinnerSV.ViewModels
                 bool isCompleted = await dataAccessDb.UpdateScommessa(i, s);
                 if (isCompleted)
                 {
-                    // TODO 
+                    // TODO
                 }
                 else
                 {
@@ -240,10 +250,6 @@ namespace WinnerSV.ViewModels
         {
             get
             {
-                ////DispatcherHelper.CheckBeginInvokeOnUI(async () =>
-                ////{   
-                ////    listIncontri = new ObservableCollection<Incontro>(await dataAccessDb.GetIncontri(SelectedSchedina.Title));
-                ////});
                 return listScommesse;
             }
 
@@ -264,7 +270,6 @@ namespace WinnerSV.ViewModels
         /// <returns></returns>
         public async void PopolaAnteprimaProperties()
         {
-            ////ListScommesse = new ObservableCollection<Scommessa>(await dataAccessDb.GetScommesse(SelectedSchedina.Title));
             var listScommesseFromDb = await dataAccessDb.GetScommesse(SelectedSchedina.Title);
             foreach (var s in listScommesseFromDb)
             {
@@ -298,6 +303,12 @@ namespace WinnerSV.ViewModels
         /// RelayCommand per la cancellazione di un elemento Scommessa dalla lista.
         /// </summary>
         public RelayCommand<Scommessa> DeleteScommessaCommand
+        {
+            get;
+            private set;
+        }
+
+        public RelayCommand RemoveSelectedItemCommand
         {
             get;
             private set;
