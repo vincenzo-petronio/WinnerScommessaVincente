@@ -136,19 +136,19 @@
     <value>About</value>
   </data>
   <data name="PivotAboutChangelogDescription" xml:space="preserve">
-    <value>ver 1.00.0</value>
+    <value>ver 1.0.0.0</value>
   </data>
   <data name="PivotAboutChangelogTitle" xml:space="preserve">
     <value>Changelog</value>
   </data>
   <data name="PivotAboutCreditsDescription" xml:space="preserve">
-    <value>autore.... privacy</value>
+    <value>Grazie a www.bet-at-home.com (fonte dati)</value>
   </data>
   <data name="PivotAboutCreditsTitle" xml:space="preserve">
     <value>Credits</value>
   </data>
   <data name="PivotAboutDescription" xml:space="preserve">
-    <value>Descrizione app...</value>
+    <value>Winner permette di visualizzare le quote dei prossimi incontri dei maggiori eventi sportivi e di memorizzare una o più scommesse come fosse un taccuino. Le quote disponibili per l'incontro sono 1 X 2, Handicap, Under/Over e Doppia Chance.</value>
   </data>
   <data name="ProgressIndicatorUpdateText" xml:space="preserve">
     <value>Aggiornamento ...</value>

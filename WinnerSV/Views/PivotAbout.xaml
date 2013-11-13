@@ -12,22 +12,23 @@
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25*" />
-                <RowDefinition Height="25*" />
-                <RowDefinition Height="25*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
-                <TextBlock>
-                    <Run Text="{Binding LocalizedResources.PivotAboutDescription, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                <TextBlock TextWrapping="Wrap">
+                    <Run Text="{Binding LocalizedResources.PivotAboutDescription, Mode=OneWay, Source={StaticResource LocalizedStrings}}"/>
                 </TextBlock>
             </StackPanel>
 
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="1" Margin="0,10">
                 <TextBlock Text="{Binding LocalizedResources.PivotAboutCreditsTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
                            FontSize="{StaticResource PhoneFontSizeMedium}" 
                            FontWeight="Bold"  />
-                <TextBlock Text="{Binding LocalizedResources.PivotAboutCreditsDescription, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+                <TextBlock Text="{Binding LocalizedResources.PivotAboutCreditsDescription, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                           TextWrapping="Wrap">
                     <!--<Run Text="ringraziamenti " /><LineBreak/>
                     <Run Text=" ..." />-->
                 </TextBlock>

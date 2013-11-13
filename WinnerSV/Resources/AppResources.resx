@@ -142,13 +142,13 @@
     <value>Changelog</value>
   </data>
   <data name="PivotAboutCreditsDescription" xml:space="preserve">
-    <value>author ... privacy</value>
+    <value>Thanks to www.bet-at-home.com (data source)</value>
   </data>
   <data name="PivotAboutCreditsTitle" xml:space="preserve">
     <value>Credits</value>
   </data>
   <data name="PivotAboutDescription" xml:space="preserve">
-    <value>App description</value>
+    <value>Winner allows to view the next matches of the major sporting events and store one or more bets like an agenda. The odds available for the event are 1 X 2, Handicap, Under/Over, Double Chance.</value>
   </data>
   <data name="ProgressIndicatorUpdateText" xml:space="preserve">
     <value>Updating ...</value>

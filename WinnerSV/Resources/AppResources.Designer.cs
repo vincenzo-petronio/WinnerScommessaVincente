@@ -133,7 +133,7 @@ namespace WinnerSV.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to author ... privacy.
+        ///   Looks up a localized string similar to Thanks to www.bet-at-home.com (data source).
         /// </summary>
         public static string PivotAboutCreditsDescription {
             get {
@@ -151,7 +151,7 @@ namespace WinnerSV.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to App description.
+        ///   Looks up a localized string similar to Winner allows to view the next matches of the major sporting events and store one or more bets like an agenda. The odds available for the event are 1 X 2, Handicap, Under/Over, Double Chance..
         /// </summary>
         public static string PivotAboutDescription {
             get {
