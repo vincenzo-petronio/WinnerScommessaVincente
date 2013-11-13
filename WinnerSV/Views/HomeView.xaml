@@ -67,30 +67,38 @@
 
             <!-- Pivot 2 -->
             <phone:PanoramaItem Header="{Binding LocalizedResources.PanoramaPivot2Header, Source={StaticResource LocalizedStrings}}" >
-                <ListBox x:Name="listBox" 
-                         ItemsSource="{Binding Schedine}" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Path=Title}" />
-                                <toolkit:ContextMenuService.ContextMenu>
-                                    <toolkit:ContextMenu>
-                                        <toolkit:MenuItem Header="{Binding LocalizedResources.ContextMenuItemDelete, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
-                                                                  Command="{Binding Home.DeleteSchedinaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                                                                  CommandParameter="{Binding}" />
-                                    </toolkit:ContextMenu>
-                                </toolkit:ContextMenuService.ContextMenu>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    
-                    <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Tap">
-                        <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                                                CommandParameter="{Binding SelectedItem, ElementName=listBox}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                </ListBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <ListBox x:Name="listBox" 
+                             Grid.Row="0"
+                             ItemsSource="{Binding Schedine}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Path=Title}" />
+                                    <toolkit:ContextMenuService.ContextMenu>
+                                        <toolkit:ContextMenu>
+                                            <toolkit:MenuItem Header="{Binding LocalizedResources.ContextMenuItemDelete, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                                                                      Command="{Binding Home.DeleteSchedinaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                                      CommandParameter="{Binding}" />
+                                        </toolkit:ContextMenu>
+                                    </toolkit:ContextMenuService.ContextMenu>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                    CommandParameter="{Binding SelectedItem, ElementName=listBox}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
+                </Grid>
             </phone:PanoramaItem>
 
             <!-- Pivot 3 -->
