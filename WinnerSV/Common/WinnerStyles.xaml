@@ -143,7 +143,7 @@
                            />
                 </Grid>
                 <TextBlock Grid.Row="0"
-                       Text="{Binding Data, Converter={StaticResource DateConverter}}"
+                       Text="{Binding Data}"
                        HorizontalAlignment="Center"/>
             </Grid>
         </Border>

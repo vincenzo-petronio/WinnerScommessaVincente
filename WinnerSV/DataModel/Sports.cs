@@ -41,7 +41,22 @@ namespace WinnerSV.DataModel
     {
         public string TeamCasa { get; set; }
         public string TeamFCasa { get; set; }
-        public string Data { get; set; }
+
+        private string data;
+        public string Data 
+        { 
+            get 
+            { 
+                return data; 
+            } 
+            
+            set 
+            {
+                // M/d/yyyy h:mm tt
+                data = System.DateTime.Parse(value).ToString("g"); 
+            } 
+        }
+
         public string Q1 { get; set; }
         public string QX { get; set; }
         public string Q2 { get; set; }

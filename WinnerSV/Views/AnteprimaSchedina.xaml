@@ -18,7 +18,7 @@
                     <Border BorderBrush="White" BorderThickness="1" Margin="2.5">
                     <StackPanel Orientation="Vertical">
                         <!-- Data e Teams -->
-                        <TextBlock Text="{Binding Data, Converter={StaticResource DateConverter}, StringFormat=\{0:d\}}" />
+                        <TextBlock Text="{Binding Data}" />
                         <TextBlock TextTrimming="WordEllipsis">
                             <Run Text="{Binding TeamCasa}" FontSize="{StaticResource PhoneFontSizeNormal}" />
                             <Run Text=" VS " FontWeight="Bold" />

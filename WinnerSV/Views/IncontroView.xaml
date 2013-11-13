@@ -47,7 +47,7 @@
 
             <!-- Data e Team -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="{Binding Path=Data, Converter={StaticResource DateConverter}}" />
+                <TextBlock Text="{Binding Path=Data}" />
                 <TextBlock HorizontalAlignment="Center">
                     <Run Text="{Binding Path=TeamCasa}"/>
                     <Run Text=" VS " FontWeight="Bold" />
