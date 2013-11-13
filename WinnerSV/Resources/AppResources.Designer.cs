@@ -160,6 +160,15 @@ namespace WinnerSV.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Updating ....
+        /// </summary>
+        public static string ProgressIndicatorUpdateText {
+            get {
+                return ResourceManager.GetString("ProgressIndicatorUpdateText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {

@@ -40,6 +40,7 @@ namespace WinnerSV.ViewModels
         private Incontro selectedIncontro;
         private Scommessa selectedScommessa;
         private ObservableCollection<Scommessa> listScommesse;
+        private bool isProgressIndicatorVisible = false;
 
         /// <summary>
         /// Costruttore.
@@ -68,15 +69,6 @@ namespace WinnerSV.ViewModels
                 DeleteScommessaCommand = new RelayCommand<Scommessa>(DeleteScommessaCommandExecute);
                 RemoveSelectedItemCommand = new RelayCommand(RemoveSelectedItemCommandExecute);
             }
-        }
-
-        private void RemoveSelectedItemCommandExecute()
-        {
-            // WORK-AROUND
-            // Con il BackKey da IncontroView a SportsView, disabilito l'item selezionato.
-            // Necessario perche' con il LongListSelector l'evento nel Command è SelectionChanged,
-            // non Tap (il Tap intercetta anche l'Header).
-            this.SelectedIncontro = null;
         }
 
         /// <summary>
@@ -177,6 +169,38 @@ namespace WinnerSV.ViewModels
                 {
                     // TODO 
                     // Notificare l'errore nella UI.
+                }
+            }
+        }
+
+        /// <summary>
+        /// Riporta a null le proprieta' in binding.
+        /// </summary>
+        private void RemoveSelectedItemCommandExecute()
+        {
+            // WORK-AROUND
+            // Con il BackKey da IncontroView a SportsView, disabilito l'item selezionato.
+            // Necessario perche' con il LongListSelector l'evento nel Command è SelectionChanged,
+            // non Tap (il Tap intercetta anche l'Header).
+            this.SelectedIncontro = null;
+        }
+
+        /// <summary>
+        /// Boolean per impostare a True/False la Visibility di un elemento nello XAML. 
+        /// </summary>
+        public bool IsProgressIndicatorVisible
+        {
+            get
+            {
+                return isProgressIndicatorVisible;
+            }
+
+            set
+            {
+                if (isProgressIndicatorVisible != value)
+                {
+                    isProgressIndicatorVisible = value;
+                    RaisePropertyChanged(() => IsProgressIndicatorVisible);
                 }
             }
         }
@@ -310,6 +334,9 @@ namespace WinnerSV.ViewModels
             private set;
         }
 
+        /// <summary>
+        /// RelayCommand per disabilitare l'elemento selezionato nelle liste.
+        /// </summary>
         public RelayCommand RemoveSelectedItemCommand
         {
             get;
