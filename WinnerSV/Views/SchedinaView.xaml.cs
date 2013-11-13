@@ -53,9 +53,6 @@ namespace WinnerSV.Views
             // Arrivo su una nuova pagina?
             if (e.NavigationMode == NavigationMode.New)
             {
-                // Svuoto la lista per effettuare un refresh.
-                this.VM.ListScommesse.Clear();
-
                 // Aggiorno AnteprimaSchedinaViewModel con il titolo della Schedina, a seconda se e'
                 // una nuova schedina o un caricamento di una schedina gia' giocata.
                 // Recupero il parametro dalla Query String.
@@ -72,8 +69,11 @@ namespace WinnerSV.Views
                     this.VM.SelectedSchedina.Title = (Constants.TITLE_SCHEDINA_DEFAULT + " " + dtFormatted).Replace(" ", "_");
                     this.textBoxTitle.IsReadOnly = false;
                 }
+
+                // Svuoto la lista per effettuare un refresh.
+                this.VM.ListScommesse.Clear();
+                this.VM.PopolaAnteprimaProperties();
             }
-            this.VM.PopolaAnteprimaProperties();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

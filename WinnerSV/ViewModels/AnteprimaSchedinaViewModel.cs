@@ -87,7 +87,7 @@ namespace WinnerSV.ViewModels
         {
             if (!string.IsNullOrEmpty(this.SelectedSchedina.Title))
             {
-                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] " + "Tapped NavToPageCommand: "
+                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "Tapped NavToPageCommand: "
                     + SelectedSchedina.Title);
 
                 bool isCompleted = await dataAccessDb.SetSchedina(SelectedSchedina.Title);
@@ -150,7 +150,8 @@ namespace WinnerSV.ViewModels
                 bool isCompleted = await dataAccessDb.UpdateScommessa(i, s);
                 if (isCompleted)
                 {
-                    // TODO
+                    // Aggiorno la lista delle scommesse effettuate.
+                    PopolaAnteprimaProperties();
                 }
                 else
                 {
@@ -166,7 +167,7 @@ namespace WinnerSV.ViewModels
         {
             if (s != null && s.GetType() == typeof(Scommessa))
             {
-                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] " + "Tapped DeleteScommmessaCommand: " + s.IdScommessa.ToString() + "," + s.IdMatch.ToString());
+                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "Tapped DeleteScommmessaCommand: " + s.IdScommessa.ToString() + "," + s.IdMatch.ToString());
                 bool isDeleted = await dataAccessDb.DeleteScommessa(s);
                 if (isDeleted)
                 {
@@ -270,6 +271,7 @@ namespace WinnerSV.ViewModels
         /// <returns></returns>
         public async void PopolaAnteprimaProperties()
         {
+            System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "*** REFRESH ANTEPRIMA ***");
             var listScommesseFromDb = await dataAccessDb.GetScommesse(SelectedSchedina.Title);
             foreach (var s in listScommesseFromDb)
             {
