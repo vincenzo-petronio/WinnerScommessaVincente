@@ -68,6 +68,7 @@ namespace WinnerSV.ViewModels
                 UpdateScommessaCommand = new RelayCommand<string>(UpdateScommessaCommandExecute);
                 DeleteScommessaCommand = new RelayCommand<Scommessa>(DeleteScommessaCommandExecute);
                 RemoveSelectedItemCommand = new RelayCommand(RemoveSelectedItemCommandExecute);
+                AlreadyUpdateScommessaCommand = new RelayCommand(AlreadyUpdateScommessaCommandExecute);
             }
         }
 
@@ -120,9 +121,27 @@ namespace WinnerSV.ViewModels
                 {
                     case "OVER": { i.OVER = SelectedIncontro.OVER; i.TotalScore = SelectedIncontro.TotalScore; } break;
                     case "UNDER": { i.UNDER = SelectedIncontro.UNDER; i.TotalScore = SelectedIncontro.TotalScore; } break;
-                    case "Q1": i.Q1 = SelectedIncontro.Q1; break;
-                    case "QX": i.QX = SelectedIncontro.QX; break;
-                    case "Q2": i.Q2 = SelectedIncontro.Q2; break;
+                    case "Q1":
+                        {
+                            i.Q1 = SelectedIncontro.Q1;
+                            i.QX = string.Empty;
+                            i.Q2 = string.Empty;
+                        }
+                        break;
+                    case "QX":
+                        {
+                            i.QX = SelectedIncontro.QX;
+                            i.Q1 = string.Empty;
+                            i.Q2 = string.Empty;
+                        }
+                        break;
+                    case "Q2":
+                        {
+                            i.Q2 = SelectedIncontro.Q2;
+                            i.Q1 = string.Empty;
+                            i.QX = string.Empty;
+                        }
+                        break;
                     ////case "HC": i.HC = SelectedIncontro.HC; break;
                     case "HC1": { i.HC1 = SelectedIncontro.HC1; i.HC = SelectedIncontro.HC; } break;
                     case "HC2": { i.HC2 = SelectedIncontro.HC2; i.HC = SelectedIncontro.HC; } break;
@@ -144,6 +163,9 @@ namespace WinnerSV.ViewModels
                 {
                     // Aggiorno la lista delle scommesse effettuate.
                     PopolaAnteprimaProperties();
+
+                    var sc = await dataAccessDb.GetScommessa(i, s);
+                    ////ScommessaStored = sc;
                 }
                 else
                 {
@@ -183,6 +205,28 @@ namespace WinnerSV.ViewModels
             // Necessario perche' con il LongListSelector l'evento nel Command è SelectionChanged,
             // non Tap (il Tap intercetta anche l'Header).
             this.SelectedIncontro = null;
+            this.ScommessaStored = null;
+        }
+
+        private async void AlreadyUpdateScommessaCommandExecute()
+        {
+            System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "AlreadyUpdateScommessaCommandExecute routine");
+
+            if (SelectedIncontro != null)
+            {
+                // Creo un nuovo Incontro con i dati delle quote da giocare.
+                Incontro i = new Incontro();
+                // Valori delle PRIMARY KEY da inviare sempre.
+                i.TeamCasa = SelectedIncontro.TeamCasa;
+                i.TeamFCasa = SelectedIncontro.TeamFCasa;
+                i.Data = SelectedIncontro.Data;
+                i.IdMatch = SelectedIncontro.IdMatch;
+
+                var s = await dataAccessDb.GetSchedina(this.SelectedSchedina.Title);
+                var isCompleted = await dataAccessDb.GetScommessa(i, s);
+
+                ScommessaStored = isCompleted;
+            }
         }
 
         /// <summary>
@@ -204,6 +248,25 @@ namespace WinnerSV.ViewModels
                 }
             }
         }
+
+        private Scommessa scommessaStored;
+        public Scommessa ScommessaStored
+        {
+            get
+            {
+                return scommessaStored;
+            }
+
+            set
+            {
+                if(scommessaStored != value)
+                {
+                    scommessaStored = value;
+                    RaisePropertyChanged(() => ScommessaStored);
+                }
+            }
+        }
+        
 
         /// <summary>
         /// Rappresenta la Schedina giocata, sia nel caso di una nuova schedina, che 
@@ -342,5 +405,15 @@ namespace WinnerSV.ViewModels
             get;
             private set;
         }
+
+        /// <summary>
+        /// RelayCommand per controllare le Scommesse gia' effettuate.
+        /// </summary>
+        public RelayCommand AlreadyUpdateScommessaCommand
+        {
+            get;
+            private set;
+        }
+            
     }
 }

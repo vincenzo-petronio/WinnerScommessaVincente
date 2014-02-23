@@ -35,6 +35,7 @@ namespace WinnerSV.DataModel
         Task<bool> SetSchedina(string s);
         Task<bool> DeleteSchedina(int id);
         Task<List<Scommessa>> GetScommesse(string t);
+        Task<Scommessa> GetScommessa(Incontro i, Schedina s);
         Task<bool> UpdateScommessa(Incontro i, Schedina s);
         Task<bool> DeleteScommessa(Scommessa s);
         Task<List<Incontro>> GetIncontri(string t);

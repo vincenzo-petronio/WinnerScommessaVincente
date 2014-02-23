@@ -14,11 +14,14 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" 
-    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}"  >
+    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}" >
 
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="BackKeyPress" >
+        <i:EventTrigger EventName="BackKeyPress">
             <Command:EventToCommand Command="{Binding RemoveSelectedItemCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <Command:EventToCommand Command="{Binding AlreadyUpdateScommessaCommand, Mode=OneWay}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -45,7 +48,8 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" 
               Grid.Row="1" 
-              Margin="12,0,12,0" DataContext="{Binding AnteSchedina.SelectedIncontro, Source={StaticResource Locator}}" 
+              Margin="12,0,12,0" 
+              DataContext="{Binding AnteSchedina.SelectedIncontro, Source={StaticResource Locator}}" 
               >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -54,7 +58,8 @@
 
             <!-- Data e Team -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="{Binding Path=Data}" />
+                <TextBlock Text="{Binding Path=Data}" 
+                           HorizontalAlignment="Center" />
                 <TextBlock HorizontalAlignment="Center">
                     <Run Text="{Binding Path=TeamCasa}"/>
                     <Run Text=" VS " FontWeight="Bold" />
@@ -72,7 +77,8 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding Q1}" />
-                                <Button Content="1">
+                                <Button Content="1" 
+                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=Q1, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -83,7 +89,8 @@
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding QX}" />
-                                <Button Content="X">
+                                <Button Content="X"
+                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=QX, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -94,7 +101,8 @@
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding Q2}" />
-                                <Button Content="2">
+                                <Button Content="2"
+                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=Q2, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 

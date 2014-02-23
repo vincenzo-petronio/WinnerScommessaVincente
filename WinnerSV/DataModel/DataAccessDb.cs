@@ -392,6 +392,80 @@ namespace WinnerSV.DataModel
             return scommesse;
         }
 
+
+        public async Task<Scommessa> GetScommessa(Incontro i, Schedina s)
+        {
+            Scommessa scommessa = null;
+            string messageForLog = string.Empty;
+
+            try
+            {
+                Database dbInstance = GetSQLiteConnection();
+                await dbInstance.OpenAsync(SqliteOpenMode.OpenRead);
+
+                string query = 
+                    " SELECT * FROM " + Constants.TABLE_NAME_SCOMMESSA +
+                    " INNER JOIN " + Constants.TABLE_NAME_SCHEDINA +
+                    " ON " + Constants.TABLE_NAME_SCOMMESSA + ".IdScommessa" +
+                    " = " +
+                    Constants.TABLE_NAME_SCHEDINA + ".Id" +
+                    " WHERE " +
+                    " IdScommessa = '" + s.Id + "'" +
+                    " AND " +
+                    " TeamCasa = '" + i.TeamCasa + "'" +
+                    " AND " +
+                    " TeamFCasa = '" + i.TeamFCasa + "'" +
+                    " AND " +
+                    " Data = '" + i.Data + "'" +
+                    " AND " +
+                    " IdMatch = '" + i.IdMatch + "'"
+                    ;
+                using (Statement statement = await dbInstance.PrepareStatementAsync(query))
+                {
+                    statement.EnableColumnsProperty();
+                    System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - GetScommessa] \t" + query.ToString());
+                    while (await statement.StepAsync())
+                    {
+                        var columns = statement.Columns;
+                        scommessa = new Scommessa
+                        {
+                            IdScommessa = int.Parse(columns["IdScommessa"]),
+                            TeamCasa = columns["TeamCasa"],
+                            TeamFCasa = columns["TeamFCasa"],
+                            Data = columns["Data"],
+                            IdMatch = columns["IdMatch"],
+                            TotalScore = columns["TotalScore"],
+                            OVER = columns["Over"],
+                            UNDER = columns["Under"],
+                            Q1 = columns["Q1"],
+                            QX = columns["Qx"],
+                            Q2 = columns["Q2"],
+                            HC = columns["Hc"],
+                            HC1 = columns["Hc1"],
+                            HC2 = columns["Hc2"],
+                            HCX = columns["Hcx"],
+                            DC1X = columns["Dc1x"],
+                            DC12 = columns["Dc12"],
+                            DCX2 = columns["Dcx2"],
+                            Home12 = columns["Home12"],
+                            Away12 = columns["Away12"]
+                        };
+                    }
+                    messageForLog = "Query eseguita con successo";
+                }
+            }
+            catch (Exception ex)
+            {
+                messageForLog = ex.Message;
+            }
+            finally
+            {
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - GetScommessa] \n" + messageForLog + "\n");
+            }
+
+            return scommessa;
+        }
+
         /// <summary>
         /// Esegue l'Update di una scommessa nel DB.
         /// </summary>
@@ -433,9 +507,12 @@ namespace WinnerSV.DataModel
                     " TotalScore = case when coalesce('" + i.TotalScore + "', '') = '' then TotalScore else '" + i.TotalScore + "' end, " +
                     " Over = case when coalesce('" + i.OVER + "', '') = '' then Over else '" + i.OVER + "' end, " +
                     " Under = case when coalesce('" + i.UNDER + "', '') = '' then Under else '" + i.UNDER + "' end, " +
-                    " Q1 = case when coalesce('" + i.Q1 + "', '') = '' then Q1 else '" + i.Q1 + "' end, " +
-                    " Qx = case when coalesce('" + i.QX + "', '') = '' then Qx else '" + i.QX + "' end, " +
-                    " Q2 = case when coalesce('" + i.Q2 + "', '') = '' then Q2 else '" + i.Q2 + "' end, " +
+                    ////" Q1 = case when coalesce('" + i.Q1 + "', '') = '' then Q1 else '" + i.Q1 + "' end, " +
+                    ////" Qx = case when coalesce('" + i.QX + "', '') = '' then Qx else '" + i.QX + "' end, " +
+                    ////" Q2 = case when coalesce('" + i.Q2 + "', '') = '' then Q2 else '" + i.Q2 + "' end, " +
+                    " Q1 = '" + i.Q1 + "'," +
+                    " Qx = '" + i.QX + "'," +
+                    " Q2 = '" + i.Q2 + "'," +
                     " Hc = case when coalesce('" + i.HC + "', '') = '' then Hc else '" + i.HC + "' end, " +
                     " Hc1 = case when coalesce('" + i.HC1 + "', '') = '' then Hc1 else '" + i.HC1 + "' end, " +
                     " Hc2 = case when coalesce('" + i.HC2 + "', '') = '' then Hc2 else '" + i.HC2 + "' end, " +

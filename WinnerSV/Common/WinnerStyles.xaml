@@ -11,6 +11,7 @@
     <Converters:StringToVisibilityConverter x:Key="StringToVisConverter" />
     <Converters:ActualHeightResizeConverter x:Key="ResizeConverter" />
     <Converters:ScommessaPropertyToVisibilityConverter x:Key="ScommessaConverter" />
+    <Converters:ScommessaPropertyToOpacityConverter x:Key="OpacityConverter" />
 
     <!-- PALETTE COLORI -->
     <Color x:Key="BrownLight">#DE6E00</Color>
