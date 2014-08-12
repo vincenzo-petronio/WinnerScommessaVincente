@@ -19,16 +19,16 @@
 //    along with Winner - Scommessa vincente.  If not, see <http://www.gnu.org/licenses/>.
 // </license>
 //-----------------------------------------------------------------------
-      
+
+using SQLiteWinRT;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
-using SQLiteWinRT;
-using Windows.Storage;
-using WinnerSV.Common;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using Windows.Storage;
+using WinnerSV.Common;
 
 namespace WinnerSV.DataModel
 {
