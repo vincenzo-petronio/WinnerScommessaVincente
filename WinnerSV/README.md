@@ -1,5 +1,5 @@
 ﻿## For devs
-* Scaricare l'[ archivio con le dipendenze ](URL).
+* Scaricare l'[ archivio con le dipendenze ](https://bitbucket.org/vi_pe/winnersv/downloads/WinnerSV_Dependecies.7z).
 * **SQLite for Windows Phone SDK 3.8.2**: Lanciare il VSIX e completare l'installazione. Su Windows il percorso di default sarà _C:\Program Files (x86)\Microsoft SDKs\Windows Phone\v8.0\ExtensionSDKs\SQLite.WP80\3.8.2_
 * **sqlite-winrt**: Tasto destro sulla Solution -> Add -> Existing Project... e scegliere la cartella **SQLiteWinRTPhone**.
 * Tasto destro sul Project WinnerSV -> Add Reference -> Solution -> Projects -> mettere il check sul project SQLiteWinRTPhone precedentemente importato.
