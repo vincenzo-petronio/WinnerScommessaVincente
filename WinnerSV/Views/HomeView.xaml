@@ -17,13 +17,13 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False" 
     DataContext="{Binding Home, Source={StaticResource Locator}}">
-    
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded" >
             <Command:EventToCommand Command="{Binding RefreshBindingData, Mode=OneWay}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <!--LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot">
         <phone:Panorama Template="{StaticResource PanoramaControlTemplateWinner}" 
@@ -34,8 +34,8 @@
             </phone:Panorama.Background>
 
             <phone:Panorama.Title>
-                <Border Background="Azure">
-                    <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" />
+                <Border Background="Transparent">
+                    <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Foreground="#FF99990E" FontFamily="Segoe WP Black" FontSize="130" Margin="0,20" />
                 </Border>
             </phone:Panorama.Title>
 
@@ -47,19 +47,30 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="textBlock"
-                               Grid.Row="0"
-                               DataContext="{Binding NuovaSchedina}"
-                               FontSize="{StaticResource PhoneFontSizeLarge}" 
-                               Margin="0,0,0,0" 
-                               Text="{Binding Title}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Tap">
-                            <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                                                    CommandParameter="{Binding DataContext, ElementName=textBlock}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    </TextBlock>
+
+                    <Grid Grid.Row="0" Margin="40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Image Source="/Assets/Add.png" 
+                               Stretch="None" 
+                               Grid.Column="0" />
+                        <TextBlock x:Name="textBlock"
+                                   Grid.Column="1"
+                                   DataContext="{Binding NuovaSchedina}"
+                                   FontSize="{StaticResource PhoneFontSizeLarge}" 
+                                   Text="{Binding Title}" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Tap">
+                                    <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                            CommandParameter="{Binding DataContext, ElementName=textBlock}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBlock>
+                    </Grid>
+                    
                     <WinnerSV:AdsControl VerticalAlignment="Bottom"
                                          Grid.Row="1"/>
                 </Grid>
@@ -79,14 +90,23 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Path=Title}" />
-                                    <toolkit:ContextMenuService.ContextMenu>
-                                        <toolkit:ContextMenu>
-                                            <toolkit:MenuItem Header="{Binding LocalizedResources.ContextMenuItemDelete, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Image Grid.Column="0" Source="/Assets/Pin.png" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Path=Title}" VerticalAlignment="Center" />
+                                        
+                                        <toolkit:ContextMenuService.ContextMenu>
+                                            <toolkit:ContextMenu>
+                                                <toolkit:MenuItem Header="{Binding LocalizedResources.ContextMenuItemDelete, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
                                                                       Command="{Binding Home.DeleteSchedinaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
                                                                       CommandParameter="{Binding}" />
-                                        </toolkit:ContextMenu>
-                                    </toolkit:ContextMenuService.ContextMenu>
+                                            </toolkit:ContextMenu>
+                                        </toolkit:ContextMenuService.ContextMenu>
+                                    </Grid>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
