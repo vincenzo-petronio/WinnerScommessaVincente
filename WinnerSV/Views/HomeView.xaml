@@ -61,14 +61,16 @@
                                    Grid.Column="1"
                                    DataContext="{Binding NuovaSchedina}"
                                    FontSize="{StaticResource PhoneFontSizeLarge}" 
-                                   Text="{Binding Title}" VerticalAlignment="Center">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Tap">
-                                    <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                                                            CommandParameter="{Binding DataContext, ElementName=textBlock}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                                   Text="{Binding Title}" 
+                                   VerticalAlignment="Center">
                         </TextBlock>
+                        
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                        CommandParameter="{Binding DataContext, ElementName=textBlock}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </Grid>
                     
                     <WinnerSV:AdsControl VerticalAlignment="Bottom"
@@ -102,8 +104,8 @@
                                         <toolkit:ContextMenuService.ContextMenu>
                                             <toolkit:ContextMenu>
                                                 <toolkit:MenuItem Header="{Binding LocalizedResources.ContextMenuItemDelete, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
-                                                                      Command="{Binding Home.DeleteSchedinaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                                                                      CommandParameter="{Binding}" />
+                                                                  Command="{Binding Home.DeleteSchedinaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                                                                  CommandParameter="{Binding}" />
                                             </toolkit:ContextMenu>
                                         </toolkit:ContextMenuService.ContextMenu>
                                     </Grid>
@@ -114,7 +116,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Tap">
                                 <Command:EventToCommand Command="{Binding Home.NavToPageCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                                                    CommandParameter="{Binding SelectedItem, ElementName=listBox}" />
+                                                        CommandParameter="{Binding SelectedItem, ElementName=listBox}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListBox>

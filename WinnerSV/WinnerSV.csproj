@@ -194,6 +194,7 @@
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\Add.png" />
+    <Content Include="Assets\Edit.png" />
     <Content Include="Assets\Pin.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

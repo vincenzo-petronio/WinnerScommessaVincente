@@ -29,26 +29,38 @@
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <StackPanel Orientation="Horizontal">
+            <Grid Tap="StackPanel_Tap" 
+                  Margin="0,0,12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                
                 <TextBox x:Name="textBoxTitle"
+                         Grid.Column="0"
                          Text="{Binding SelectedSchedina.Title, Mode=TwoWay}" 
-                         Margin="9,-7,0,0" 
-                         FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
-                <Image />
-            </StackPanel>
+                         FontSize="{StaticResource PhoneFontSizeMediumLarge}" 
+                         Foreground="Black"
+                         BorderThickness="0,0,0,5" 
+                         SelectionForeground="Black" 
+                         Background="#E5FFFFFF" 
+                         TextWrapping="Wrap"/>
+                <Image Grid.Column="1" 
+                       Source="/Assets/Edit.png" Stretch="None"/>
+            </Grid>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="85*" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <uc:AnteprimaSchedina Grid.Row="0" />
 
             <StackPanel Grid.Row="1">
-                <Button Content="{Binding LocalizedResources.AddScommessaTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
+                <Button Content="{Binding LocalizedResources.AddScommessaTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" Background="#FF99990E">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Tap">
                             <Command:EventToCommand Command="{Binding NavToPageCommand, Mode=OneWay}" />

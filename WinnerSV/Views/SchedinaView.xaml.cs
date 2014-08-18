@@ -66,7 +66,7 @@ namespace WinnerSV.Views
                 {
                     DateTime dt = DateTime.Now;
                     var dtFormatted = String.Format("{0:g}", dt);
-                    this.VM.SelectedSchedina.Title = (Constants.TITLE_SCHEDINA_DEFAULT + " " + dtFormatted).Replace(" ", "_");
+                    this.VM.SelectedSchedina.Title = (Constants.TITLE_SCHEDINA_DEFAULT + " " + dtFormatted); //.Replace(" ", "_");
                     this.textBoxTitle.IsReadOnly = false;
                 }
 
@@ -81,6 +81,12 @@ namespace WinnerSV.Views
             base.OnNavigatedFrom(e);
 
             this.textBoxTitle.IsReadOnly = true;
+        }
+
+        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            // Al Tap sull'icona imposto il focus sulla TextBox!
+            this.textBoxTitle.Focus();
         }
     }
 }
