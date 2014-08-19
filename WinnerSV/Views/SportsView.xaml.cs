@@ -44,7 +44,7 @@ namespace WinnerSV.Views
         private void SportsGridAnteprima_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
         {
             var ct = (CompositeTransform)this.SportsGridAnteprima.RenderTransform;
-            if (initialPosition == null || initialPosition == 0)
+            if (initialPosition == 0)
             {
                 initialPosition = ct.TranslateY;
                 DoubleAnimationUp.From = initialPosition;

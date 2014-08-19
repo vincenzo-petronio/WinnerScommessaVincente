@@ -35,7 +35,11 @@
 
             <phone:Panorama.Title>
                 <Border Background="Transparent">
-                    <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Foreground="#FF99990E" FontFamily="Segoe WP Black" FontSize="130" Margin="0,20" />
+                    <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" 
+                               Foreground="{StaticResource paletteWinnerYellowDark}" 
+                               FontFamily="Segoe WP Black" 
+                               FontSize="130" 
+                               Margin="0,20" />
                 </Border>
             </phone:Panorama.Title>
 

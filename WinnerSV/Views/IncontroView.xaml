@@ -42,7 +42,8 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
-                       Style="{StaticResource PhoneTextNormalStyle}"/>
+                       Style="{StaticResource PhoneTextNormalStyle}" 
+                       Foreground="{StaticResource paletteWinnerYellowDark}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
