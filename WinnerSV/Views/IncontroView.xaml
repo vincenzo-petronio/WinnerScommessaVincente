@@ -50,35 +50,60 @@
         <Grid x:Name="ContentPanel" 
               Grid.Row="1" 
               Margin="12,0,12,0" 
-              DataContext="{Binding AnteSchedina.SelectedIncontro, Source={StaticResource Locator}}" 
-              >
+              DataContext="{Binding AnteSchedina.SelectedIncontro, Source={StaticResource Locator}}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
+            
             <!-- Data e Team -->
-            <StackPanel Grid.Row="0">
+            <StackPanel Grid.Row="0" Background="Black">
                 <TextBlock Text="{Binding Path=Data}" 
                            HorizontalAlignment="Center" />
-                <TextBlock HorizontalAlignment="Center">
-                    <Run Text="{Binding Path=TeamCasa}"/>
-                    <Run Text=" VS " FontWeight="Bold" />
-                    <Run Text="{Binding Path=TeamFCasa}"/>
-                </TextBlock>
+                <Grid Margin="0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" 
+                               Text="{Binding Path=TeamCasa}" 
+                               FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1"
+                               Text="VS"
+                               Margin="4"
+                               FontWeight="Bold" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2" 
+                               Text="{Binding Path=TeamFCasa}"
+                               FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap" />
+                </Grid>
             </StackPanel>
             
             <!-- Quote -->
-            <ScrollViewer Grid.Row="1">
+            <ScrollViewer Grid.Row="1" Margin="0,16">
                 <StackPanel Orientation="Vertical">
                     <!-- 1 X 2 -->
                     <StackPanel Orientation="Vertical" 
-                                Visibility="{Binding Q1, Converter={StaticResource StringToVisConverter}}" >
-                        <TextBlock Text="{Binding LocalizedResources.Scommessa1X2Title, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Q1}" />
+                                Visibility="{Binding Q1, Converter={StaticResource StringToVisConverter}}" 
+                                Margin="12">
+                        <TextBlock Text="{Binding LocalizedResources.Scommessa1X2Title, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                                   HorizontalAlignment="Center" 
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <StackPanel Orientation="Vertical" >
+                                <TextBlock Text="{Binding Q1}" HorizontalAlignment="Center" />
                                 <Button Content="1" 
+                                        MinWidth="96"
+                                        MinHeight="96"
                                         Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=Q1, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
@@ -89,8 +114,10 @@
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding QX}" />
+                                <TextBlock Text="{Binding QX}" HorizontalAlignment="Center" />
                                 <Button Content="X"
+                                        MinWidth="96"
+                                        MinHeight="96"
                                         Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=QX, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
@@ -101,8 +128,10 @@
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Q2}" />
+                                <TextBlock Text="{Binding Q2}" HorizontalAlignment="Center" />
                                 <Button Content="2"
+                                        MinWidth="96"
+                                        MinHeight="96"
                                         Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=Q2, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
@@ -117,16 +146,21 @@
 
                     <!-- Handicap -->
                     <StackPanel Orientation="Vertical" 
-                                Visibility="{Binding HC, Converter={StaticResource StringToVisConverter}}">
-                        <TextBlock>
+                                Visibility="{Binding HC, Converter={StaticResource StringToVisConverter}}" 
+                                Margin="12">
+                        <TextBlock HorizontalAlignment="Center"
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" >
                                 <Run Text="{Binding LocalizedResources.ScommessaHandicapTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
                                 <Run Text=": " />
                                 <Run Text="{Binding HC}" />
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center" >
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Path=HC1}" />
-                                <Button Content="1">
+                                <TextBlock Text="{Binding Path=HC1}" HorizontalAlignment="Center" />
+                                <Button Content="1" 
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -136,8 +170,10 @@
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Path=HCX}" />
-                                <Button Content="X">
+                                <TextBlock Text="{Binding Path=HCX}" HorizontalAlignment="Center" />
+                                <Button Content="X"
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -147,8 +183,10 @@
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Path=HC2}" />
-                                <Button Content="2">
+                                <TextBlock Text="{Binding Path=HC2}" HorizontalAlignment="Center" />
+                                <Button Content="2" 
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -162,16 +200,21 @@
                         
                     <!-- Over/Under -->
                     <StackPanel Orientation="Vertical" 
-                                Visibility="{Binding TotalScore, Converter={StaticResource StringToVisConverter}}" >
-                        <TextBlock>
+                                Visibility="{Binding TotalScore, Converter={StaticResource StringToVisConverter}}" 
+                                Margin="12" >
+                        <TextBlock HorizontalAlignment="Center"
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" >
                                 <Run Text="{Binding LocalizedResources.ScommessaOverUnderTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
                                 <Run Text=": " />
                                 <Run Text="{Binding TotalScore}" />
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center" >
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Path=OVER}" />
-                                <Button Content="Over">
+                                <TextBlock Text="{Binding Path=OVER}" HorizontalAlignment="Center" />
+                                <Button Content="Over" 
+                                        MinWidth="96"
+                                        MinHeight="96">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -181,8 +224,10 @@
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Path=UNDER}" />
-                                <Button Content="Under">
+                                <TextBlock Text="{Binding Path=UNDER}" HorizontalAlignment="Center"/>
+                                <Button Content="Under" 
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -196,12 +241,18 @@
                         
                     <!-- Doppia Chance -->
                     <StackPanel Orientation="Vertical"
-                                Visibility="{Binding DC1X, Converter={StaticResource StringToVisConverter}}">
-                        <TextBlock Text="{Binding LocalizedResources.ScommessaDoppiaChanceTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
-                        <StackPanel Orientation="Horizontal">
+                                Visibility="{Binding DC1X, Converter={StaticResource StringToVisConverter}}"
+                                Margin="12" >
+                        <TextBlock Text="{Binding LocalizedResources.ScommessaDoppiaChanceTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                                   HorizontalAlignment="Center" 
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center" >
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding DC1X}" />
-                                <Button Content="1X">
+                                <TextBlock Text="{Binding DC1X}" HorizontalAlignment="Center" />
+                                <Button Content="1X" 
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -211,8 +262,10 @@
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding DC12}" />
-                                <Button Content="12">
+                                <TextBlock Text="{Binding DC12}" HorizontalAlignment="Center" />
+                                <Button Content="12" 
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -222,8 +275,10 @@
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding DCX2}" />
-                                <Button Content="X2">
+                                <TextBlock Text="{Binding DCX2}" HorizontalAlignment="Center" />
+                                <Button Content="X2"
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -237,12 +292,18 @@
                         
                     <!-- Home/Away -->
                     <StackPanel Orientation="Vertical"
-                                Visibility="{Binding Home12, Converter={StaticResource StringToVisConverter}}">
-                        <TextBlock Text="{Binding LocalizedResources.ScommessaHomeAwayTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
-                        <StackPanel Orientation="Horizontal">
+                                Visibility="{Binding Home12, Converter={StaticResource StringToVisConverter}}"
+                                Margin="12" >
+                        <TextBlock Text="{Binding LocalizedResources.ScommessaHomeAwayTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                                   HorizontalAlignment="Center"
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" />
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center" >
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Home12}" />
-                                <Button Content="1">
+                                <TextBlock Text="{Binding Home12}" HorizontalAlignment="Center" />
+                                <Button Content="1"
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -252,8 +313,10 @@
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Away12}" />
-                                <Button Content="2">
+                                <TextBlock Text="{Binding Away12}" HorizontalAlignment="Center" />
+                                <Button Content="2"
+                                        MinWidth="96"
+                                        MinHeight="96" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
