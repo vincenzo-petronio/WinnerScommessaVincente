@@ -57,9 +57,9 @@
             </Grid.RowDefinitions>
             
             <!-- Data e Team -->
-            <StackPanel Grid.Row="0" Background="Black">
+            <StackPanel Grid.Row="0" >
                 <TextBlock Text="{Binding Path=Data}" 
-                           HorizontalAlignment="Center" />
+                            HorizontalAlignment="Center" />
                 <Grid Margin="0,16">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -67,24 +67,37 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" 
-                               Text="{Binding Path=TeamCasa}" 
-                               FontSize="{StaticResource PhoneFontSizeMediumLarge}"
-                               TextWrapping="Wrap"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="1"
-                               Text="VS"
-                               Margin="4"
-                               FontWeight="Bold" 
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="2" 
-                               Text="{Binding Path=TeamFCasa}"
-                               FontSize="{StaticResource PhoneFontSizeMediumLarge}"
-                               HorizontalAlignment="Right"
-                               VerticalAlignment="Center"
-                               TextWrapping="Wrap" />
+                    <Border Grid.Column="0" 
+                            BorderBrush="{StaticResource paletteWinnerYellowLight}" 
+                            BorderThickness="0,0,0,1">
+                        <TextBlock Grid.Column="0" 
+                                    Text="{Binding Path=TeamCasa}" 
+                                    FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                                    TextWrapping="Wrap"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
+                    </Border>
+                    <Border Grid.Column="1" 
+                            BorderBrush="{StaticResource paletteWinnerYellowLight}" 
+                            BorderThickness="1"
+                            CornerRadius="50">
+                        <TextBlock Grid.Column="1"
+                                Text="VS"
+                                Margin="24"
+                                FontWeight="Bold" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                    </Border>
+                    <Border Grid.Column="2" 
+                            BorderBrush="{StaticResource paletteWinnerYellowLight}" 
+                            BorderThickness="0,0,0,1" >
+                        <TextBlock Grid.Column="2" 
+                                Text="{Binding Path=TeamFCasa}"
+                                FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                TextWrapping="Wrap" />
+                    </Border>
                 </Grid>
             </StackPanel>
             
