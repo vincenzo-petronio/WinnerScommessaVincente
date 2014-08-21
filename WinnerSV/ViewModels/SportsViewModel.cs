@@ -40,12 +40,12 @@ namespace WinnerSV.ViewModels
     public class SportsViewModel : ViewModelBase
     {
         private IServiceAgent serviceAgent;
-        private Sports sports;
+        //private Sports sports;
         private ObservableCollection<Calcio> listCalcio;
         private ObservableCollection<Basket> listBasket;
         private ObservableCollection<Tennis> listTennis;
-        private Incontro itemSelected;
-        private Incontro itemSelectedStored;
+        //private Incontro itemSelected;
+        //private Incontro itemSelectedStored;
         private bool isProgressIndicatorVisible = true;
 
         /// <summary>

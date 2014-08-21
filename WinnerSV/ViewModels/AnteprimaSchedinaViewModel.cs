@@ -39,6 +39,7 @@ namespace WinnerSV.ViewModels
         private Schedina selectedSchedina;
         private Incontro selectedIncontro;
         private Scommessa selectedScommessa;
+        private Scommessa scommessaStored;
         private ObservableCollection<Scommessa> listScommesse;
         private bool isProgressIndicatorVisible = false;
 
@@ -164,8 +165,7 @@ namespace WinnerSV.ViewModels
                     // Aggiorno la lista delle scommesse effettuate.
                     PopolaAnteprimaProperties();
 
-                    var sc = await dataAccessDb.GetScommessa(i, s);
-                    ////ScommessaStored = sc;
+                    ScommessaStored = await dataAccessDb.GetScommessa(i, s);
                 }
                 else
                 {
@@ -208,6 +208,9 @@ namespace WinnerSV.ViewModels
             this.ScommessaStored = null;
         }
 
+        /// <summary>
+        /// Restituisce una immagine della Scommessa presente nel DB.
+        /// </summary>
         private async void AlreadyUpdateScommessaCommandExecute()
         {
             System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "AlreadyUpdateScommessaCommandExecute routine");
@@ -222,10 +225,9 @@ namespace WinnerSV.ViewModels
                 i.Data = SelectedIncontro.Data;
                 i.IdMatch = SelectedIncontro.IdMatch;
 
-                var s = await dataAccessDb.GetSchedina(this.SelectedSchedina.Title);
-                var isCompleted = await dataAccessDb.GetScommessa(i, s);
-
-                ScommessaStored = isCompleted;
+                // Recupero la Scommessa, nota la Schedina e l'Incontro selezionati.
+                Schedina s = await dataAccessDb.GetSchedina(this.SelectedSchedina.Title);
+                ScommessaStored = await dataAccessDb.GetScommessa(i, s);
             }
         }
 
@@ -249,7 +251,10 @@ namespace WinnerSV.ViewModels
             }
         }
 
-        private Scommessa scommessaStored;
+        /// <summary>
+        /// Rappresenta la scommessa gia' memorizzata nel DB, 
+        /// per una determinata Schedina e un Incontro.
+        /// </summary>
         public Scommessa ScommessaStored
         {
             get
@@ -312,7 +317,7 @@ namespace WinnerSV.ViewModels
 
         /// <summary>
         /// Rappresenta la scommessa effettuata, per un determinato incontro e all'interno
-        /// di una Schedina.
+        /// di una Schedina. E' l'immagine del contenuto nel DB.
         /// </summary>
         public Scommessa SelectedScommessa
         {
@@ -414,6 +419,6 @@ namespace WinnerSV.ViewModels
             get;
             private set;
         }
-            
+
     }
 }

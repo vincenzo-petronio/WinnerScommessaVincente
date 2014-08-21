@@ -25,7 +25,7 @@ using System.Collections.Generic;
 namespace WinnerSV.DataModel
 {
     /// <summary>
-    /// Oggetto per rappresentare tutti i sport seguendo la struttra del file json.
+    /// Oggetto per rappresentare tutti gli sport seguendo la struttura del file json.
     /// </summary>
     public class Sports
     {
