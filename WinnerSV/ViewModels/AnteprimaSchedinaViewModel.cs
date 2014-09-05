@@ -164,8 +164,8 @@ namespace WinnerSV.ViewModels
                 {
                     // Aggiorno la lista delle scommesse effettuate.
                     PopolaAnteprimaProperties();
-
-                    ScommessaStored = await dataAccessDb.GetScommessa(i, s);
+                    // Aggiorno la proprietà in binding 
+                    //ScommessaStored = await dataAccessDb.GetScommessa(i, s);
                 }
                 else
                 {
@@ -204,8 +204,8 @@ namespace WinnerSV.ViewModels
             // Con il BackKey da IncontroView a SportsView, disabilito l'item selezionato.
             // Necessario perche' con il LongListSelector l'evento nel Command è SelectionChanged,
             // non Tap (il Tap intercetta anche l'Header).
-            this.SelectedIncontro = null;
-            this.ScommessaStored = null;
+            //this.SelectedIncontro = null;
+            //this.ScommessaStored = null;
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace WinnerSV.ViewModels
 
                 // Recupero la Scommessa, nota la Schedina e l'Incontro selezionati.
                 Schedina s = await dataAccessDb.GetSchedina(this.SelectedSchedina.Title);
-                ScommessaStored = await dataAccessDb.GetScommessa(i, s);
+                //ScommessaStored = await dataAccessDb.GetScommessa(i, s);
             }
         }
 
@@ -259,6 +259,7 @@ namespace WinnerSV.ViewModels
         {
             get
             {
+                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "GET ScommessaStored");
                 return scommessaStored;
             }
 
@@ -267,6 +268,7 @@ namespace WinnerSV.ViewModels
                 if(scommessaStored != value)
                 {
                     scommessaStored = value;
+                    System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "SET ScommessaStored");
                     RaisePropertyChanged(() => ScommessaStored);
                 }
             }
@@ -281,14 +283,16 @@ namespace WinnerSV.ViewModels
         {
             get
             {
+                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "GET SelectedSchedina");
                 return selectedSchedina;
             }
 
             set
             {
-                if (selectedSchedina != value)
+                if (selectedSchedina != value && value != null)
                 {
                     selectedSchedina = value;
+                    System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "SET SelectedSchedina");
                     RaisePropertyChanged(() => SelectedSchedina);
                 }
             }
@@ -302,14 +306,16 @@ namespace WinnerSV.ViewModels
         {
             get
             {
+                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "GET SelectedIncontro");
                 return selectedIncontro;
             }
 
             set
             {
-                if (selectedIncontro != value)
+                if (selectedIncontro != value && value != null)
                 {
                     selectedIncontro = value;
+                    System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "SET SelectedIncontro");
                     RaisePropertyChanged(() => SelectedIncontro);
                 }
             }
@@ -323,6 +329,7 @@ namespace WinnerSV.ViewModels
         {
             get
             {
+                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "GET SelectedScommessa");
                 return selectedScommessa;
             }
 
@@ -331,6 +338,7 @@ namespace WinnerSV.ViewModels
                 if (selectedScommessa != value)
                 {
                     selectedScommessa = value;
+                    System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "SET SelectedScommessa");
                     RaisePropertyChanged(() => SelectedScommessa);
                 }
             }
@@ -343,6 +351,7 @@ namespace WinnerSV.ViewModels
         {
             get
             {
+                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "GET ListScommesse");
                 return listScommesse;
             }
 
@@ -351,6 +360,7 @@ namespace WinnerSV.ViewModels
                 if (listScommesse != value)
                 {
                     listScommesse = value;
+                    System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "SET ListScommesse");
                     RaisePropertyChanged(() => ListScommesse);
                 }
             }

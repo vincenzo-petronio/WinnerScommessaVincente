@@ -44,7 +44,7 @@ namespace WinnerSV.ViewModels
         private ObservableCollection<Calcio> listCalcio;
         private ObservableCollection<Basket> listBasket;
         private ObservableCollection<Tennis> listTennis;
-        //private Incontro itemSelected;
+        private Incontro itemSelected;
         //private Incontro itemSelectedStored;
         private bool isProgressIndicatorVisible = true;
 
@@ -72,7 +72,7 @@ namespace WinnerSV.ViewModels
                     {
                         if (err != null)
                         {
-                            System.Diagnostics.Debug.WriteLine("[SportsViewModel] \r" + err.Message);
+                            System.Diagnostics.Debug.WriteLine("[SPORTSVIEWMODEL] \r" + err.Message);
                         }
                         else if(sports != null)
                         {
@@ -118,22 +118,23 @@ namespace WinnerSV.ViewModels
         /// <summary>
         /// Binding con la proprietà SelectedItem del LongListSelector
         /// </summary>
-        ////public Incontro ItemSelected
-        ////{
-        ////    get
-        ////    {
-        ////        return itemSelected;
-        ////    }
+        public Incontro ItemSelected
+        {
+            get
+            {
+                System.Diagnostics.Debug.WriteLine("[SPORTSVIEWMODEL] \t" + "GET ItemSelected");
+                return itemSelected;
+            }
 
-        ////    set
-        ////    {
-        ////        if (itemSelected != value)
-        ////        {
-        ////            itemSelected = value;
-        ////            RaisePropertyChanged(() => ItemSelected);
-        ////        }
-        ////    }
-        ////}
+            set
+            {
+                if (itemSelected != value)
+                {
+                    itemSelected = value;
+                    RaisePropertyChanged(() => ItemSelected);
+                }
+            }
+        }
 
         /// <summary>
         /// Conserva l'oggetto selezionato per essere utilizzato da altri ViewModel.
@@ -313,10 +314,17 @@ namespace WinnerSV.ViewModels
         /// </summary>
         private void IncontroSelectedCommand()
         {
+            // Passando da SportsView a IncontroView devo salvare in AnteprimaViewModel l'incontro tappato.
+            // Per farlo accedo all'instanza del ViewModel nel ViewModelLocator, recupero la proprietà SelectedIncontro
+            // e faccio un SET.
+            var vmAnteprima = (new ViewModelLocator()).AnteSchedina;
+            vmAnteprima.SelectedIncontro = ItemSelected;
+            ItemSelected = null;
+
             ////if (itemSelected != null)
             ////{
             ////    ItemSelectedStored = ItemSelected;
-                Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "IncontroView" });
+            Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "IncontroView" });
             ////    ItemSelected = null;
             ////}
         }

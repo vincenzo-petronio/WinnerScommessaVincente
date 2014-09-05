@@ -15,17 +15,17 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    DataContext="{Binding Sports, Source={StaticResource Locator}}"
-    xmlns:uc="clr-namespace:WinnerSV.Views">
+    DataContext="{Binding Sports, Mode=OneTime, Source={StaticResource Locator}}"
+    xmlns:uc="clr-namespace:WinnerSV.Views" >
 
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="StoryBoardYUp">
             <DoubleAnimation x:Name="DoubleAnimationUp"
-        		Duration="0:0:0.7"
-        		To="0" 
-        		Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" 
-        		Storyboard.TargetName="SportsGridAnteprima" 
-        		d:IsOptimized="True">
+                Duration="0:0:0.7"
+                To="0" 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" 
+                Storyboard.TargetName="SportsGridAnteprima" 
+                d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <BackEase EasingMode="EaseIn" Amplitude="0.2" />
                 </DoubleAnimation.EasingFunction>
@@ -33,11 +33,11 @@
         </Storyboard>
         <Storyboard x:Name="StoryBoardYDown">
             <DoubleAnimation x:Name="DoubleAnimationDown"
-        		Duration="0:0:0.7"
-        		From="0"
-        		Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" 
-        		Storyboard.TargetName="SportsGridAnteprima" 
-        		d:IsOptimized="True">
+                Duration="0:0:0.7"
+                From="0"
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" 
+                Storyboard.TargetName="SportsGridAnteprima" 
+                d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <BackEase EasingMode="EaseOut" Amplitude="0.2" />
                 </DoubleAnimation.EasingFunction>
@@ -55,20 +55,22 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <phone:Pivot Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+        <phone:Pivot x:Name="SportsPivot"
+                     Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
                      Height="768" 
                      VerticalAlignment="Bottom" Foreground="{StaticResource paletteWinnerYellowDark}">
 
             <!-- Pivot Calcio -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot1Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <helpers:LongListSelector ItemsSource="{Binding GroupedCalcio}"
+                <helpers:LongListSelector x:Name="SportsPivotFootball" 
+                                          ItemsSource="{Binding GroupedCalcio}"
                                           ItemTemplate="{StaticResource templateSportsLls}"
                                           JumpListStyle="{StaticResource templateSprtsJumpLls}"
-                                          GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
-                                          IsGroupingEnabled ="true" 
+                                          GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}" 
                                           LayoutMode="List" 
-                                          SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}" 
-                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}"
+                                          SelectedItem="{Binding ItemSelected, Mode=TwoWay}" 
+                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}" 
+                                          IsGroupingEnabled="True"
                                           >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -80,14 +82,15 @@
 
             <!-- Pivot Tennis -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot2Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <helpers:LongListSelector ItemsSource="{Binding GroupedTennis}" 
+                <helpers:LongListSelector x:Name="SportsPivotTennis"  
+                                          ItemsSource="{Binding GroupedTennis}" 
                                           ItemTemplate="{StaticResource templateSportsLls}"
                                           JumpListStyle="{StaticResource templateSprtsJumpLls}"
-                                          GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
-                                          IsGroupingEnabled ="true" 
+                                          GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}" 
                                           LayoutMode="List"
-                                          SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}"
-                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}"
+                                          SelectedItem="{Binding ItemSelected, Mode=TwoWay}" 
+                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}" 
+                                          IsGroupingEnabled="True"
                                           >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -99,14 +102,15 @@
 
             <!-- Pivot Basket -->
             <phone:PivotItem Header="{Binding LocalizedResources.SportsPivot3Header, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
-                <helpers:LongListSelector ItemsSource="{Binding GroupedBasket}"
+                <helpers:LongListSelector x:Name="SportsPivotBasket"
+                                          ItemsSource="{Binding GroupedBasket}"
                                           ItemTemplate="{StaticResource templateSportsLls}"
                                           JumpListStyle="{StaticResource templateSprtsJumpLls}"
-                                          GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}"
-                                          IsGroupingEnabled ="true" 
+                                          GroupHeaderTemplate="{StaticResource templateSportsLlsGroupHeader}" 
                                           LayoutMode="List"
-                                          SelectedItem="{Binding AnteSchedina.SelectedIncontro, Mode=TwoWay, Source={StaticResource Locator}}"
-                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}"
+                                          SelectedItem="{Binding ItemSelected, Mode=TwoWay}" 
+                                          Padding="{Binding ActualHeight, ConverterParameter=3, Converter={StaticResource ResizeConverter}, ElementName=LayoutRoot, Mode=OneWay}" 
+                                          IsGroupingEnabled="True"
                                           >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -141,8 +145,7 @@
 
             <TextBlock Grid.Row="0"
                        Padding="10"
-                       DataContext="{Binding AnteSchedina, Source={StaticResource Locator}}"
-                       Text="{Binding SelectedSchedina.Title}" 
+                       Text="{Binding AnteSchedina.SelectedSchedina.Title, Source={StaticResource Locator}}" 
                        FontSize="{StaticResource PhoneFontSizeLarge}" 
                        TextTrimming="WordEllipsis" Foreground="Black"/>
             <uc:AnteprimaSchedina Grid.Row="0" Grid.RowSpan="2"

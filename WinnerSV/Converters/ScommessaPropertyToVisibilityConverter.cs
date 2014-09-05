@@ -68,7 +68,7 @@ namespace WinnerSV.Converters
                     return Visibility.Visible;
                 }
             }
-            System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToVisibilityConverter] \t" + "Scommessa Collapsed");
+            System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToVisibilityConverter] \t" + "Scommessa " + (string)parameter + " Collapsed");
             return Visibility.Collapsed;
         }
 

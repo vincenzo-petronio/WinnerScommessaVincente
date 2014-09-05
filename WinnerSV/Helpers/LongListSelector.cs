@@ -4,7 +4,7 @@ using System.Windows.Controls;
 namespace WinnerSV.Helpers
 {
     /// <summary>
-    /// Classe che definisce la proprietà SelectedItem sul controllo LongListSelector
+    /// Classe che aggiunge la dependency property SelectedItem sul controllo LongListSelector
     /// </summary>
     public class LongListSelector : Microsoft.Phone.Controls.LongListSelector
     {

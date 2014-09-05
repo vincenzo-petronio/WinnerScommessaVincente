@@ -15,8 +15,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" 
-    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}"
-    xmlns:uc="clr-namespace:WinnerSV.Views">
+    DataContext="{Binding AnteSchedina, Mode=OneTime, Source={StaticResource Locator}}"
+    xmlns:uc="clr-namespace:WinnerSV.Views" >
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -65,7 +65,7 @@
                         Background="{StaticResource paletteWinnerBrownDark}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Tap">
-                            <Command:EventToCommand Command="{Binding NavToPageCommand, Mode=OneWay}" />
+                            <Command:EventToCommand Command="{Binding NavToPageCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>

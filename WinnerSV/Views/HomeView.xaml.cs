@@ -19,12 +19,11 @@
 //    along with Winner - Scommessa vincente.  If not, see <http://www.gnu.org/licenses/>.
 // </license>
 //-----------------------------------------------------------------------
-  
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
+
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Phone.Controls;
+using System.Windows.Navigation;
 using WinnerSV.Helpers;
-using WinnerSV.ViewModels;
 
 namespace WinnerSV.Views
 {

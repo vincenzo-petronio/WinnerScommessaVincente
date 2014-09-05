@@ -9,10 +9,10 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480" 
-    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}">
+    DataContext="{Binding AnteSchedina, Mode=OneTime, Source={StaticResource Locator}}" >
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <ListBox ItemsSource="{Binding ListScommesse}" >
+        <ListBox ItemsSource="{Binding ListScommesse, Mode=OneTime}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="{StaticResource paletteWinnerYellowDark}" 

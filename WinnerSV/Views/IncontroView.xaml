@@ -14,7 +14,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" 
-    DataContext="{Binding AnteSchedina, Mode=OneWay, Source={StaticResource Locator}}" >
+    DataContext="{Binding AnteSchedina, Mode=OneTime, Source={StaticResource Locator}}" >
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="BackKeyPress">
@@ -50,7 +50,7 @@
         <Grid x:Name="ContentPanel" 
               Grid.Row="1" 
               Margin="12,0,12,0" 
-              DataContext="{Binding AnteSchedina.SelectedIncontro, Source={StaticResource Locator}}" >
+              DataContext="{Binding SelectedIncontro, Mode=OneTime}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -116,8 +116,8 @@
                                 <TextBlock Text="{Binding Q1}" HorizontalAlignment="Center" />
                                 <Button Content="1" 
                                         MinWidth="96"
-                                        MinHeight="96"
-                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=Q1, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
+                                        MinHeight="96" 
+                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=Q1, Converter={StaticResource OpacityConverter}, Mode=TwoWay, Source={StaticResource Locator}}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -131,7 +131,7 @@
                                 <Button Content="X"
                                         MinWidth="96"
                                         MinHeight="96"
-                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=QX, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
+                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=QX, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=TwoWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -145,7 +145,7 @@
                                 <Button Content="2"
                                         MinWidth="96"
                                         MinHeight="96"
-                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=Q2, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=OneWay}">
+                                        Opacity="{Binding AnteSchedina.ScommessaStored, ConverterParameter=Q2, Converter={StaticResource OpacityConverter}, Source={StaticResource Locator}, Mode=TwoWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Tap">
                                             <Command:EventToCommand Command="{Binding AnteSchedina.UpdateScommessaCommand, Mode=OneWay, Source={StaticResource Locator}}" 

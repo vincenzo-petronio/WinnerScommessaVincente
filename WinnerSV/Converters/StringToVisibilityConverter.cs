@@ -33,7 +33,7 @@ namespace WinnerSV.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            System.Diagnostics.Debug.WriteLine("[StringToVisibilityConverter] \t" + "StringToVisibilityConverter");
+            System.Diagnostics.Debug.WriteLine("[StringToVisibilityConverter] \t" + (string)value);
             return string.IsNullOrEmpty((string)value) ? Visibility.Collapsed : Visibility.Visible;
         }
 

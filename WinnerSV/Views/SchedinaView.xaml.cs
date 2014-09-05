@@ -79,7 +79,8 @@ namespace WinnerSV.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-
+            // Tornando indietro su questa vista il Title deve essere in sola lettura, perché è una Schedina già esistente.
+            // Per giocare una nuova Schedina devo tornare alla Home e crearne una nuova.
             this.textBoxTitle.IsReadOnly = true;
         }
 

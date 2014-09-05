@@ -115,7 +115,8 @@ namespace WinnerSV.ViewModels
         public ObservableCollection<Schedina> Schedine
         {
             get 
-            { 
+            {
+                System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "GET Schedine");
                 return schedine; 
             }
 
@@ -124,6 +125,7 @@ namespace WinnerSV.ViewModels
                 if (schedine != value)
                 {
                     schedine = value;
+                    System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "SET Schedine");
                     RaisePropertyChanged(() => Schedine);
                 }
             }
@@ -136,6 +138,7 @@ namespace WinnerSV.ViewModels
         {
             get
             {
+                System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "GET NuovaSchedina");
                 return nuovaSchedina;
             }
 
@@ -144,6 +147,7 @@ namespace WinnerSV.ViewModels
                 if (nuovaSchedina != value)
                 {
                     nuovaSchedina = value;
+                    System.Diagnostics.Debug.WriteLine("[HOMEVIEWMODEL] " + "SET NuovaSchedina");
                     RaisePropertyChanged(() => NuovaSchedina);
                 }
             }

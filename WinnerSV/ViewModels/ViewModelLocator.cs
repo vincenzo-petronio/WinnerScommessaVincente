@@ -19,10 +19,11 @@
 //    along with Winner - Scommessa vincente.  If not, see <http://www.gnu.org/licenses/>.
 // </license>
 //-----------------------------------------------------------------------
-    
+
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using System;
 using WinnerSV.DataModel;
 
 namespace WinnerSV.ViewModels
@@ -80,7 +81,7 @@ namespace WinnerSV.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SportsViewModel>();
+                return ServiceLocator.Current.GetInstance<SportsViewModel>(Guid.NewGuid().ToString());
             }
         }
 
