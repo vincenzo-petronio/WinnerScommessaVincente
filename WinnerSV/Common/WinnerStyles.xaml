@@ -40,8 +40,8 @@
             </Primitives:PanningBackgroundLayer>
 
             <Primitives:PanningTitleLayer x:Name="TitleLayer" Grid.Row="0" HorizontalAlignment="Left"  Margin="10,-34,0,0"
-				Content="{TemplateBinding Title}" ContentTemplate="{TemplateBinding TitleTemplate}"
-				FontSize="170" FontFamily="{StaticResource PhoneFontFamilyLight}" CharacterSpacing="-35" Foreground="#FF0A0909" >
+                Content="{TemplateBinding Title}" ContentTemplate="{TemplateBinding TitleTemplate}"
+                FontSize="170" FontFamily="{StaticResource PhoneFontFamilyLight}" CharacterSpacing="-35" Foreground="#FF0A0909" >
                 <Primitives:PanningTitleLayer.Background>
                     <SolidColorBrush Color="#FFF480"/>
                 </Primitives:PanningTitleLayer.Background>
@@ -111,7 +111,7 @@
                 BorderThickness="2"
                 Margin="0,4"
                 Padding="8">
-            <Grid>
+            <Grid Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
