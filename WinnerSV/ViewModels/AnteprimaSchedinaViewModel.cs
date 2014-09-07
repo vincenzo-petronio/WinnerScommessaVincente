@@ -39,7 +39,7 @@ namespace WinnerSV.ViewModels
         private Schedina selectedSchedina;
         private Incontro selectedIncontro;
         private Scommessa selectedScommessa;
-        private Scommessa scommessaStored;
+        ////private Scommessa scommessaStored;
         private ObservableCollection<Scommessa> listScommesse;
         private bool isProgressIndicatorVisible = false;
 
@@ -165,7 +165,7 @@ namespace WinnerSV.ViewModels
                     // Aggiorno la lista delle scommesse effettuate.
                     PopolaAnteprimaProperties();
                     // Aggiorno la proprietà in binding 
-                    //ScommessaStored = await dataAccessDb.GetScommessa(i, s);
+                    ////ScommessaStored = await dataAccessDb.GetScommessa(i, s);
                 }
                 else
                 {
@@ -204,8 +204,8 @@ namespace WinnerSV.ViewModels
             // Con il BackKey da IncontroView a SportsView, disabilito l'item selezionato.
             // Necessario perche' con il LongListSelector l'evento nel Command è SelectionChanged,
             // non Tap (il Tap intercetta anche l'Header).
-            //this.SelectedIncontro = null;
-            //this.ScommessaStored = null;
+            ////this.SelectedIncontro = null;
+            ////this.ScommessaStored = null;
         }
 
         /// <summary>
@@ -226,8 +226,8 @@ namespace WinnerSV.ViewModels
                 i.IdMatch = SelectedIncontro.IdMatch;
 
                 // Recupero la Scommessa, nota la Schedina e l'Incontro selezionati.
-                Schedina s = await dataAccessDb.GetSchedina(this.SelectedSchedina.Title);
-                //ScommessaStored = await dataAccessDb.GetScommessa(i, s);
+                ////Schedina s = await dataAccessDb.GetSchedina(this.SelectedSchedina.Title);
+                ////ScommessaStored = await dataAccessDb.GetScommessa(i, s);
             }
         }
 
@@ -255,24 +255,24 @@ namespace WinnerSV.ViewModels
         /// Rappresenta la scommessa gia' memorizzata nel DB, 
         /// per una determinata Schedina e un Incontro.
         /// </summary>
-        public Scommessa ScommessaStored
-        {
-            get
-            {
-                System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "GET ScommessaStored");
-                return scommessaStored;
-            }
+        ////public Scommessa ScommessaStored
+        ////{
+        ////    get
+        ////    {
+        ////        System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "GET ScommessaStored");
+        ////        return scommessaStored;
+        ////    }
 
-            set
-            {
-                if(scommessaStored != value)
-                {
-                    scommessaStored = value;
-                    System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "SET ScommessaStored");
-                    RaisePropertyChanged(() => ScommessaStored);
-                }
-            }
-        }
+        ////    set
+        ////    {
+        ////        if(scommessaStored != value)
+        ////        {
+        ////            scommessaStored = value;
+        ////            System.Diagnostics.Debug.WriteLine("[ANTEPRIMASCHEDINAVIEWMODEL] \t" + "SET ScommessaStored");
+        ////            RaisePropertyChanged(() => ScommessaStored);
+        ////        }
+        ////    }
+        ////}
         
 
         /// <summary>

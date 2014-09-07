@@ -51,6 +51,96 @@ namespace WinnerSV.Converters
                             }
                         }
                         break;
+                    case "HC1":
+                        {
+                            if (!string.IsNullOrEmpty(s.HC1))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "HC1 opacity LOW");
+                            }
+                        }
+                        break;
+                    case "HCX":
+                        {
+                            if (!string.IsNullOrEmpty(s.HCX))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "HCX opacity LOW");
+                            }
+                        }
+                        break;
+                    case "HC2":
+                        {
+                            if (!string.IsNullOrEmpty(s.HC2))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "HC2 opacity LOW");
+                            }
+                        }
+                        break;
+                    case "OVER":
+                        {
+                            if (!string.IsNullOrEmpty(s.OVER))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "OVER opacity LOW");
+                            }
+                        }
+                        break;
+                    case "UNDER":
+                        {
+                            if (!string.IsNullOrEmpty(s.UNDER))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "UNDER opacity LOW");
+                            }
+                        }
+                        break;
+                    case "DC1X":
+                        {
+                            if (!string.IsNullOrEmpty(s.DC1X))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "DC1X opacity LOW");
+                            }
+                        }
+                        break;
+                    case "DC12":
+                        {
+                            if (!string.IsNullOrEmpty(s.DC12))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "DC12 opacity LOW");
+                            }
+                        }
+                        break;
+                    case "DCX2":
+                        {
+                            if (!string.IsNullOrEmpty(s.DCX2))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "DCX2 opacity LOW");
+                            }
+                        }
+                        break;
+                    case "Home12":
+                        {
+                            if (!string.IsNullOrEmpty(s.Home12))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "Home12 opacity LOW");
+                            }
+                        }
+                        break;
+                    case "Away12":
+                        {
+                            if (!string.IsNullOrEmpty(s.Away12))
+                            {
+                                opacity = 0.3;
+                                System.Diagnostics.Debug.WriteLine("[ScommessaPropertyToOpacityConverter] \t" + "Away12 opacity LOW");
+                            }
+                        }
+                        break;
                     default: break;
                 }
             }

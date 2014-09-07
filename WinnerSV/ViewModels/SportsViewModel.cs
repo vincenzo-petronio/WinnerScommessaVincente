@@ -314,19 +314,17 @@ namespace WinnerSV.ViewModels
         /// </summary>
         private void IncontroSelectedCommand()
         {
-            // Passando da SportsView a IncontroView devo salvare in AnteprimaViewModel l'incontro tappato.
-            // Per farlo accedo all'instanza del ViewModel nel ViewModelLocator, recupero la proprietà SelectedIncontro
-            // e faccio un SET.
-            var vmAnteprima = (new ViewModelLocator()).AnteSchedina;
-            vmAnteprima.SelectedIncontro = ItemSelected;
-            ItemSelected = null;
+            if (ItemSelected != null)
+            {
+                // Passando da SportsView a IncontroView devo salvare in AnteprimaViewModel l'incontro tappato.
+                // Per farlo accedo all'instanza del ViewModel nel ViewModelLocator, recupero la proprietà SelectedIncontro
+                // e faccio un SET.
+                var vmAnteprima = (new ViewModelLocator()).AnteSchedina;
+                vmAnteprima.SelectedIncontro = ItemSelected;
+                ItemSelected = null;
 
-            ////if (itemSelected != null)
-            ////{
-            ////    ItemSelectedStored = ItemSelected;
-            Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "IncontroView" });
-            ////    ItemSelected = null;
-            ////}
+                Messenger.Default.Send<NavToPage>(new NavToPage { PageName = "IncontroView" });
+            }
         }
 
     }
