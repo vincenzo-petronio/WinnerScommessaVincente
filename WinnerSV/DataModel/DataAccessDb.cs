@@ -263,7 +263,7 @@ namespace WinnerSV.DataModel
             }
             finally
             {
-                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - SetSchedina] \n" + messageForLog + "\n");
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - SetSchedina] \t" + messageForLog + "\n");
             }
 
             return isCompleted;
@@ -460,7 +460,7 @@ namespace WinnerSV.DataModel
             }
             finally
             {
-                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - GetScommessa] \n" + messageForLog + "\n");
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - GetScommessa] \t" + messageForLog + "\n");
             }
 
             return scommessa;
@@ -507,12 +507,12 @@ namespace WinnerSV.DataModel
                     " TotalScore = case when coalesce('" + i.TotalScore + "', '') = '' then TotalScore else '" + i.TotalScore + "' end, " +
                     " Over = case when coalesce('" + i.OVER + "', '') = '' then Over else '" + i.OVER + "' end, " +
                     " Under = case when coalesce('" + i.UNDER + "', '') = '' then Under else '" + i.UNDER + "' end, " +
-                    ////" Q1 = case when coalesce('" + i.Q1 + "', '') = '' then Q1 else '" + i.Q1 + "' end, " +
-                    ////" Qx = case when coalesce('" + i.QX + "', '') = '' then Qx else '" + i.QX + "' end, " +
-                    ////" Q2 = case when coalesce('" + i.Q2 + "', '') = '' then Q2 else '" + i.Q2 + "' end, " +
-                    " Q1 = '" + i.Q1 + "'," +
-                    " Qx = '" + i.QX + "'," +
-                    " Q2 = '" + i.Q2 + "'," +
+                    " Q1 = case when coalesce('" + i.Q1 + "', '') = '' then Q1 else '" + i.Q1 + "' end, " +
+                    " Qx = case when coalesce('" + i.QX + "', '') = '' then Qx else '" + i.QX + "' end, " +
+                    " Q2 = case when coalesce('" + i.Q2 + "', '') = '' then Q2 else '" + i.Q2 + "' end, " +
+                    ////" Q1 = '" + i.Q1 + "'," +
+                    ////" Qx = '" + i.QX + "'," +
+                    ////" Q2 = '" + i.Q2 + "'," +
                     " Hc = case when coalesce('" + i.HC + "', '') = '' then Hc else '" + i.HC + "' end, " +
                     " Hc1 = case when coalesce('" + i.HC1 + "', '') = '' then Hc1 else '" + i.HC1 + "' end, " +
                     " Hc2 = case when coalesce('" + i.HC2 + "', '') = '' then Hc2 else '" + i.HC2 + "' end, " +
@@ -547,7 +547,7 @@ namespace WinnerSV.DataModel
             }
             finally
             {
-                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - UpdateScommessa] \n" + messageForLog + "\n");
+                System.Diagnostics.Debug.WriteLine("[DATAACCESSDB - UpdateScommessa] \t" + messageForLog + "\n");
             }
             
             return isUpdated;
